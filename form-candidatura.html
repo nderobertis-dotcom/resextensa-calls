@@ -564,8 +564,8 @@ let fileSlots = {}; // { slotId: File | null }
 // INIT
 // ============================================================
 (async () => {
-  await applyLang();
-caricaCategorie();
+  applyLang();
+  await caricaCategorie();
 
   const params = new URLSearchParams(window.location.search);
   const bandoId = params.get("bando");
