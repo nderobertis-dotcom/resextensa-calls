@@ -77,10 +77,9 @@
   @media(max-width:640px){.candidature-grid{grid-template-columns:1fr;}}
   .opzione-card{background:var(--bg-sunken);border:1px solid var(--border);border-radius:8px;padding:24px;display:flex;flex-direction:column;}
   .opzione-card.spontanea{border-color:var(--accent);}
-  .opzione-card.con-locandina{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;}
-  .opzione-card.con-locandina .locandina-bando{width:200px;height:auto;border-radius:6px;margin-bottom:0;}
-  .opzione-card.con-locandina .card-body{display:flex;flex-direction:column;height:100%;}
-  @media(max-width:640px){.opzione-card.con-locandina{grid-template-columns:1fr;}.opzione-card.con-locandina .locandina-bando{width:100%;}}
+  .opzione-card.con-locandina{grid-column:unset;display:flex;flex-direction:column;}
+  .locandina-bando{width:100%;height:200px;object-fit:cover;border-radius:6px 6px 0 0;margin:-24px -24px 16px -24px;width:calc(100% + 48px);}
+  .opzione-card.con-locandina .card-body{display:flex;flex-direction:column;flex:1;}
   .tag-categoria{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;padding:3px 9px;border-radius:4px;color:white;margin-bottom:12px;}
   .opzione-card h3{font-size:17px;margin:0 0 8px;} .opzione-card .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);margin-bottom:12px;}
   .opzione-card .scadenza{color:var(--accent);} .opzione-card p.desc{font-size:13.5px;color:var(--text-soft);margin:0 0 20px;flex:1;}
@@ -484,7 +483,7 @@ async function caricaBandiAttivi(){
     let locandinaHtml="";
     if(b.locandina_path){
       const url=sb.storage.from("bandi-locandine").getPublicUrl(b.locandina_path).data.publicUrl;
-      locandinaHtml=`<img src="${url}" alt="${b.titolo}" class="locandina-bando" style="width:100%;height:auto;display:block;border-radius:6px;margin-bottom:16px;">`;
+      locandinaHtml=`<img src="${url}" alt="${b.titolo}" class="locandina-bando">`;
       card.classList.add("con-locandina");
     }
     const bodyHtml=`
@@ -494,7 +493,7 @@ async function caricaBandiAttivi(){
       <p class="desc">${b.descrizione||''}</p>
       <a href="form-candidatura.html?bando=${b.id}" class="btn btn-primary">${t('apply.bando.btn')}</a>
     `;
-    card.innerHTML=locandinaHtml?(locandinaHtml+`<div class="card-body">${bodyHtml}</div>`):bodyHtml;
+    card.innerHTML=locandinaHtml?(locandinaHtml+bodyHtml):bodyHtml;
     grid.appendChild(card);
   });
 }
