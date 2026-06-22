@@ -73,17 +73,52 @@
   @media(max-width:640px){.photo-strip{grid-template-columns:1fr;}}
   .photo-strip .photo-placeholder{aspect-ratio:1/1;}
   .sezione-intro{color:var(--text-soft);max-width:580px;margin:0 0 32px;}
-  .candidature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
-  @media(max-width:640px){.candidature-grid{grid-template-columns:1fr;}}
-  .opzione-card{background:var(--bg-sunken);border:1px solid var(--border);border-radius:8px;padding:24px;display:flex;flex-direction:column;}
-  .opzione-card.spontanea{border-color:var(--accent);}
-  .opzione-card.con-locandina{grid-column:unset;display:flex;flex-direction:column;}
-  .locandina-bando{width:100%;height:200px;object-fit:cover;border-radius:6px 6px 0 0;margin:-24px -24px 16px -24px;width:calc(100% + 48px);}
-  .opzione-card.con-locandina .card-body{display:flex;flex-direction:column;flex:1;}
-  .tag-categoria{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;padding:3px 9px;border-radius:4px;color:white;margin-bottom:12px;}
-  .opzione-card h3{font-size:17px;margin:0 0 8px;} .opzione-card .meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);margin-bottom:12px;}
-  .opzione-card .scadenza{color:var(--accent);} .opzione-card p.desc{font-size:13.5px;color:var(--text-soft);margin:0 0 20px;flex:1;}
-  .opzione-card .btn{align-self:flex-start;padding:11px 20px;font-size:13px;} .bandi-empty-note{font-size:13px;color:var(--text-faint);margin-top:20px;}
+  /* Colonna unica: tutte le card si impilano a larghezza piena */
+  .candidature-grid{display:flex;flex-direction:column;gap:18px;}
+
+  /* BASE card */
+  .opzione-card{background:var(--bg-sunken);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+
+  /* CARD SPONTANEA: orizzontale compatta */
+  .opzione-card.spontanea{
+    border-color:var(--accent);
+    display:flex;align-items:center;gap:28px;
+    padding:22px 28px;flex-wrap:wrap;
+  }
+  .opzione-card.spontanea .spon-text{flex:1;min-width:200px;}
+  .opzione-card.spontanea h3{font-size:17px;margin:0 0 6px;color:var(--text);}
+  .opzione-card.spontanea p.desc{font-size:13.5px;color:var(--text-soft);margin:0;}
+  .opzione-card.spontanea .btn{flex-shrink:0;padding:12px 24px;font-size:13px;}
+
+  /* CARD BANDO CON LOCANDINA: immagine a sinistra, contenuto a destra */
+  .opzione-card.con-locandina{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    align-items:stretch;
+    min-height:220px;
+  }
+  @media(max-width:640px){.opzione-card.con-locandina{grid-template-columns:1fr;}}
+  .locandina-bando{
+    width:100%;height:100%;
+    object-fit:cover;display:block;
+  }
+  @media(max-width:640px){.locandina-bando{height:200px;}}
+  .card-body{padding:22px 24px;display:flex;flex-direction:column;}
+
+  /* CARD BANDO SENZA LOCANDINA */
+  .opzione-card:not(.con-locandina):not(.spontanea){padding:22px 24px;display:flex;flex-direction:column;}
+
+  /* Elementi interni */
+  .tag-categoria{display:inline-block;align-self:flex-start;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;padding:3px 9px;border-radius:4px;color:white;margin-bottom:10px;}
+  .opzione-card h3{font-size:18px;margin:0 0 14px;color:var(--text);}
+  .card-dates{margin-bottom:12px;}
+  .date-row{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;}
+  .date-label{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-faint);font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
+  .date-value{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--accent);}
+  .date-value.scadenza{color:var(--danger);}
+  .opzione-card p.desc{font-size:13.5px;color:var(--text-soft);margin:0 0 18px;flex:1;}
+  .opzione-card .btn{align-self:flex-start;padding:11px 20px;font-size:13px;}
+  .bandi-empty-note{font-size:13px;color:var(--text-faint);margin-top:20px;}
   .cta-final{text-align:center;padding:100px 24px;background:radial-gradient(ellipse at bottom,rgba(201,162,39,0.10),transparent 65%),var(--bg-sunken);}
   .cta-final h2{font-size:clamp(28px,5vw,44px);margin:0 0 16px;} .cta-final p{color:var(--text-soft);max-width:480px;margin:0 auto 32px;}
   footer{padding:36px 24px;text-align:center;border-top:1px solid var(--border);font-size:13px;color:var(--text-faint);}
@@ -165,8 +200,10 @@
     <p class="sezione-intro" data-i18n="apply.intro">Se c'è un bando aperto in linea con il tuo profilo, candidati direttamente. Altrimenti proponiti con una candidatura spontanea.</p>
     <div class="candidature-grid" id="candidature-grid">
       <div class="opzione-card spontanea">
-        <h3 data-i18n="apply.spon.t">Candidatura spontanea</h3>
-        <p class="desc" data-i18n="apply.spon.d">Non c'è ancora un bando specifico per te? Proponiti comunque.</p>
+        <div class="spon-text">
+          <h3 data-i18n="apply.spon.t">Candidatura spontanea</h3>
+          <p class="desc" data-i18n="apply.spon.d">Non c'è ancora un bando specifico per te? Proponiti comunque.</p>
+        </div>
         <a href="form-candidatura.html" class="btn btn-primary" data-i18n="apply.spon.btn">Candidati ora</a>
       </div>
     </div>
@@ -475,25 +512,35 @@ async function caricaBandiAttivi(){
     const card=document.createElement("div");
     card.className="opzione-card";
     const giorni=giorniAllaScadenza(b.scadenza_candidature);
-    let scadenzaHtml="";
-    if(b.scadenza_candidature){
-      const urgente=giorni!==null&&giorni<=7&&giorni>=0;
-      scadenzaHtml=`<span class="${urgente?'scadenza':''}">${t('apply.spon.btn').replace('ora','').trim()} ${fmtDataBreve(b.scadenza_candidature)}</span>`;
-    }
+    let scadenzaHtml=""; // usato sotto per card-dates
     let locandinaHtml="";
     if(b.locandina_path){
       const url=sb.storage.from("bandi-locandine").getPublicUrl(b.locandina_path).data.publicUrl;
       locandinaHtml=`<img src="${url}" alt="${b.titolo}" class="locandina-bando">`;
       card.classList.add("con-locandina");
     }
+    // Date in evidenza
+    let datesHtml = '<div class="card-dates">';
+    if(b.data_evento_inizio){
+      datesHtml += `<div class="date-row"><span class="date-label">Data</span><span class="date-value">${fmtRangeEvento(b.data_evento_inizio,b.data_evento_fine)}</span></div>`;
+    }
+    if(b.luogo){
+      datesHtml += `<div class="date-row"><span class="date-label">Luogo</span><span class="date-value" style="color:var(--text-soft);font-size:13px;">${b.luogo}</span></div>`;
+    }
+    if(b.scadenza_candidature){
+      const isUrgente = giorni!==null && giorni<=7 && giorni>=0;
+      datesHtml += `<div class="date-row"><span class="date-label">Candidature</span><span class="date-value${isUrgente?' scadenza':''}">${fmtDataBreve(b.scadenza_candidature)}</span></div>`;
+    }
+    datesHtml += '</div>';
+
     const bodyHtml=`
       <div class="tag-categoria" style="background:${categoriaColorVar(b.categorie?b.categorie.nome:'')}">${b.categorie?b.categorie.nome:''}</div>
       <h3>${b.titolo}</h3>
-      <div class="meta">${b.data_evento_inizio?fmtRangeEvento(b.data_evento_inizio,b.data_evento_fine):''}${b.luogo?' · '+b.luogo:''}${scadenzaHtml?' · '+scadenzaHtml:''}</div>
+      ${datesHtml}
       <p class="desc">${b.descrizione||''}</p>
       <a href="form-candidatura.html?bando=${b.id}" class="btn btn-primary">${t('apply.bando.btn')}</a>
     `;
-    card.innerHTML=locandinaHtml?(locandinaHtml+bodyHtml):bodyHtml;
+    card.innerHTML=locandinaHtml?(locandinaHtml+`<div class="card-body">${bodyHtml}</div>`):bodyHtml;
     grid.appendChild(card);
   });
 }
