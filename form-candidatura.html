@@ -657,11 +657,21 @@ function renderFormSpontaneo(cat){
 // RENDER FORM BANDO (semplificato)
 // ============================================================
 function renderFormBando(cat, bando){
-  fileSlots = {};
-  const form = document.getElementById("candidatura-form");
-  form.innerHTML = renderPanelAnagraficaBase() + renderPanelMaterialiGenerici() + renderPanelPrivacy();
-  bindForm();
-  document.getElementById("form-section").style.display = "block";
+  // Usa lo stesso form specifico per figura della candidatura spontanea:
+  // se il bando è per Dancer mostra i campi Dancer, ecc.
+  // La categoria non è selezionabile (il banndo la pre-imposta),
+  // ma i campi richiesti sono gli stessi.
+  const fig = getFIGURE()[cat.nome];
+  if(fig){
+    renderFormSpontaneo(cat);
+  } else {
+    // Figura non mappata: form base di fallback
+    fileSlots = {};
+    const form = document.getElementById("candidatura-form");
+    form.innerHTML = renderPanelAnagraficaBase() + renderPanelMaterialiGenerici() + renderPanelPrivacy();
+    bindForm();
+    document.getElementById("form-section").style.display = "block";
+  }
 }
 
 // ============================================================
