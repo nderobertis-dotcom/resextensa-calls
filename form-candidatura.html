@@ -196,9 +196,9 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // DEFINIZIONE FORM PER FIGURA
 // ============================================================
 const FIGURE = {
-  "Performer": {
+  "Dancer": {
     titolo: "Dancer Applications",
-    color: "var(--cat-performer, #B2477A)",
+    color: "var(--cat-dancer, #B2477A)",
     desc: "Performers, dancers for productions and auditions.",
     campiExtra: [
       { id:"altezza", label:"Height (cm)", type:"number", req:true, placeholder:"e.g. 175" }
@@ -217,9 +217,9 @@ const FIGURE = {
       { id:"rep2",      label:"Repertoire Video 2", tipo:"video", req:false }
     ]
   },
-  "Formatore": {
+  "Choreographer | Creation": {
     titolo: "Choreographer | Creation Applications",
-    color: "var(--cat-formatore, #C2791E)",
+    color: "var(--cat-choreographer, #C2791E)",
     desc: "Propose a creation or workshop project.",
     campiExtra: [],
     testi: [
@@ -241,9 +241,9 @@ const FIGURE = {
       { id:"srider",   label:"Set Rider",                       tipo:"altro",     req:false }
     ]
   },
-  "Tecnico": {
+  "Technical Figure": {
     titolo: "Technical Figure Applications",
-    color: "var(--cat-tecnico, #2F7A6F)",
+    color: "var(--cat-technical, #2F7A6F)",
     desc: "Lights, audio, rigging and other technical roles.",
     campiExtra: [],
     testi: [
@@ -257,9 +257,9 @@ const FIGURE = {
     campoLavoro: ["Lights","Audio","Rigger"],
     patente: true
   },
-  "Staff organizzativo": {
+  "Office Figure": {
     titolo: "Office Figure Applications",
-    color: "var(--cat-staff_organizzativo, #5B7A99)",
+    color: "var(--cat-office, #5B7A99)",
     desc: "Communication, organisation, administration.",
     campiExtra: [],
     testi: [

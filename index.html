@@ -44,10 +44,10 @@
     --accent-ink: #1C1404;
     --border: #34291A;
 
-    --cat-performer: #B2477A;
-    --cat-tecnico: #2F7A6F;
-    --cat-formatore: #C2791E;
-    --cat-staff_organizzativo: #5B7A99;
+    --cat-dancer: #B2477A;
+    --cat-technical: #2F7A6F;
+    --cat-choreographer: #C2791E;
+    --cat-office: #5B7A99;
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -334,28 +334,28 @@
 <!-- ============== AREE APERTE ============== -->
 <section>
   <div class="wrap">
-    <div class="step-label">LE AREE APERTE</div>
-    <h2 class="title">Cerchiamo persone per quattro ambiti</h2>
+    <div class="step-label">OPEN AREAS</div>
+    <h2 class="title">We are looking for people in four areas</h2>
     <div class="cat-grid">
       <div class="cat-card">
-        <div class="swatch" style="background:var(--cat-performer)"></div>
-        <h3>Performer</h3>
-        <p>Attori, cantanti, danzatori e performer per produzioni e audizioni della compagnia.</p>
+        <div class="swatch" style="background:var(--cat-dancer)"></div>
+        <h3>Dancer</h3>
+        <p>Performers and dancers for productions and auditions of the company.</p>
       </div>
       <div class="cat-card">
-        <div class="swatch" style="background:var(--cat-tecnico)"></div>
-        <h3>Tecnico</h3>
-        <p>Audio, luci, scenografia, sartoria: chi fa funzionare lo spettacolo dietro le quinte.</p>
+        <div class="swatch" style="background:var(--cat-technical)"></div>
+        <h3>Technical Figure</h3>
+        <p>Lights, audio, rigging, scenography: the people who make the show work.</p>
       </div>
       <div class="cat-card">
-        <div class="swatch" style="background:var(--cat-formatore)"></div>
-        <h3>Formatore</h3>
-        <p>Proponi un workshop o un percorso formativo da realizzare con la compagnia.</p>
+        <div class="swatch" style="background:var(--cat-choreographer)"></div>
+        <h3>Choreographer | Creation</h3>
+        <p>Propose a creation or workshop project to develop with the company.</p>
       </div>
       <div class="cat-card">
-        <div class="swatch" style="background:var(--cat-staff_organizzativo)"></div>
-        <h3>Staff organizzativo</h3>
-        <p>Comunicazione, organizzazione, amministrazione: il lavoro che tiene in piedi i progetti.</p>
+        <div class="swatch" style="background:var(--cat-office)"></div>
+        <h3>Office Figure</h3>
+        <p>Communication, organisation, administration: the work that keeps projects running.</p>
       </div>
     </div>
 
@@ -417,8 +417,13 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 function categoriaColorVar(nome){
-  const slug = nome === "Staff organizzativo" ? "staff_organizzativo" : (nome || "").toLowerCase();
-  return `var(--cat-${slug}, #777)`;
+  const map = {
+    "Dancer":                  "var(--cat-dancer, #B2477A)",
+    "Choreographer | Creation":"var(--cat-choreographer, #C2791E)",
+    "Technical Figure":        "var(--cat-technical, #2F7A6F)",
+    "Office Figure":           "var(--cat-office, #5B7A99)"
+  };
+  return map[nome] || "#777";
 }
 
 function fmtRangeEvento(inizio, fine){

@@ -59,10 +59,10 @@
     --stato-scartato: #A6483B;
     --stato-richiamabile: #3F8F8A;
 
-    --cat-performer: #B2477A;
-    --cat-tecnico: #2F7A6F;
-    --cat-formatore: #C2791E;
-    --cat-staff_organizzativo: #5B7A99;
+    --cat-dancer: #B2477A;
+    --cat-technical: #2F7A6F;
+    --cat-choreographer: #C2791E;
+    --cat-office: #5B7A99;
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -556,8 +556,13 @@ function categoriaSlug(nome){
 }
 
 function categoriaColorVar(nome){
-  const slug = nome === "Staff organizzativo" ? "staff_organizzativo" : nome.toLowerCase();
-  return `var(--cat-${slug}, #555)`;
+  const map = {
+    "Dancer":                  "var(--cat-dancer, #B2477A)",
+    "Choreographer | Creation":"var(--cat-choreographer, #C2791E)",
+    "Technical Figure":        "var(--cat-technical, #2F7A6F)",
+    "Office Figure":           "var(--cat-office, #5B7A99)"
+  };
+  return map[nome] || "#555";
 }
 
 function statoLabel(value){
