@@ -31,6 +31,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
   :root{
@@ -380,6 +383,29 @@
   }
   .save-status{ font-size: 12px; color: var(--text-faint); }
 
+
+  /* ---- MODAL PDF ---- */
+  .pdf-overlay{
+    display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,0.7); z-index:200;
+    align-items:center; justify-content:center;
+  }
+  .pdf-modal-box{
+    background:var(--bg-raised); border:1px solid var(--border);
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    width:100%; max-width:460px; padding:28px;
+  }
+  .pdf-modal-box h2{ font-size:18px; margin:0 0 6px; }
+  .pdf-modal-box .sub{ color:var(--text-faint); font-size:13px; margin-bottom:20px; }
+  .pdf-option{
+    border:1px solid var(--border); border-radius:6px; padding:14px 16px;
+    margin-bottom:10px; cursor:pointer; background:var(--bg-sunken);
+  }
+  .pdf-option:hover{ border-color:var(--accent); }
+  .pdf-option.selected{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+  .pdf-option h3{ font-size:14px; margin:0 0 4px; }
+  .pdf-option p{ font-size:12px; color:var(--text-soft); margin:0; }
+  .pdf-modal-actions{ display:flex; gap:10px; margin-top:20px; }
   footer.toast{
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
     background: var(--accent); color: var(--accent-ink);
@@ -451,6 +477,7 @@
         <input type="text" id="search-input" placeholder="Cerca per nome, progetto, ruolo…">
         <select id="filter-categoria"><option value="">Tutte le categorie</option></select>
         <select id="filter-bando"><option value="">Tutte (spontanee + bandi)</option><option value="spontanee">Solo spontanee</option></select>
+        <button class="btn btn-ghost" onclick="apriModalePDF()" style="margin-left:auto;padding:7px 14px;font-size:13px;">⬇ Scarica PDF</button>
         <div class="chip-row" id="stato-chips"></div>
       </div>
 
@@ -1229,5 +1256,30 @@ async function eliminaBando(id){
   }
 })();
 </script>
+
+<!-- MODAL PDF -->
+<div class="pdf-overlay" id="pdf-modal">
+  <div class="pdf-modal-box">
+    <h2>Scarica PDF</h2>
+    <div class="sub" id="pdf-modal-sub">Candidature filtrate: —</div>
+    <div class="pdf-option selected" id="pdf-opt-compatta" onclick="selezionaOpzionePDF('compatta')">
+      <h3>Lista compatta</h3>
+      <p>Una riga per candidato · Nome, categoria, tipo, ruolo, stato, data · Orientamento orizzontale</p>
+    </div>
+    <div class="pdf-option" id="pdf-opt-estesa" onclick="selezionaOpzionePDF('estesa')">
+      <h3>Lista estesa</h3>
+      <p>Include email, età, nazionalità, note interne · Più colonne, più informazioni</p>
+    </div>
+    <div class="pdf-option" id="pdf-opt-schede" onclick="selezionaOpzionePDF('schede')">
+      <h3>Schede individuali con foto e QR</h3>
+      <p>Una pagina per candidato · Foto primo piano, dati completi, QR per aprire in dashboard · Più lenta da generare</p>
+    </div>
+    <div class="pdf-modal-actions">
+      <button class="btn btn-primary" id="genera-pdf-btn" onclick="generaPDF(opzionePDFSelezionata)" style="width:auto;">Genera PDF</button>
+      <button class="btn btn-ghost" onclick="chiudiModalePDF()">Annulla</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
