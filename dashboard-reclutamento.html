@@ -422,8 +422,55 @@
       padding: 10px 16px;
     }
     tbody td{ border:none; padding: 4px 0; }
-    .drawer{ max-width: 100%; }
   }
+
+  /* ---- SPLIT PANE LAYOUT ---- */
+  main{ padding: 20px; max-width: 100%; margin: 0; }
+
+  .split-pane{
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 16px;
+    align-items: start;
+  }
+  .split-pane.no-detail{ grid-template-columns: 1fr; }
+
+  .detail-pane{
+    display: none;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+    position: sticky;
+    top: 20px;
+  }
+  .detail-pane.visible{ display: block; }
+
+  .detail-pane-inner{ padding: 20px; }
+
+  /* su schermi stretti torna a layout singolo */
+  @media (max-width: 900px){
+    .split-pane{ grid-template-columns: 1fr; }
+    .detail-pane{
+      position: fixed; inset: 0;
+      max-height: 100vh;
+      border-radius: 0;
+      z-index: 50;
+      overflow-y: auto;
+    }
+    .detail-pane.visible::before{
+      content:''; position:fixed; inset:0;
+      background:rgba(0,0,0,0.6); z-index:-1;
+    }
+  }
+
+  /* riga attiva in tabella */
+  tbody tr.active-row{ background: rgba(201,162,39,0.08); }
+  tbody tr.active-row td{ border-left: 2px solid var(--accent); }
+  tbody tr.active-row td:first-child{ padding-left: 14px; }
+
 </style>
 </head>
 <body>
@@ -481,22 +528,27 @@
         <div class="chip-row" id="stato-chips"></div>
       </div>
 
-      <div class="panel">
-        <table>
-          <thead>
-            <tr>
-              <th>Candidato</th>
-              <th>Categoria</th>
-              <th>Ruolo / Progetto</th>
-              <th>Stato</th>
-              <th>Candidatura</th>
-            </tr>
-          </thead>
-          <tbody id="candidature-tbody"></tbody>
-        </table>
-        <div class="empty-state" id="empty-state" style="display:none;">
-          <div class="display">Nessuna candidatura trovata</div>
-          <div>Prova a cambiare i filtri di ricerca.</div>
+      <div class="split-pane no-detail" id="split-pane">
+        <div class="panel" id="lista-panel">
+          <table>
+            <thead>
+              <tr>
+                <th>Candidato</th>
+                <th>Categoria</th>
+                <th>Ruolo / Progetto</th>
+                <th>Stato</th>
+                <th>Candidatura</th>
+              </tr>
+            </thead>
+            <tbody id="candidature-tbody"></tbody>
+          </table>
+          <div class="empty-state" id="empty-state" style="display:none;">
+            <div class="display">Nessuna candidatura trovata</div>
+            <div>Prova a cambiare i filtri di ricerca.</div>
+          </div>
+        </div>
+        <div class="detail-pane" id="detail-pane">
+          <div class="detail-pane-inner" id="drawer-content"></div>
         </div>
       </div>
     </div>
@@ -530,9 +582,10 @@
   </main>
 </div>
 
-<!-- ============== DETAIL DRAWER ============== -->
-<div class="overlay" id="drawer-overlay">
-  <div class="drawer" id="drawer-content"></div>
+
+<!-- Overlay drawer per form bandi -->
+<div class="overlay" id="bando-overlay">
+  <div class="drawer" id="bando-drawer-content"></div>
 </div>
 
 <footer class="toast" id="toast"></footer>
@@ -824,10 +877,21 @@ function renderTabella(){
 // ------------------------------------------------------------
 // DETTAGLIO / DRAWER
 // ------------------------------------------------------------
+let candidaturaAttivaId = null;
+
 async function apriDettaglio(c){
-  const overlay = document.getElementById("drawer-overlay");
+  const pane = document.getElementById("detail-pane");
   const content = document.getElementById("drawer-content");
-  overlay.style.display = "flex";
+  const splitPane = document.getElementById("split-pane");
+
+  // Marca riga attiva
+  document.querySelectorAll("tbody tr").forEach(r => r.classList.remove("active-row"));
+  const rows = document.querySelectorAll("#candidature-tbody tr");
+  rows.forEach(r => { if(r.onclick && r.onclick.toString().includes(c.id)) r.classList.add("active-row"); });
+
+  candidaturaAttivaId = c.id;
+  pane.classList.add("visible");
+  splitPane.classList.remove("no-detail");
 
   const candidato = c.candidati;
   const eta_anni = eta(candidato.data_nascita);
@@ -892,13 +956,23 @@ async function apriDettaglio(c){
   caricaMateriali(c.id);
 }
 
-function chiudiDettaglio(){
-  document.getElementById("drawer-overlay").style.display = "none";
-}
 
-document.getElementById("drawer-overlay").addEventListener("click", e => {
-  if(e.target.id === "drawer-overlay") chiudiDettaglio();
-});
+function chiudiBandoDrawer(){
+  document.getElementById("bando-overlay").style.display = "none";
+}
+document.getElementById ? (function(){
+  var bo = document.getElementById("bando-overlay");
+  if(bo) bo.addEventListener("click", function(e){ if(e.target.id==="bando-overlay") chiudiBandoDrawer(); });
+})() : null;
+
+function chiudiDettaglio(){
+  const pane = document.getElementById("detail-pane");
+  const splitPane = document.getElementById("split-pane");
+  pane.classList.remove("visible");
+  splitPane.classList.add("no-detail");
+  document.querySelectorAll("tbody tr").forEach(r => r.classList.remove("active-row"));
+  candidaturaAttivaId = null;
+}
 
 async function caricaMateriali(candidaturaId){
   const { data, error } = await sb
@@ -1041,8 +1115,8 @@ async function toggleAttivoBando(b){
 }
 
 function apriFormBando(bando){
-  const overlay = document.getElementById("drawer-overlay");
-  const content = document.getElementById("drawer-content");
+  const overlay = document.getElementById("bando-overlay");
+  const content = document.getElementById("bando-drawer-content");
   overlay.style.display = "flex";
 
   locandinaFileSelezionata = null;
@@ -1124,7 +1198,7 @@ function apriFormBando(bando){
     </div>
   `;
 
-  document.getElementById("close-drawer").onclick = chiudiDettaglio;
+  document.getElementById("close-drawer").onclick = chiudiBandoDrawer;
   document.getElementById("save-bando-btn").onclick = () => salvaBando(bando ? bando.id : null, categoriaFissa);
   if(bando){
     document.getElementById("delete-bando-btn").onclick = () => eliminaBando(bando.id);
@@ -1211,7 +1285,7 @@ async function salvaBando(id, categoriaFissa){
   }
 
   showToast("Bando salvato.");
-  chiudiDettaglio();
+  chiudiBandoDrawer();
   await caricaBandi();
 }
 
@@ -1234,7 +1308,7 @@ async function eliminaBando(id){
   const { error } = await sb.from("bandi").delete().eq("id", id);
   if(error){ showToast("Errore nell'eliminazione del bando."); return; }
   showToast("Bando eliminato.");
-  chiudiDettaglio();
+  chiudiBandoDrawer();
   await caricaBandi();
 }
 
