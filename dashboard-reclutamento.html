@@ -1255,6 +1255,274 @@ async function eliminaBando(id){
     }
   }
 })();
+
+
+// ============================================================
+// PDF GENERATION
+// ============================================================
+let opzionePDFSelezionata = 'compatta';
+
+function apriModalePDF(){
+  const cands = getCandidatureFiltrate();
+  document.getElementById("pdf-modal-sub").textContent =
+    "Candidature filtrate: " + cands.length + " · " + descrizioneFiltri();
+  document.getElementById("pdf-modal").style.display = "flex";
+}
+function chiudiModalePDF(){ document.getElementById("pdf-modal").style.display = "none"; }
+
+function selezionaOpzionePDF(tipo){
+  opzionePDFSelezionata = tipo;
+  ['compatta','estesa','schede'].forEach(t => {
+    document.getElementById("pdf-opt-"+t).classList.toggle("selected", t===tipo);
+  });
+}
+
+function getCandidatureFiltrate(){
+  return state.candidature.filter(c => {
+    if(state.filtroStato && c.stato !== state.filtroStato) return false;
+    if(state.filtroCategoria && c.categoria_id !== state.filtroCategoria) return false;
+    if(state.filtroBando === "spontanee" && c.bando_id) return false;
+    if(state.filtroBando && state.filtroBando !== "spontanee" && c.bando_id !== state.filtroBando) return false;
+    if(state.ricerca){
+      const blob = (c.candidati.nome+" "+c.candidati.cognome+" "+(c.progetto_riferimento||"")+" "+(c.ruolo_specifico||"")).toLowerCase();
+      if(!blob.includes(state.ricerca)) return false;
+    }
+    return true;
+  });
+}
+
+function descrizioneFiltri(){
+  const parts = [];
+  if(state.filtroBando === "spontanee") parts.push("Solo spontanee");
+  else if(state.filtroBando){
+    const b = state.bandi.find(b => b.id===state.filtroBando);
+    if(b) parts.push("Bando: "+b.titolo);
+  }
+  if(state.filtroCategoria){
+    const cat = state.categorie.find(c => c.id===state.filtroCategoria);
+    if(cat) parts.push(cat.nome);
+  }
+  if(state.filtroStato) parts.push(statoLabel(state.filtroStato));
+  if(state.ricerca) parts.push('Ricerca: "'+state.ricerca+'"');
+  return parts.length ? parts.join(" · ") : "Tutte le candidature";
+}
+
+function etaAnni(dob){
+  if(!dob) return "—";
+  const oggi=new Date(), n=new Date(dob);
+  let a=oggi.getFullYear()-n.getFullYear();
+  const m=oggi.getMonth()-n.getMonth();
+  if(m<0||(m===0&&oggi.getDate()<n.getDate())) a--;
+  return a+" anni";
+}
+
+function pdfHeader(doc,titolo,n){
+  const W=doc.internal.pageSize.getWidth();
+  doc.setFillColor(10,8,6); doc.rect(0,0,W,22,'F');
+  doc.setFillColor(201,162,39); doc.rect(0,22,W,0.8,'F');
+  doc.setTextColor(201,162,39); doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.text("RESEXTENSA | PORTA D'ORIENTE",12,8);
+  doc.setTextColor(243,236,221); doc.setFontSize(12); doc.setFont('helvetica','bold');
+  doc.text(titolo.toUpperCase(),12,18);
+  doc.setFontSize(7); doc.setFont('helvetica','normal'); doc.setTextColor(180,170,150);
+  const d=new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
+  doc.text(d+" · "+n+" candidature",W-12,18,{align:'right'});
+  doc.setTextColor(30,20,10);
+}
+
+function generaListaCompatta(cands){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+  const W=doc.internal.pageSize.getWidth();
+  pdfHeader(doc,'Lista Candidature',cands.length);
+  doc.setFontSize(7); doc.setFont('helvetica','italic'); doc.setTextColor(100,90,70);
+  doc.text(descrizioneFiltri(),12,30);
+  doc.autoTable({
+    startY:34,
+    head:[['#','Candidato','Categoria','Tipo/Bando','Ruolo','Stato','Data']],
+    body:cands.map((c,i)=>[
+      i+1,
+      c.candidati.cognome.toUpperCase()+' '+c.candidati.nome,
+      c.categorie.nome,
+      c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'Bando'}).titolo:'Spontanea',
+      c.ruolo_specifico||'—',
+      statoLabel(c.stato),
+      fmtData(c.data_candidatura)
+    ]),
+    styles:{fontSize:8,cellPadding:2.5},
+    headStyles:{fillColor:[201,162,39],textColor:[28,20,4],fontStyle:'bold'},
+    alternateRowStyles:{fillColor:[245,240,230]},
+    columnStyles:{0:{cellWidth:8,halign:'center'},5:{halign:'center'},6:{halign:'center'}}
+  });
+  const pc=doc.internal.getNumberOfPages();
+  for(let i=1;i<=pc;i++){doc.setPage(i);doc.setFontSize(7);doc.setTextColor(160,150,130);doc.text('Pagina '+i+' di '+pc,W/2,doc.internal.pageSize.getHeight()-8,{align:'center'});}
+  doc.save('resextensa-lista-candidature.pdf');
+}
+
+function generaListaEstesa(cands){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+  const W=doc.internal.pageSize.getWidth();
+  pdfHeader(doc,'Lista Estesa Candidature',cands.length);
+  doc.setFontSize(7); doc.setFont('helvetica','italic'); doc.setTextColor(100,90,70);
+  doc.text(descrizioneFiltri(),12,30);
+  doc.autoTable({
+    startY:34,
+    head:[['#','Candidato','Email','Età','Nazionalità','Categoria','Tipo/Bando','Ruolo','Stato','Note']],
+    body:cands.map((c,i)=>[
+      i+1,
+      c.candidati.cognome.toUpperCase()+' '+c.candidati.nome,
+      c.candidati.email,
+      etaAnni(c.candidati.data_nascita),
+      c.candidati.nazionalita||'—',
+      c.categorie.nome,
+      c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'Bando'}).titolo:'Spontanea',
+      c.ruolo_specifico||'—',
+      statoLabel(c.stato),
+      (c.note_interne||'').substring(0,50)+((c.note_interne||'').length>50?'…':'')
+    ]),
+    styles:{fontSize:7,cellPadding:2},
+    headStyles:{fillColor:[201,162,39],textColor:[28,20,4],fontStyle:'bold'},
+    alternateRowStyles:{fillColor:[245,240,230]},
+    columnStyles:{0:{cellWidth:7,halign:'center'},3:{cellWidth:12,halign:'center'},8:{cellWidth:18,halign:'center'}}
+  });
+  const pc=doc.internal.getNumberOfPages();
+  for(let i=1;i<=pc;i++){doc.setPage(i);doc.setFontSize(7);doc.setTextColor(160,150,130);doc.text('Pagina '+i+' di '+pc,W/2,doc.internal.pageSize.getHeight()-8,{align:'center'});}
+  doc.save('resextensa-lista-estesa-candidature.pdf');
+}
+
+async function generaSchede(cands){
+  const btn=document.getElementById("genera-pdf-btn");
+  btn.disabled=true;
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const ids=cands.map(c=>c.id);
+  const {data:mat}=await sb.from('materiali').select('*').in('candidatura_id',ids).eq('tipo','foto');
+  for(let i=0;i<cands.length;i++){
+    if(i>0) doc.addPage();
+    btn.textContent="Generazione "+(i+1)+"/"+cands.length+"…";
+    await renderScheda(doc,cands[i],mat||[]);
+  }
+  const pc=doc.internal.getNumberOfPages();
+  for(let p=1;p<=pc;p++){doc.setPage(p);doc.setFontSize(6);doc.setTextColor(160,150,130);doc.text('Pagina '+p+' di '+pc,105,291,{align:'center'});}
+  doc.save('resextensa-schede-candidature.pdf');
+  btn.disabled=false; btn.textContent="Genera PDF";
+  chiudiModalePDF();
+}
+
+async function renderScheda(doc,c,tuttiMat){
+  const W=210;
+  doc.setFillColor(10,8,6); doc.rect(0,0,W,24,'F');
+  doc.setFillColor(201,162,39); doc.rect(0,24,W,0.8,'F');
+  doc.setTextColor(201,162,39); doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.text("RESEXTENSA | PORTA D'ORIENTE",12,9);
+  doc.setTextColor(243,236,221); doc.setFontSize(11); doc.setFont('helvetica','bold');
+  doc.text(c.candidati.cognome.toUpperCase()+' '+c.candidati.nome,12,19);
+  doc.setFontSize(6.5); doc.setFont('helvetica','normal'); doc.setTextColor(180,170,150);
+  doc.text(new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'}),W-12,19,{align:'right'});
+  const fotoMat=tuttiMat.find(m=>m.candidatura_id===c.id&&m.etichetta&&m.etichetta.toLowerCase().includes('primo piano'));
+  const fx=12,fy=28,fw=45,fh=62;
+  if(fotoMat){
+    try{
+      const {data:su}=await sb.storage.from('candidature-materiali').createSignedUrl(fotoMat.storage_path,300);
+      if(su&&su.signedUrl){
+        const b64=await urlToBase64(su.signedUrl);
+        doc.addImage(b64,'JPEG',fx,fy,fw,fh,'','FAST');
+      } else drawPlaceholder(doc,fx,fy,fw,fh);
+    } catch(e){ drawPlaceholder(doc,fx,fy,fw,fh); }
+  } else drawPlaceholder(doc,fx,fy,fw,fh);
+  const rgb=catRGB(c.categorie.nome);
+  doc.setFillColor(rgb[0],rgb[1],rgb[2]); doc.roundedRect(fx,fy+fh+3,fw,7,2,2,'F');
+  doc.setTextColor(255,255,255); doc.setFontSize(6.5); doc.setFont('helvetica','bold');
+  doc.text(c.categorie.nome.toUpperCase(),fx+fw/2,fy+fh+7.5,{align:'center'});
+  const dx=62; let dy=30;
+  const righe=[
+    ['Email',c.candidati.email||'—'],
+    ['Telefono',c.candidati.telefono||'—'],
+    ['Data nascita',c.candidati.data_nascita?fmtData(c.candidati.data_nascita)+' ('+etaAnni(c.candidati.data_nascita)+')':'—'],
+    ['Nazionalita',c.candidati.nazionalita||'—'],
+    ['Domicilio',c.candidati.indirizzo_domicilio||'—'],
+    ['Codice Fiscale',c.candidati.codice_fiscale||'—'],
+    ['Ruolo',c.ruolo_specifico||'—'],
+    ['Bando',c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'—'}).titolo:'Candidatura spontanea'],
+    ['Data candidatura',fmtData(c.data_candidatura)],
+    ['Stato',statoLabel(c.stato)],
+  ];
+  righe.forEach(function(r){
+    doc.setFontSize(6.5); doc.setFont('helvetica','bold'); doc.setTextColor(130,115,90);
+    doc.text(r[0].toUpperCase(),dx,dy);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(30,20,10);
+    var lines=doc.splitTextToSize(r[1],W-dx-30);
+    doc.text(lines,dx,dy+4.5);
+    dy+=4.5+(lines.length>1?lines.length*3.2:3)+2;
+  });
+  const sepY=Math.max(fy+fh+18,dy+4);
+  doc.setDrawColor(201,162,39); doc.setLineWidth(0.4); doc.line(12,sepY,W-12,sepY);
+  let ny=sepY+7;
+  doc.setFontSize(7.5); doc.setFont('helvetica','bold'); doc.setTextColor(100,90,70);
+  doc.text('NOTE INTERNE',12,ny); ny+=5;
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(30,20,10);
+  var noteLines=doc.splitTextToSize(c.note_interne||'—',W-24-35);
+  doc.text(noteLines,12,ny);
+  const qrUrl='https://resextensacalls.it/dashboard-reclutamento.html?c='+c.id;
+  const qrCanvas=await generaQR(qrUrl);
+  if(qrCanvas){
+    doc.addImage(qrCanvas.toDataURL('image/png'),'PNG',W-12-30,258,30,30);
+    doc.setFontSize(6); doc.setTextColor(130,115,90);
+    doc.text('Apri in dashboard',W-12-15,291,{align:'center'});
+  }
+}
+
+function drawPlaceholder(doc,x,y,w,h){
+  doc.setFillColor(33,26,16); doc.rect(x,y,w,h,'F');
+  doc.setFontSize(7); doc.setTextColor(140,125,100); doc.setFont('helvetica','normal');
+  doc.text('Foto non disponibile',x+w/2,y+h/2,{align:'center'});
+}
+
+function catRGB(nome){
+  var map={'Dancer':[178,71,122],'Choreographer | Creation':[194,121,30],'Technical Figure':[47,122,111],'Office Figure':[91,122,153]};
+  return map[nome]||[100,100,100];
+}
+
+async function urlToBase64(url){
+  const r=await fetch(url); const b=await r.blob();
+  return new Promise(function(res,rej){var fr=new FileReader();fr.onloadend=function(){res(fr.result);};fr.onerror=rej;fr.readAsDataURL(b);});
+}
+
+async function generaQR(text){
+  try{
+    var div=document.createElement('div');
+    div.style.cssText='position:absolute;left:-9999px;top:-9999px;';
+    document.body.appendChild(div);
+    new QRCode(div,{text:text,width:128,height:128,colorDark:'#0A0806',colorLight:'#F3ECDD'});
+    await new Promise(function(r){setTimeout(r,150);});
+    var canvas=div.querySelector('canvas');
+    document.body.removeChild(div);
+    return canvas;
+  } catch(e){ return null; }
+}
+
+async function generaPDF(tipo){
+  var cands=getCandidatureFiltrate();
+  if(!cands.length){showToast("Nessuna candidatura con i filtri attuali.");return;}
+  if(tipo==='compatta'){generaListaCompatta(cands);chiudiModalePDF();}
+  else if(tipo==='estesa'){generaListaEstesa(cands);chiudiModalePDF();}
+  else if(tipo==='schede') await generaSchede(cands);
+}
+
+// Deep link da QR: apre automaticamente la scheda candidato
+(function(){
+  var p=new URLSearchParams(window.location.search);
+  var cId=p.get('c');
+  if(cId){
+    var tryOpen=function(){
+      var c=state.candidature.find(function(x){return x.id===cId;});
+      if(c){apriDettaglio(c);}else{setTimeout(tryOpen,500);}
+    };
+    setTimeout(tryOpen,1500);
+  }
+})();
+
 </script>
 
 <!-- MODAL PDF -->
