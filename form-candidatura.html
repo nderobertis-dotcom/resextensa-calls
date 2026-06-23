@@ -657,16 +657,16 @@ function renderFormSpontaneo(cat){
 // RENDER FORM BANDO (semplificato)
 // ============================================================
 function renderFormBando(cat, bando){
-  // Usa lo stesso form specifico per figura della candidatura spontanea:
-  // se il bando è per Dancer mostra i campi Dancer, ecc.
-  // La categoria non è selezionabile (il banndo la pre-imposta),
-  // ma i campi richiesti sono gli stessi.
   const fig = getFIGURE()[cat.nome];
   if(fig){
+    categoriaSelezionata = cat;
     renderFormSpontaneo(cat);
+    document.getElementById("form-section").style.display = "block";
+    document.getElementById("form-section").scrollIntoView({behavior:"smooth", block:"start"});
   } else {
     // Figura non mappata: form base di fallback
     fileSlots = {};
+    categoriaSelezionata = cat;
     const form = document.getElementById("candidatura-form");
     form.innerHTML = renderPanelAnagraficaBase() + renderPanelMaterialiGenerici() + renderPanelPrivacy();
     bindForm();
@@ -987,6 +987,17 @@ function calcolaEta(dataNascita){
   return anni;
 }
 
+function generateUUID(){
+  if(typeof crypto !== 'undefined' && crypto.randomUUID){
+    return crypto.randomUUID();
+  }
+  // fallback per HTTP o browser senza supporto nativo
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
 function nomeFileSicuro(nome){ return nome.replace(/[^a-zA-Z0-9._-]/g,"_"); }
 
 async function handleSubmit(e){
@@ -1025,7 +1036,7 @@ async function handleSubmit(e){
       for(const m of fig.materiali){
         const file = fileSlots[m.id];
         if(!file) continue;
-        const path = `${cat.id}/${crypto.randomUUID()}-${nomeFileSicuro(file.name)}`;
+        const path = `${cat.id}/${generateUUID()}-${nomeFileSicuro(file.name)}`;
         const { error: upErr } = await sb.storage.from(BUCKET).upload(path, file);
         if(upErr) throw new Error(`Upload failed: ${m.label}`);
         materialiPayload.push({ tipo: m.tipo, etichetta: m.label, storage_path: path, nome_file_originale: file.name });
@@ -1034,7 +1045,7 @@ async function handleSubmit(e){
       // bando: materiali generici
       for(const entry of (window._materialiGenerici||[])){
         if(!entry.file) continue;
-        const path = `${cat.id}/${crypto.randomUUID()}-${nomeFileSicuro(entry.file.name)}`;
+        const path = `${cat.id}/${generateUUID()}-${nomeFileSicuro(entry.file.name)}`;
         const { error: upErr } = await sb.storage.from(BUCKET).upload(path, entry.file);
         if(upErr) throw new Error(`Upload failed: ${entry.file.name}`);
         materialiPayload.push({ tipo: "altro", etichetta: null, storage_path: path, nome_file_originale: entry.file.name });
