@@ -450,6 +450,7 @@
       <div class="toolbar">
         <input type="text" id="search-input" placeholder="Cerca per nome, progetto, ruolo…">
         <select id="filter-categoria"><option value="">Tutte le categorie</option></select>
+        <select id="filter-bando"><option value="">Tutte (spontanee + bandi)</option><option value="spontanee">Solo spontanee</option></select>
         <div class="chip-row" id="stato-chips"></div>
       </div>
 
@@ -529,12 +530,13 @@ const STATI = [
 ];
 
 let state = {
-  user: null,        // utenti_staff row
+  user: null,
   candidature: [],
   categorie: [],
   bandi: [],
   filtroStato: "",
   filtroCategoria: "",
+  filtroBando: "",   // "" = tutte | "spontanee" | <bando_id>
   ricerca: ""
 };
 
@@ -671,6 +673,10 @@ async function initApp(){
     state.filtroCategoria = e.target.value;
     renderTabella();
   });
+  document.getElementById("filter-bando").addEventListener("change", e => {
+    state.filtroBando = e.target.value;
+    renderTabella();
+  });
 
   document.getElementById("tab-candidature").addEventListener("click", () => mostraTab("candidature"));
   document.getElementById("tab-bandi").addEventListener("click", () => mostraTab("bandi"));
@@ -751,6 +757,8 @@ function renderTabella(){
   let righe = state.candidature.filter(c => {
     if(state.filtroStato && c.stato !== state.filtroStato) return false;
     if(state.filtroCategoria && c.categoria_id !== state.filtroCategoria) return false;
+    if(state.filtroBando === "spontanee" && c.bando_id) return false;
+    if(state.filtroBando && state.filtroBando !== "spontanee" && c.bando_id !== state.filtroBando) return false;
     if(state.ricerca){
       const blob = `${c.candidati.nome} ${c.candidati.cognome} ${c.progetto_riferimento||""} ${c.ruolo_specifico||""}`.toLowerCase();
       if(!blob.includes(state.ricerca)) return false;
@@ -765,6 +773,8 @@ function renderTabella(){
   empty.style.display = "none";
 
   righe.forEach(c => {
+    const isBando = !!c.bando_id;
+    const bandoNome = isBando ? (state.bandi.find(b => b.id === c.bando_id)?.titolo || "Bando") : null;
     const tr = document.createElement("tr");
     tr.onclick = () => apriDettaglio(c);
     tr.innerHTML = `
@@ -775,7 +785,7 @@ function renderTabella(){
       <td><span class="tag" style="background:${categoriaColorVar(c.categorie.nome)}">${c.categorie.nome}</span></td>
       <td>
         <div>${c.ruolo_specifico || "—"}</div>
-        <div class="sub">${c.progetto_riferimento || ""}</div>
+        <div class="sub">${isBando ? `<span style="color:var(--accent);font-size:10px;font-family:'IBM Plex Mono',monospace;">● ${bandoNome}</span>` : '<span style="color:var(--text-faint);font-size:10px;">spontanea</span>'}</div>
       </td>
       <td><span class="badge" style="background:var(--stato-${c.stato})">${statoLabel(c.stato)}</span></td>
       <td class="mono sub">${fmtData(c.data_candidatura)}</td>
@@ -946,6 +956,19 @@ function renderBandiTabella(){
   const empty = document.getElementById("bandi-empty-state");
   tbody.innerHTML = "";
 
+  // Aggiorna dropdown filtro bando nella tab candidature
+  const sel = document.getElementById("filter-bando");
+  if(sel){
+    // rimuovi opzioni bandi precedenti (mantieni prime 2: tutte + spontanee)
+    while(sel.options.length > 2) sel.remove(2);
+    state.bandi.forEach(b => {
+      const opt = document.createElement("option");
+      opt.value = b.id;
+      opt.textContent = b.titolo + (b.attivo ? "" : " (chiuso)");
+      sel.appendChild(opt);
+    });
+  }
+
   if(state.bandi.length === 0){
     empty.style.display = "block";
     return;
@@ -953,6 +976,7 @@ function renderBandiTabella(){
   empty.style.display = "none";
 
   state.bandi.forEach(b => {
+    const nCandidature = state.candidature.filter(c => c.bando_id === b.id).length;
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>
@@ -964,10 +988,18 @@ function renderBandiTabella(){
       <td class="mono sub">${fmtData(b.scadenza_candidature)}</td>
       <td><span class="badge" style="background:${b.attivo ? 'var(--stato-selezionato)' : 'var(--text-faint)'}">${b.attivo ? "Attivo" : "Disattivo"}</span></td>
       <td style="white-space:nowrap;">
+        <button class="btn btn-ghost btn-vedi" style="padding:5px 10px;font-size:12px;" title="${nCandidature} candidature">Candidature ${nCandidature > 0 ? `<span style="background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:1px 6px;font-size:10px;margin-left:4px;">${nCandidature}</span>` : ""}</button>
         <button class="btn btn-ghost btn-modifica" style="padding:5px 10px;font-size:12px;">Modifica</button>
         <button class="btn btn-ghost btn-toggle" style="padding:5px 10px;font-size:12px;">${b.attivo ? "Disattiva" : "Attiva"}</button>
       </td>
     `;
+    tr.querySelector(".btn-vedi").onclick = () => {
+      mostraTab("candidature");
+      state.filtroBando = b.id;
+      const sel = document.getElementById("filter-bando");
+      if(sel) sel.value = b.id;
+      renderTabella();
+    };
     tr.querySelector(".btn-modifica").onclick = () => apriFormBando(b);
     tr.querySelector(".btn-toggle").onclick = () => toggleAttivoBando(b);
     tbody.appendChild(tr);
