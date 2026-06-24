@@ -56,8 +56,6 @@
   section{padding:80px 0;} section.raised{background:var(--bg-raised);}
   .step-label{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);letter-spacing:0.1em;margin-bottom:14px;}
   section h2.title{font-size:clamp(26px,4vw,36px);margin:0 0 24px;}
-  .chi-siamo{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;}
-  @media(max-width:760px){.chi-siamo{grid-template-columns:1fr;}}
   .chi-siamo p{color:var(--text-soft);}
   .photo-placeholder{aspect-ratio:4/5;border:1px dashed var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-faint);font-size:13px;padding:20px;background:var(--bg-sunken);}
   .valori{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
@@ -151,14 +149,11 @@
 
 <section>
   <div class="wrap">
-    <div class="chi-siamo">
-      <div>
+    <div>
         <div class="step-label" data-i18n="who.step">CHI SIAMO</div>
         <h2 class="title" data-i18n="who.title">Una compagnia, vent'anni di palco</h2>
         <p data-i18n="who.p1">ResExtensa è una compagnia di danza contemporanea con sede a Bari, attiva dal 2004.</p>
         <p data-i18n="who.p2">Le creazioni dirette da Elisa Barucchieri uniscono danza aerea e acrobatica, video proiezioni, musica dal vivo e parola scenica.</p>
-      </div>
-      <div class="photo-placeholder">FOTO DA INSERIRE<br>(es. scena da uno spettacolo)</div>
     </div>
   </div>
 </section>
@@ -185,11 +180,6 @@
       <div class="cat-card"><div class="swatch" style="background:var(--cat-choreographer)"></div><h3 data-i18n="cat.choreo.t">Coreografo | Creazione</h3><p data-i18n="cat.choreo.d">Proponi un progetto di creazione o workshop da sviluppare con la compagnia.</p></div>
       <div class="cat-card"><div class="swatch" style="background:var(--cat-technical)"></div><h3 data-i18n="cat.tech.t">Figura Tecnica</h3><p data-i18n="cat.tech.d">Luci, audio, rigging, scenografia: chi fa funzionare lo spettacolo.</p></div>
       <div class="cat-card"><div class="swatch" style="background:var(--cat-office)"></div><h3 data-i18n="cat.office.t">Figura Organizzativa</h3><p data-i18n="cat.office.d">Comunicazione, organizzazione, amministrazione: il lavoro che tiene in piedi i progetti.</p></div>
-    </div>
-    <div class="photo-strip">
-      <div class="photo-placeholder">FOTO DA INSERIRE</div>
-      <div class="photo-placeholder">FOTO DA INSERIRE</div>
-      <div class="photo-placeholder">FOTO DA INSERIRE</div>
     </div>
   </div>
 </section>
