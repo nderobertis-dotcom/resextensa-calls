@@ -515,7 +515,7 @@
 
   <nav class="view-tabs">
     <button class="tab-btn active" id="tab-candidature" type="button">Candidature</button>
-    <button class="tab-btn" id="tab-bandi" type="button">Bandi</button>
+    <button class="tab-btn" id="tab-bandi" type="button">Laboratori</button>
   </nav>
 
   <main>
@@ -523,7 +523,7 @@
       <div class="toolbar">
         <input type="text" id="search-input" placeholder="Cerca per nome, progetto, ruolo…">
         <select id="filter-categoria"><option value="">Tutte le categorie</option></select>
-        <select id="filter-bando"><option value="">Tutte (spontanee + bandi)</option><option value="spontanee">Solo spontanee</option></select>
+        <select id="filter-bando"><option value="">Tutte (spontanee + laboratori)</option><option value="spontanee">Solo spontanee</option></select>
         <button class="btn btn-ghost" onclick="apriModalePDF()" style="margin-left:auto;padding:7px 14px;font-size:13px;">⬇ Scarica PDF</button>
         <div class="chip-row" id="stato-chips"></div>
       </div>
@@ -555,8 +555,8 @@
 
     <div id="bandi-view" style="display:none;">
       <div class="toolbar">
-        <div style="font-size:13px;color:var(--text-faint);max-width:420px;">Audizioni e workshop a data fissa: quelli attivi appaiono sulla landing RESEXTENSA CALLS.</div>
-        <button class="btn btn-primary" id="nuovo-bando-btn" type="button" style="width:auto;margin-left:auto;">Nuovo bando</button>
+        <div style="font-size:13px;color:var(--text-faint);max-width:420px;">Laboratori, audizioni e workshop a data fissa: quelli attivi appaiono sulla landing RESEXTENSA CALLS.</div>
+        <button class="btn btn-primary" id="nuovo-bando-btn" type="button" style="width:auto;margin-left:auto;">Nuovo laboratorio</button>
       </div>
 
       <div class="panel">
@@ -854,7 +854,7 @@ function renderTabella(){
 
   righe.forEach(c => {
     const isBando = !!c.bando_id;
-    const bandoNome = isBando ? (state.bandi.find(b => b.id === c.bando_id)?.titolo || "Bando") : null;
+    const bandoNome = isBando ? (state.bandi.find(b => b.id === c.bando_id)?.titolo || "Laboratorio") : null;
     const tr = document.createElement("tr");
     tr.onclick = () => apriDettaglio(c);
     tr.innerHTML = `
@@ -1135,7 +1135,7 @@ function apriFormBando(bando){
 
   content.innerHTML = `
     <div class="drawer-head">
-      <h2>${bando ? "Modifica bando" : "Nuovo bando"}</h2>
+      <h2>${bando ? "Modifica laboratorio" : "Nuovo laboratorio"}</h2>
       <button class="close-btn" id="close-drawer">&times;</button>
     </div>
 
@@ -1284,7 +1284,7 @@ async function salvaBando(id, categoriaFissa){
     return;
   }
 
-  showToast("Bando salvato.");
+  showToast("Laboratorio salvato.");
   chiudiBandoDrawer();
   await caricaBandi();
 }
@@ -1307,7 +1307,7 @@ async function eliminaBando(id){
   if(!confirm("Eliminare definitivamente questo bando? Non ha candidature collegate.")) return;
   const { error } = await sb.from("bandi").delete().eq("id", id);
   if(error){ showToast("Errore nell'eliminazione del bando."); return; }
-  showToast("Bando eliminato.");
+  showToast("Laboratorio eliminato.");
   chiudiBandoDrawer();
   await caricaBandi();
 }
@@ -1370,7 +1370,7 @@ function descrizioneFiltri(){
   if(state.filtroBando === "spontanee") parts.push("Solo spontanee");
   else if(state.filtroBando){
     const b = state.bandi.find(b => b.id===state.filtroBando);
-    if(b) parts.push("Bando: "+b.titolo);
+    if(b) parts.push("Laboratorio: "+b.titolo);
   }
   if(state.filtroCategoria){
     const cat = state.categorie.find(c => c.id===state.filtroCategoria);
@@ -1418,7 +1418,7 @@ function generaListaCompatta(cands){
       i+1,
       c.candidati.cognome.toUpperCase()+' '+c.candidati.nome,
       c.categorie.nome,
-      c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'Bando'}).titolo:'Spontanea',
+      c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'Laboratorio'}).titolo:'Spontanea',
       c.ruolo_specifico||'—',
       statoLabel(c.stato),
       fmtData(c.data_candidatura)
@@ -1450,7 +1450,7 @@ function generaListaEstesa(cands){
       etaAnni(c.candidati.data_nascita),
       c.candidati.nazionalita||'—',
       c.categorie.nome,
-      c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'Bando'}).titolo:'Spontanea',
+      c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'Laboratorio'}).titolo:'Spontanea',
       c.ruolo_specifico||'—',
       statoLabel(c.stato),
       (c.note_interne||'').substring(0,50)+((c.note_interne||'').length>50?'…':'')
@@ -1518,7 +1518,7 @@ async function renderScheda(doc,c,tuttiMat){
     ['Domicilio',c.candidati.indirizzo_domicilio||'—'],
     ['Codice Fiscale',c.candidati.codice_fiscale||'—'],
     ['Ruolo',c.ruolo_specifico||'—'],
-    ['Bando',c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'—'}).titolo:'Candidatura spontanea'],
+    ['Laboratorio',c.bando_id?(state.bandi.find(b=>b.id===c.bando_id)||{titolo:'—'}).titolo:'Candidatura spontanea'],
     ['Data candidatura',fmtData(c.data_candidatura)],
     ['Stato',statoLabel(c.stato)],
   ];

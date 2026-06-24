@@ -118,6 +118,18 @@
   .opzione-card p.desc{font-size:12.5px;color:var(--text-soft);margin:0 0 14px;flex:1;}
   .opzione-card .btn{align-self:flex-start;padding:10px 18px;font-size:12px;}
   .bandi-empty-note{font-size:13px;color:var(--text-faint);margin-top:20px;}
+  .spon-footer{
+    margin-top:32px;
+    padding-top:24px;
+    border-top:1px solid var(--border);
+  }
+  .spon-footer .opzione-card.spontanea{
+    border-color:var(--border);
+    opacity:0.85;
+  }
+  .spon-footer .opzione-card.spontanea h3{
+    font-size:15px;
+  }
   .cta-final{text-align:center;padding:100px 24px;background:radial-gradient(ellipse at bottom,rgba(201,162,39,0.10),transparent 65%),var(--bg-sunken);}
   .cta-final h2{font-size:clamp(28px,5vw,44px);margin:0 0 16px;} .cta-final p{color:var(--text-soft);max-width:480px;margin:0 auto 32px;}
   footer{padding:36px 24px;text-align:center;border-top:1px solid var(--border);font-size:13px;color:var(--text-faint);}
@@ -186,26 +198,31 @@
 
 <section class="raised">
   <div class="wrap">
-    <div class="step-label" data-i18n="apply.step">CANDIDATI ORA</div>
-    <h2 class="title" data-i18n="apply.title">Scegli come proporti</h2>
-    <p class="sezione-intro" data-i18n="apply.intro">Se c'è un bando aperto in linea con il tuo profilo, candidati direttamente. Altrimenti proponiti con una candidatura spontanea.</p>
-    <div class="candidature-grid" id="candidature-grid">
+    <div class="step-label" data-i18n="apply.step">PARTECIPA</div>
+    <h2 class="title" data-i18n="apply.title">Partecipa</h2>
+    <p class="sezione-intro" data-i18n="apply.intro">Scopri i laboratori attivi e candidati direttamente. Puoi anche inviare una candidatura aperta.</p>
+
+    <!-- LABORATORI ATTIVI (caricati da JS, posizione principale) -->
+    <div class="candidature-grid" id="candidature-grid"></div>
+    <div class="bandi-empty-note" id="bandi-empty-note" style="display:none;" data-i18n="apply.empty"></div>
+
+    <!-- CANDIDATURA APERTA (secondaria, in fondo) -->
+    <div class="spon-footer">
       <div class="opzione-card spontanea">
         <div class="spon-text">
-          <h3 data-i18n="apply.spon.t">Candidatura spontanea</h3>
-          <p class="desc" data-i18n="apply.spon.d">Non c'è ancora un bando specifico per te? Proponiti comunque.</p>
+          <h3 data-i18n="apply.spon.t">Candidatura aperta</h3>
+          <p class="desc" data-i18n="apply.spon.d">Proponi il tuo profilo alla compagnia.</p>
         </div>
         <a href="form-candidatura.html" class="btn btn-primary" data-i18n="apply.spon.btn">Candidati ora</a>
       </div>
     </div>
-    <div class="bandi-empty-note" id="bandi-empty-note" style="display:none;" data-i18n="apply.empty"></div>
   </div>
 </section>
 
 <div class="cta-final">
   <h2 data-i18n="cta.title">Tocca a te</h2>
   <p data-i18n="cta.desc">Compila il form: ti ricontattiamo quando c'è un'occasione adatta al tuo profilo.</p>
-  <a href="form-candidatura.html" class="btn btn-primary" data-i18n="cta.btn">Vai al form di candidatura</a>
+  <a href="form-candidatura.html" class="btn btn-primary" data-i18n="cta.btn">Invia candidatura aperta</a>
 </div>
 
 <footer>
@@ -240,12 +257,12 @@ const TRANSLATIONS = {
     "cat.choreo.t":"Choreographer | Creazione","cat.choreo.d":"Proponi un progetto di creazione o workshop da sviluppare con la compagnia.",
     "cat.tech.t":"Figura Tecnica","cat.tech.d":"Luci, audio, rigging, scenografia: chi fa funzionare lo spettacolo.",
     "cat.office.t":"Figura Organizzativa","cat.office.d":"Comunicazione, organizzazione, amministrazione: il lavoro che tiene in piedi i progetti.",
-    "apply.step":"CANDIDATI ORA","apply.title":"Scegli come proporti",
+    "apply.step":"PARTECIPA","apply.title":"Partecipa",
     "apply.intro":"Se c'è un bando aperto in linea con il tuo profilo, candidati direttamente a quello. Altrimenti proponiti con una candidatura spontanea: resti comunque in considerazione.",
-    "apply.spon.t":"Candidatura spontanea","apply.spon.d":"Non c'è ancora un bando specifico per te? Proponiti comunque: la tua candidatura resta a disposizione per le prossime produzioni, audizioni e workshop.",
-    "apply.spon.btn":"Candidati ora","apply.bando.btn":"Candidati a questo bando",
-    "apply.empty":"Al momento non ci sono bandi attivi: la candidatura spontanea resta comunque aperta.",
-    "cta.title":"Tocca a te","cta.desc":"Compila il form: ti ricontattiamo quando c'è un'occasione adatta al tuo profilo.","cta.btn":"Vai al form di candidatura",
+    "apply.spon.t":"Candidatura aperta","apply.spon.d":"Proponi il tuo profilo alla compagnia: la tua candidatura resta a disposizione per le prossime produzioni, audizioni e workshop.",
+    "apply.spon.btn":"Candidati ora","apply.bando.btn":"Candidati a questo laboratorio",
+    "apply.empty":"Al momento non ci sono laboratori attivi: la candidatura aperta è comunque disponibile.",
+    "cta.title":"Tocca a te","cta.desc":"Compila il form: ti ricontattiamo quando c'è un'occasione adatta al tuo profilo.","cta.btn":"Invia candidatura aperta",
     "footer.staff":"↳ Accesso staff",
     "form.eyebrow":"RESEXTENSA | PORTA D'ORIENTE","form.title":"Candidatura","form.sub":"Seleziona il tuo profilo e compila il form.",
     "form.step1":"01 — SELEZIONA IL TUO PROFILO","form.step2":"02 — LA TUA CANDIDATURA","form.for":"HAI SELEZIONATO",
@@ -297,12 +314,12 @@ const TRANSLATIONS = {
     "cat.choreo.t":"Choreographer | Creation","cat.choreo.d":"Propose a creation or workshop project to develop with the company.",
     "cat.tech.t":"Technical Figure","cat.tech.d":"Lights, audio, rigging, scenography: the people who make the show work.",
     "cat.office.t":"Office Figure","cat.office.d":"Communication, organisation, administration: the work that keeps projects running.",
-    "apply.step":"APPLY NOW","apply.title":"Choose how to apply",
+    "apply.step":"JOIN","apply.title":"Join us",
     "apply.intro":"If there is an open call matching your profile, apply directly. Otherwise submit a spontaneous application — you will still be considered.",
-    "apply.spon.t":"Spontaneous application","apply.spon.d":"No specific call for you yet? Apply anyway: your application will be kept on file for future productions, auditions and workshops.",
-    "apply.spon.btn":"Apply now","apply.bando.btn":"Apply for this call",
-    "apply.empty":"No active open calls at the moment: spontaneous applications are always welcome.",
-    "cta.title":"Your turn","cta.desc":"Fill in the form: we'll contact you when an opportunity matches your profile.","cta.btn":"Go to application form",
+    "apply.spon.t":"Open application","apply.spon.d":"No specific call for you yet? Apply anyway: your application will be kept on file for future productions, auditions and workshops.",
+    "apply.spon.btn":"Apply now","apply.bando.btn":"Apply for this lab",
+    "apply.empty":"No active labs at the moment: open applications are always welcome.",
+    "cta.title":"Your turn","cta.desc":"Fill in the form: we'll contact you when an opportunity matches your profile.","cta.btn":"Submit open application",
     "footer.staff":"↳ Staff access",
     "form.eyebrow":"RESEXTENSA | PORTA D'ORIENTE","form.title":"Applications","form.sub":"Select your profile and apply.",
     "form.step1":"01 — SELECT YOUR PROFILE","form.step2":"02 — YOUR APPLICATION","form.for":"APPLYING FOR",
@@ -354,12 +371,12 @@ const TRANSLATIONS = {
     "cat.choreo.t":"Choreographer | Création","cat.choreo.d":"Proposez un projet de création ou d'atelier à développer avec la compagnie.",
     "cat.tech.t":"Technicien·ne","cat.tech.d":"Lumières, son, rigging, scénographie : ceux qui font fonctionner le spectacle.",
     "cat.office.t":"Collaborateur·rice Administratif·ve","cat.office.d":"Communication, organisation, administration : le travail qui maintient les projets.",
-    "apply.step":"POSTULEZ MAINTENANT","apply.title":"Choisissez comment vous proposer",
+    "apply.step":"PARTICIPEZ","apply.title":"Participez",
     "apply.intro":"S'il y a un appel ouvert correspondant à votre profil, postulez directement. Sinon soumettez une candidature spontanée — vous serez toujours pris en considération.",
-    "apply.spon.t":"Candidature spontanée","apply.spon.d":"Pas encore d'appel spécifique ? Proposez-vous quand même : votre candidature sera conservée pour les prochaines productions, auditions et ateliers.",
-    "apply.spon.btn":"Postuler maintenant","apply.bando.btn":"Postuler à cet appel",
-    "apply.empty":"Aucun appel actif en ce moment : les candidatures spontanées sont toujours les bienvenues.",
-    "cta.title":"À vous de jouer","cta.desc":"Remplissez le formulaire : nous vous contacterons dès qu'une opportunité correspond à votre profil.","cta.btn":"Aller au formulaire",
+    "apply.spon.t":"Candidature ouverte","apply.spon.d":"Pas encore d'appel spécifique ? Proposez-vous quand même : votre candidature sera conservée pour les prochaines productions, auditions et ateliers.",
+    "apply.spon.btn":"Postuler maintenant","apply.bando.btn":"Postuler à ce laboratoire",
+    "apply.empty":"Aucun laboratoire actif en ce moment : les candidatures ouvertes sont toujours bienvenues.",
+    "cta.title":"À vous de jouer","cta.desc":"Remplissez le formulaire : nous vous contacterons dès qu'une opportunité correspond à votre profil.","cta.btn":"Soumettre une candidature",
     "footer.staff":"↳ Accès staff",
     "form.eyebrow":"RESEXTENSA | PORTA D'ORIENTE","form.title":"Candidature","form.sub":"Sélectionnez votre profil et postulez.",
     "form.step1":"01 — SÉLECTIONNEZ VOTRE PROFIL","form.step2":"02 — VOTRE CANDIDATURE","form.for":"CANDIDATURE POUR",
@@ -411,12 +428,12 @@ const TRANSLATIONS = {
     "cat.choreo.t":"Choreographer | Kreation","cat.choreo.d":"Schlagen Sie ein Kreations- oder Workshopprojekt vor, das mit der Compagnie entwickelt werden soll.",
     "cat.tech.t":"Techniker·in","cat.tech.d":"Licht, Ton, Rigging, Bühnenbild: die Menschen, die die Show zum Laufen bringen.",
     "cat.office.t":"Organisator·in","cat.office.d":"Kommunikation, Organisation, Verwaltung: die Arbeit, die Projekte am Laufen hält.",
-    "apply.step":"JETZT BEWERBEN","apply.title":"Bewerbungsart wählen",
+    "apply.step":"MITMACHEN","apply.title":"Mitmachen",
     "apply.intro":"Wenn es einen offenen Aufruf für Ihr Profil gibt, bewerben Sie sich direkt. Andernfalls reichen Sie eine Initiativbewerbung ein — Sie werden trotzdem berücksichtigt.",
-    "apply.spon.t":"Initiativbewerbung","apply.spon.d":"Noch kein spezifischer Aufruf? Bewerben Sie sich trotzdem: Ihre Bewerbung wird für zukünftige Produktionen, Vortanzen und Workshops berücksichtigt.",
-    "apply.spon.btn":"Jetzt bewerben","apply.bando.btn":"Für diesen Aufruf bewerben",
-    "apply.empty":"Derzeit keine aktiven offenen Aufrufe: Initiativbewerbungen sind immer willkommen.",
-    "cta.title":"Sie sind dran","cta.desc":"Füllen Sie das Formular aus: wir melden uns, wenn eine passende Gelegenheit für Ihr Profil entsteht.","cta.btn":"Zum Bewerbungsformular",
+    "apply.spon.t":"Offene Bewerbung","apply.spon.d":"Noch kein spezifischer Aufruf? Bewerben Sie sich trotzdem: Ihre Bewerbung wird für zukünftige Produktionen, Vortanzen und Workshops berücksichtigt.",
+    "apply.spon.btn":"Jetzt bewerben","apply.bando.btn":"Für dieses Labor bewerben",
+    "apply.empty":"Derzeit keine aktiven Labore: offene Bewerbungen sind immer willkommen.",
+    "cta.title":"Sie sind dran","cta.desc":"Füllen Sie das Formular aus: wir melden uns, wenn eine passende Gelegenheit für Ihr Profil entsteht.","cta.btn":"Bewerbung einreichen",
     "footer.staff":"↳ Mitarbeiterzugang",
     "form.eyebrow":"RESEXTENSA | PORTA D'ORIENTE","form.title":"Bewerbung","form.sub":"Wählen Sie Ihr Profil und bewerben Sie sich.",
     "form.step1":"01 — PROFIL WÄHLEN","form.step2":"02 — IHRE BEWERBUNG","form.for":"BEWERBUNG FÜR",
