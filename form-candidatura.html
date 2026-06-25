@@ -562,17 +562,16 @@ let fileSlots = {}; // { slotId: File | null }
 
 // Chiamata da applyLang() quando si cambia lingua
 function onLangChange(){
-  // 1. Ri-renderizza le card categorie con le nuove etichette
   renderCategorie();
-  // 2. Se il form è aperto, ri-renderizzalo nella nuova lingua
   if(categoriaSelezionata){
     renderFormSpontaneo(categoriaSelezionata);
     document.getElementById("form-section").style.display = "block";
   }
-  // 3. Aggiorna lo step label
   const sl = document.getElementById("form-step-label");
   if(sl) sl.innerHTML = t("form.step2");
 }
+
+let _categorieCached = []; // dichiarata PRIMA dell'IIFE
 
 // ============================================================
 // INIT
@@ -588,8 +587,6 @@ function onLangChange(){
     await caricaBando(bandoId);
   }
 })();
-
-let _categorieCached = [];
 
 async function caricaCategorie(){
   const { data, error } = await sb.from("categorie").select("*").order("nome");
