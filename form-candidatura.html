@@ -698,52 +698,52 @@ function renderFormBando(cat, bando){
 function renderPanelAnagraficaCompleta(){
   return `
   <div class="panel">
-    <div class="panel-title">Personal Information</div>
+    <div class="panel-title">${t('pan.personal')}</div>
     <div class="row-2">
       <div class="field">
-        <label for="f-nome">Name <span class="req">*</span></label>
+        <label for="f-nome">${t('f.name')} <span class="req">*</span></label>
         <input type="text" id="f-nome" required>
       </div>
       <div class="field">
-        <label for="f-cognome">Surname (ALL CAPS) <span class="req">*</span></label>
+        <label for="f-cognome">${t('f.surname')} <span class="req">*</span></label>
         <input type="text" id="f-cognome" class="uppercase" required>
       </div>
     </div>
     <div class="row-2">
       <div class="field">
-        <label for="f-email">Email <span class="req">*</span></label>
+        <label for="f-email">${t('f.email')} <span class="req">*</span></label>
         <input type="email" id="f-email" required>
       </div>
       <div class="field">
-        <label for="f-telefono">Phone number <span class="req">*</span></label>
+        <label for="f-telefono">${t('f.phone')} <span class="req">*</span></label>
         <input type="tel" id="f-telefono" required>
       </div>
     </div>
     <div class="row-2">
       <div class="field">
-        <label for="f-data-nascita">Date of Birth <span class="req">*</span></label>
+        <label for="f-data-nascita">${t('f.dob')} <span class="req">*</span></label>
         <input type="date" id="f-data-nascita" required>
         <div class="tutore-box" id="tutore-box">
-          <div class="hint" style="margin:8px 0;">For minors, parent/guardian details are required.</div>
-          <div class="field"><label for="f-tutore-nome">Guardian name</label><input type="text" id="f-tutore-nome"></div>
-          <div class="field"><label for="f-tutore-contatto">Guardian contact</label><input type="text" id="f-tutore-contatto" placeholder="Email or phone"></div>
+          <div class="hint" style="margin:8px 0;">${t('f.minor.hint')}</div>
+          <div class="field"><label for="f-tutore-nome">${t('f.gname')}</label><input type="text" id="f-tutore-nome"></div>
+          <div class="field"><label for="f-tutore-contatto">${t('f.gcontact')}</label><input type="text" id="f-tutore-contatto"></div>
         </div>
       </div>
       <div class="field">
-        <label for="f-nazionalita">Nationality <span class="req">*</span></label>
+        <label for="f-nazionalita">${t('f.nat')} <span class="req">*</span></label>
         <input type="text" id="f-nazionalita" required>
       </div>
     </div>
     <div class="field">
-      <label for="f-domicilio">Domicile — Full Address <span class="req">*</span></label>
+      <label for="f-domicilio">${t('f.dom')} <span class="req">*</span></label>
       <input type="text" id="f-domicilio" required>
     </div>
     <div class="field">
-      <label for="f-residenza">Residence — Full Address <span class="opt">(if different)</span></label>
+      <label for="f-residenza">${t('f.res')} <span class="opt">${t('f.res.opt')}</span></label>
       <input type="text" id="f-residenza">
     </div>
     <div class="field">
-      <label for="f-cf">Codice Fiscale <span class="opt">(Italian citizens only)</span></label>
+      <label for="f-cf">${t('f.cf')} <span class="opt">${t('f.cf.hint')}</span></label>
       <input type="text" id="f-cf" class="uppercase" maxlength="16">
     </div>
   </div>`;
@@ -755,38 +755,38 @@ function renderPanelAnagraficaCompleta(){
 function renderPanelAnagraficaBase(){
   return `
   <div class="panel">
-    <div class="panel-title">Personal Information</div>
+    <div class="panel-title">${t('pan.personal')}</div>
     <div class="row-2">
       <div class="field">
-        <label for="f-nome">Name <span class="req">*</span></label>
+        <label for="f-nome">${t('f.name')} <span class="req">*</span></label>
         <input type="text" id="f-nome" required>
       </div>
       <div class="field">
-        <label for="f-cognome">Surname <span class="req">*</span></label>
+        <label for="f-cognome">${t('f.surname')} <span class="req">*</span></label>
         <input type="text" id="f-cognome" class="uppercase" required>
       </div>
     </div>
     <div class="row-2">
       <div class="field">
-        <label for="f-email">Email <span class="req">*</span></label>
+        <label for="f-email">${t('f.email')} <span class="req">*</span></label>
         <input type="email" id="f-email" required>
       </div>
       <div class="field">
-        <label for="f-telefono">Phone <span class="req">*</span></label>
+        <label for="f-telefono">${t('f.phone')} <span class="req">*</span></label>
         <input type="tel" id="f-telefono" required>
       </div>
     </div>
     <div class="field">
-      <label for="f-data-nascita">Date of Birth</label>
+      <label for="f-data-nascita">${t('f.dob')}</label>
       <input type="date" id="f-data-nascita">
       <div class="tutore-box" id="tutore-box">
-        <div class="hint" style="margin:8px 0;">For minors, parent/guardian details are required.</div>
-        <div class="field"><label for="f-tutore-nome">Guardian name</label><input type="text" id="f-tutore-nome"></div>
-        <div class="field"><label for="f-tutore-contatto">Guardian contact</label><input type="text" id="f-tutore-contatto"></div>
+        <div class="hint" style="margin:8px 0;">${t('f.minor.hint')}</div>
+        <div class="field"><label for="f-tutore-nome">${t('f.gname')}</label><input type="text" id="f-tutore-nome"></div>
+        <div class="field"><label for="f-tutore-contatto">${t('f.gcontact')}</label><input type="text" id="f-tutore-contatto"></div>
       </div>
     </div>
     <div class="field">
-      <label for="f-ruolo">Role / How you'd like to contribute <span class="req">*</span></label>
+      <label for="f-ruolo">${t('f.role')} <span class="req">*</span></label>
       <input type="text" id="f-ruolo" required>
     </div>
   </div>`;
@@ -798,18 +798,16 @@ function renderPanelAnagraficaBase(){
 function renderPanelFigura(nomeCat, fig){
   let html = `<div class="panel"><div class="panel-title">${fig.titolo}</div>`;
 
-  // Campi extra (es. altezza)
   fig.campiExtra.forEach(c => {
     html += `<div class="field">
-      <label for="extra-${c.id}">${c.label}${c.req ? '<span class="req"> *</span>' : '<span class="opt"> (optional)</span>'}</label>
+      <label for="extra-${c.id}">${c.label}${c.req ? '<span class="req"> *</span>' : `<span class="opt"> (${t('f.opt')})</span>`}</label>
       <input type="${c.type}" id="extra-${c.id}" ${c.placeholder?`placeholder="${c.placeholder}"`:""}  ${c.req?"required":""} style="max-width:160px;">
     </div>`;
   });
 
-  // Campo lavoro tecnico (checkboxes)
   if(fig.campoLavoro){
     html += `<div class="field">
-      <label>Area of Work <span class="req">*</span></label>
+      <label>${t('f.area')} <span class="req">*</span></label>
       <div class="check-group">
         ${fig.campoLavoro.map(v => `<label class="check-item"><input type="checkbox" name="campo_lavoro" value="${v}"> ${v}</label>`).join("")}
         <label class="check-item"><input type="checkbox" name="campo_lavoro" value="Other" id="campo-other-chk"> Other:</label>
@@ -818,36 +816,33 @@ function renderPanelFigura(nomeCat, fig){
     </div>`;
   }
 
-  // Patente / Automuniti
   if(fig.patente){
     html += `<div class="field">
-      <label>Driving Licence / Own vehicle</label>
+      <label>${t('f.driving')} / ${t('f.vehicle')}</label>
       <div class="check-group">
-        <label class="check-item"><input type="checkbox" id="patente"> Driving licence</label>
-        <label class="check-item"><input type="checkbox" id="automuniti"> Own vehicle</label>
+        <label class="check-item"><input type="checkbox" id="patente"> ${t('f.driving')}</label>
+        <label class="check-item"><input type="checkbox" id="automuniti"> ${t('f.vehicle')}</label>
       </div>
     </div>`;
   }
 
   html += `</div>`;
 
-  // Materiali (slot dedicati)
-  html += `<div class="panel"><div class="panel-title">Materials & Attachments</div><div class="file-slots">`;
+  html += `<div class="panel"><div class="panel-title">${t('pan.materials')}</div><div class="file-slots">`;
   fig.materiali.forEach(m => {
     fileSlots[m.id] = null;
     html += renderFileSlot(m);
   });
   html += `</div></div>`;
 
-  // Testi
   if(fig.testi.length > 0){
-    html += `<div class="panel"><div class="panel-title">Written Statements</div>`;
-    fig.testi.forEach(t => {
+    html += `<div class="panel"><div class="panel-title">${t('pan.texts')}</div>`;
+    fig.testi.forEach(ts => {
       html += `<div class="field">
-        <label for="testo-${t.id}">${t.label}${t.req?'<span class="req"> *</span>':'<span class="opt"> (optional)</span>'}</label>
+        <label for="testo-${ts.id}">${ts.label}${ts.req?'<span class="req"> *</span>':`<span class="opt"> (${t('f.opt')})</span>`}</label>
         <div class="textarea-wrap">
-          <textarea id="testo-${t.id}" rows="5" maxlength="${t.max}" data-max="${t.max}" ${t.req?"required":""}></textarea>
-          <div class="char-count" id="cnt-${t.id}">0 / ${t.max}</div>
+          <textarea id="testo-${ts.id}" rows="5" maxlength="${ts.max}" data-max="${ts.max}" ${ts.req?"required":""}></textarea>
+          <div class="char-count" id="cnt-${ts.id}">0 / ${ts.max}</div>
         </div>
       </div>`;
     });
@@ -860,12 +855,12 @@ function renderPanelFigura(nomeCat, fig){
 function renderFileSlot(m){
   return `<div class="file-slot" id="slot-wrap-${m.id}">
     <div class="file-slot-head">
-      <span class="file-slot-label">${m.label}${m.req ? '<span class="req"> *</span>' : '<span class="opt"> optional</span>'}</span>
-      <span class="file-slot-status" id="slot-status-${m.id}">No file</span>
+      <span class="file-slot-label">${m.label}${m.req ? '<span class="req"> *</span>' : `<span class="opt"> ${t('f.opt')}</span>`}</span>
+      <span class="file-slot-status" id="slot-status-${m.id}">${t('f.nofile')}</span>
     </div>
     <div style="padding:0 14px 12px; display:flex; gap:8px; align-items:center;">
-      <button type="button" class="file-slot-btn" onclick="document.getElementById('slot-input-${m.id}').click()">Choose file</button>
-      <button type="button" class="file-slot-btn" id="slot-remove-${m.id}" style="display:none;color:var(--danger);border-color:var(--danger);" onclick="rimuoviSlot('${m.id}')">Remove</button>
+      <button type="button" class="file-slot-btn" onclick="document.getElementById('slot-input-${m.id}').click()">${t('f.choose')}</button>
+      <button type="button" class="file-slot-btn" id="slot-remove-${m.id}" style="display:none;color:var(--danger);border-color:var(--danger);" onclick="rimuoviSlot('${m.id}')">${t('f.remove')}</button>
     </div>
     <input type="file" id="slot-input-${m.id}" accept="${accettaPerTipo(m.tipo)}" onchange="onSlotChange('${m.id}', this)">
   </div>`;
@@ -873,26 +868,26 @@ function renderFileSlot(m){
 
 function renderPanelMaterialiGenerici(){
   return `<div class="panel">
-    <div class="panel-title">Materials (optional)</div>
-    <p style="font-size:13px;color:var(--text-soft);margin:0 0 14px;">Attach any relevant material: CV, portfolio, video links etc.</p>
+    <div class="panel-title">${t('pan.materials')}</div>
+    <p style="font-size:13px;color:var(--text-soft);margin:0 0 14px;">${t('f.mat.hint')}</p>
     <div class="file-slots" id="materiali-generici"></div>
-    <button type="button" class="file-slot-btn" style="margin-top:10px;" onclick="aggiungiMaterialeGenerico()">+ Add file</button>
+    <button type="button" class="file-slot-btn" style="margin-top:10px;" onclick="aggiungiMaterialeGenerico()">${t('f.addfile')}</button>
   </div>`;
 }
 
 function renderPanelPrivacy(){
   return `<div class="panel">
-    <div class="panel-title">Privacy</div>
+    <div class="panel-title">${t('pan.privacy')}</div>
     <div class="consent-row">
       <input type="checkbox" id="f-consenso" required>
-      <label for="f-consenso">I have read the privacy policy and consent to the processing of my personal data for recruitment purposes.</label>
+      <label for="f-consenso">${t('f.privacy')}</label>
     </div>
     <details class="informativa">
-      <summary>Read privacy policy</summary>
-      <div>[PLACEHOLDER — replace with the actual legal text before publishing. Must include: data controller, purpose, retention period, data subject rights, and — since minors may apply — parental consent procedures.]</div>
+      <summary>${t('f.privacyread')}</summary>
+      <div>[PLACEHOLDER — replace with the actual legal text before publishing.]</div>
     </details>
   </div>
-  <button type="submit" class="btn btn-primary" id="submit-btn">Send Application</button>`;
+  <button type="submit" class="btn btn-primary" id="submit-btn">${t('f.submit')}</button>`;
 }
 
 // ============================================================
