@@ -560,6 +560,20 @@ let categoriaSelezionata = null;
 let bandoCorrente = null;
 let fileSlots = {}; // { slotId: File | null }
 
+// Chiamata da applyLang() quando si cambia lingua
+function onLangChange(){
+  // 1. Ri-renderizza le card categorie con le nuove etichette
+  renderCategorie();
+  // 2. Se il form è aperto, ri-renderizzalo nella nuova lingua
+  if(categoriaSelezionata){
+    renderFormSpontaneo(categoriaSelezionata);
+    document.getElementById("form-section").style.display = "block";
+  }
+  // 3. Aggiorna lo step label
+  const sl = document.getElementById("form-step-label");
+  if(sl) sl.innerHTML = t("form.step2");
+}
+
 // ============================================================
 // INIT
 // ============================================================
@@ -575,14 +589,21 @@ let fileSlots = {}; // { slotId: File | null }
   }
 })();
 
+let _categorieCached = [];
+
 async function caricaCategorie(){
   const { data, error } = await sb.from("categorie").select("*").order("nome");
   if(error || !data) return;
+  _categorieCached = data;
+  renderCategorie();
+}
 
+function renderCategorie(){
   const grid = document.getElementById("cat-grid");
+  if(!grid) return;
   grid.innerHTML = "";
 
-  data.forEach(c => {
+  _categorieCached.forEach(c => {
     const fig = getFIGURE()[c.nome];
     if(!fig) return;
     const btn = document.createElement("button");
