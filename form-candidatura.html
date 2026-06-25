@@ -172,6 +172,7 @@
   <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
   <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
   <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn theme-btn" onclick="toggleTheme()" title="Tema chiaro" style="font-size:14px;">☀</button>
 </div>
 
 <div class="hero">
@@ -441,6 +442,25 @@ const TRANSLATIONS = {
 
 const LANG_KEY = 'rx_lang';
 let LANG = localStorage.getItem(LANG_KEY) || 'it';
+
+
+(function(){
+  var THEME_KEY = 'rx_theme';
+  function applyTheme(t){
+    document.body.classList.toggle('light-theme', t === 'light');
+    document.querySelectorAll('.theme-btn').forEach(function(b){
+      b.textContent = t === 'light' ? '☾' : '☀';
+      b.title = t === 'light' ? 'Tema scuro' : 'Tema chiaro';
+    });
+  }
+  window.toggleTheme = function(){
+    var cur = localStorage.getItem(THEME_KEY) || 'dark';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  };
+  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+})();
 
 function t(key){ return (TRANSLATIONS[LANG]||{})[key] || (TRANSLATIONS['it']||{})[key] || key; }
 

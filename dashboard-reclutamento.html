@@ -178,6 +178,42 @@
   /* -------------------- APP SHELL -------------------- */
   #app-view{ display:none; min-height: 100vh; }
 
+
+/* ---- TEMA CHIARO ---- */
+body.light-theme {
+  --bg: #F5F0E8;
+  --bg-raised: #FFFFFF;
+  --bg-sunken: #EDE8DF;
+  --text: #1C1404;
+  --text-soft: #4A3C22;
+  --text-faint: #8A7A5A;
+  --accent: #9B7A14;
+  --accent-bright: #B89020;
+  --accent-ink: #FFFFFF;
+  --border: #D8CFBE;
+  --danger: #C0392B;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.06);
+}
+body.light-theme input[type=text],
+body.light-theme input[type=email],
+body.light-theme input[type=tel],
+body.light-theme input[type=date],
+body.light-theme input[type=number],
+body.light-theme textarea,
+body.light-theme select {
+  background: var(--bg-raised);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* In tema chiaro la topbar resta scura (brand element) */
+body.light-theme header.topbar{
+  background: var(--bg-sunken);
+  border-bottom: 2px solid var(--accent);
+}
+body.light-theme header.topbar h1,
+body.light-theme header.topbar .who { color: var(--text); }
+body.light-theme header.topbar .role-tag { border-color: var(--border); color: var(--text-soft); }
   header.topbar{
     background: var(--bg-sunken);
     color: var(--text);
@@ -553,7 +589,7 @@
     <div class="who">
       <span id="who-name"></span>
       <span class="role-tag" id="who-role"></span>
-      <button class="btn btn-ghost" id="logout-btn">Esci</button>
+      <button class="lang-btn theme-btn" onclick="toggleTheme()" title="Tema chiaro" style="font-size:14px;background:none;border:1px solid rgba(255,255,255,0.25);border-radius:4px;padding:5px 8px;cursor:pointer;margin-right:4px;">☀</button><button class="btn btn-ghost" id="logout-btn">Esci</button>
     </div>
   </header>
 
@@ -647,6 +683,25 @@
 // ============================================================
 // CONFIGURAZIONE — sostituisci con i dati del tuo progetto
 // ============================================================
+
+(function(){
+  var THEME_KEY = 'rx_theme';
+  function applyTheme(t){
+    document.body.classList.toggle('light-theme', t === 'light');
+    document.querySelectorAll('.theme-btn').forEach(function(b){
+      b.textContent = t === 'light' ? '☾' : '☀';
+      b.title = t === 'light' ? 'Tema scuro' : 'Tema chiaro';
+    });
+  }
+  window.toggleTheme = function(){
+    var cur = localStorage.getItem(THEME_KEY) || 'dark';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  };
+  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+})();
+
 const SUPABASE_URL = "https://sihvyjaniwsjhsalrglu.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpaHZ5amFuaXdzamhzYWxyZ2x1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNzA0ODQsImV4cCI6MjA5NzY0NjQ4NH0.M2qnZW9giilndVoxaaPKprW-6eFS5qErZOnUq2EB7JE";
 
