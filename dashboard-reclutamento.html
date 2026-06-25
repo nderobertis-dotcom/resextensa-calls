@@ -368,6 +368,15 @@
   .save-bar{
     display:flex; gap: 10px; align-items: center; margin-top: 6px;
   }
+  .lang-tab-btn{
+    background:none; border:1px solid var(--border); border-radius:4px;
+    color:var(--text-faint); font-family:'IBM Plex Mono',monospace;
+    font-size:11px; font-weight:600; padding:5px 10px; cursor:pointer;
+    letter-spacing:0.05em;
+  }
+  .lang-tab-btn.active{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .lang-tab-btn:hover:not(.active){ color:var(--text); }
+
   .locandina-preview{
     width: 100%; max-width: 200px;
     height: auto; display: block;
@@ -384,6 +393,41 @@
   .save-status{ font-size: 12px; color: var(--text-faint); }
 
 
+
+  /* ---- TO DO ---- */
+  .todo-col{
+    background:var(--bg-raised); border:1px solid var(--border);
+    border-radius:var(--radius); padding:12px; min-height:200px;
+  }
+  .todo-col-title{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint);
+    margin:0 0 12px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .todo-col-count{
+    background:var(--border); color:var(--text-faint);
+    border-radius:10px; padding:2px 8px; font-size:10px;
+  }
+  .todo-card{
+    background:var(--bg-sunken); border:1px solid var(--border);
+    border-radius:6px; padding:12px; margin-bottom:8px; cursor:pointer;
+    transition:border-color 0.15s;
+  }
+  .todo-card:hover{ border-color:var(--accent); }
+  .todo-card h4{ font-size:13px; margin:0 0 5px; color:var(--text); }
+  .todo-card .todo-meta{
+    font-size:11px; color:var(--text-faint);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;
+  }
+  .todo-card .todo-assegnato{
+    font-size:11px; color:var(--text-soft); margin:4px 0 0;
+  }
+  .prio-1{ border-left:3px solid var(--danger) !important; }
+  .prio-3{ border-left:3px solid var(--text-faint) !important; }
+  @media(max-width:900px){ #todo-kanban{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:560px){ #todo-kanban{ grid-template-columns:1fr; } }
+  /* form todo nel drawer */
+  .todo-stato-select{ width:100%; }
   /* ---- MODAL PDF ---- */
   .pdf-overlay{
     display:none; position:fixed; inset:0;
@@ -516,6 +560,7 @@
   <nav class="view-tabs">
     <button class="tab-btn active" id="tab-candidature" type="button">Candidature</button>
     <button class="tab-btn" id="tab-bandi" type="button">Laboratori</button>
+    <button class="tab-btn" id="tab-todo" type="button">TO DO</button>
   </nav>
 
   <main>
@@ -578,6 +623,14 @@
           <div>Crea il primo bando per un'audizione o un workshop a data fissa.</div>
         </div>
       </div>
+    </div>
+    <div id="todo-view" style="display:none;">
+      <div class="toolbar" style="flex-wrap:wrap;gap:10px;align-items:center;">
+        <div class="chip-row" id="todo-stato-chips"></div>
+        <button class="btn btn-primary" id="nuovo-todo-btn" type="button" style="width:auto;margin-left:auto;">+ Nuova attività</button>
+      </div>
+
+      <div id="todo-kanban" style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;"></div>
     </div>
   </main>
 </div>
@@ -760,14 +813,19 @@ async function initApp(){
 
   document.getElementById("tab-candidature").addEventListener("click", () => mostraTab("candidature"));
   document.getElementById("tab-bandi").addEventListener("click", () => mostraTab("bandi"));
+  document.getElementById("tab-todo").addEventListener("click", () => mostraTab("todo"));
   document.getElementById("nuovo-bando-btn").addEventListener("click", () => apriFormBando(null));
+  document.getElementById("nuovo-todo-btn").addEventListener("click", () => apriFormTodo(null));
 }
 
 function mostraTab(nome){
   document.getElementById("candidature-view").style.display = nome === "candidature" ? "block" : "none";
   document.getElementById("bandi-view").style.display = nome === "bandi" ? "block" : "none";
+  document.getElementById("todo-view").style.display = nome === "todo" ? "block" : "none";
   document.getElementById("tab-candidature").classList.toggle("active", nome === "candidature");
   document.getElementById("tab-bandi").classList.toggle("active", nome === "bandi");
+  document.getElementById("tab-todo").classList.toggle("active", nome === "todo");
+  if(nome === "todo") caricaTodo();
 }
 
 async function caricaCategorie(){
@@ -1141,9 +1199,37 @@ function apriFormBando(bando){
 
     <div class="section">
       <div class="field">
-        <label for="b-titolo">Titolo</label>
-        <input type="text" id="b-titolo" value="${bando ? bando.titolo.replace(/"/g,'&quot;') : ''}" placeholder="Es. Audizioni primavera 2027">
+        <label for="b-titolo">Titolo <span style="color:var(--accent);font-size:11px;">IT</span></label>
+        <input type="text" id="b-titolo" value="${bando ? bando.titolo.replace(/"/g,'&quot;') : ''}" placeholder="Es. Workshop coreografia primavera 2027">
       </div>
+      <div class="field">
+        <label for="b-descrizione">Descrizione <span style="color:var(--accent);font-size:11px;">IT</span> <span style="color:var(--text-faint);font-size:11px;">(visibile sulla landing)</span></label>
+        <textarea id="b-descrizione" rows="3">${bando && bando.descrizione ? bando.descrizione : ''}</textarea>
+      </div>
+
+      <!-- TRADUZIONI -->
+      <div class="field" style="margin-top:14px;">
+        <label style="margin-bottom:8px;">Traduzioni <span style="color:var(--text-faint);font-size:11px;">(facoltative — se vuote si mostra la versione italiana)</span></label>
+        <div style="display:flex;gap:4px;margin-bottom:12px;" id="lang-tabs-bando">
+          <button type="button" class="lang-tab-btn active" data-lang="en" onclick="switchLangTab('en')">EN</button>
+          <button type="button" class="lang-tab-btn" data-lang="fr" onclick="switchLangTab('fr')">FR</button>
+          <button type="button" class="lang-tab-btn" data-lang="de" onclick="switchLangTab('de')">DE</button>
+        </div>
+        ${['en','fr','de'].map(lang => {
+          const tr = (bando && bando.traduzioni && bando.traduzioni[lang]) || {};
+          return `<div class="lang-tab-panel" data-lang="${lang}" style="display:${lang==='en'?'block':'none'}">
+            <div class="field">
+              <label style="font-size:11px;color:var(--text-faint);">TITOLO ${lang.toUpperCase()}</label>
+              <input type="text" id="b-titolo-${lang}" value="${(tr.titolo||'').replace(/"/g,'&quot;')}" placeholder="Title in ${lang.toUpperCase()}">
+            </div>
+            <div class="field">
+              <label style="font-size:11px;color:var(--text-faint);">DESCRIZIONE ${lang.toUpperCase()}</label>
+              <textarea id="b-descrizione-${lang}" rows="2">${tr.descrizione||''}</textarea>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+
       <div class="field">
         <label for="b-categoria">Categoria</label>
         <select id="b-categoria" ${!isAdmin ? "disabled" : ""}>${opzioniCategoria}</select>
@@ -1168,10 +1254,6 @@ function apriFormBando(bando){
       <div class="field">
         <label for="b-scadenza">Accettazione candidature entro il</label>
         <input type="date" id="b-scadenza" value="${bando && bando.scadenza_candidature ? bando.scadenza_candidature : ''}">
-      </div>
-      <div class="field">
-        <label for="b-descrizione">Descrizione (visibile sulla landing)</label>
-        <textarea id="b-descrizione" rows="3">${bando && bando.descrizione ? bando.descrizione : ''}</textarea>
       </div>
       <div class="field">
         <label>Locandina (facoltativa — usata nella card sulla landing)</label>
@@ -1234,8 +1316,26 @@ function nomeFileSicuro(nome){
   return nome.replace(/[^a-zA-Z0-9._-]/g, "_");
 }
 
+function switchLangTab(lang){
+  document.querySelectorAll('#lang-tabs-bando .lang-tab-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.lang === lang)
+  );
+  document.querySelectorAll('.lang-tab-panel').forEach(p =>
+    p.style.display = p.dataset.lang === lang ? 'block' : 'none'
+  );
+}
+
 async function salvaBando(id, categoriaFissa){
   const statusEl = document.getElementById("bando-save-status");
+
+  // Raccoglie le traduzioni (solo quelle non vuote)
+  const traduzioni = {};
+  ['en','fr','de'].forEach(lang => {
+    const titolo = (document.getElementById(`b-titolo-${lang}`)?.value||'').trim();
+    const descrizione = (document.getElementById(`b-descrizione-${lang}`)?.value||'').trim();
+    if(titolo || descrizione) traduzioni[lang] = { titolo: titolo||null, descrizione: descrizione||null };
+  });
+
   const payload = {
     titolo: document.getElementById("b-titolo").value.trim(),
     categoria_id: categoriaFissa || document.getElementById("b-categoria").value,
@@ -1244,6 +1344,7 @@ async function salvaBando(id, categoriaFissa){
     data_evento_fine: document.getElementById("b-data-fine").value || null,
     scadenza_candidature: document.getElementById("b-scadenza").value || null,
     descrizione: document.getElementById("b-descrizione").value.trim() || null,
+    traduzioni: Object.keys(traduzioni).length ? traduzioni : {},
     attivo: document.getElementById("b-attivo").checked
   };
 
@@ -1582,6 +1683,164 @@ async function generaPDF(tipo){
   if(tipo==='compatta'){generaListaCompatta(cands);chiudiModalePDF();}
   else if(tipo==='estesa'){generaListaEstesa(cands);chiudiModalePDF();}
   else if(tipo==='schede') await generaSchede(cands);
+}
+
+
+// ============================================================
+// TO DO
+// ============================================================
+const STATI_TODO = [
+  { value: 'inserito',  label: 'Inserito',  color: '#8A8578' },
+  { value: 'assegnato', label: 'Assegnato', color: '#5B8AA6' },
+  { value: 'in corso',  label: 'In corso',  color: '#C2791E' },
+  { value: 'terminato', label: 'Terminato', color: '#4F8F62' },
+];
+const PRIORITA = [
+  { value: 1, label: '↑ Alta',    color: 'var(--danger)' },
+  { value: 2, label: '— Normale', color: 'var(--text-faint)' },
+  { value: 3, label: '↓ Bassa',   color: 'var(--text-faint)' },
+];
+
+let _todo = [];
+
+async function caricaTodo(){
+  const { data, error } = await sb
+    .from('todo_tasks')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if(error){ console.error(error); return; }
+  _todo = data || [];
+  renderKanban();
+}
+
+function renderKanban(){
+  const board = document.getElementById('todo-kanban');
+  board.innerHTML = '';
+  STATI_TODO.forEach(s => {
+    const tasks = _todo.filter(t => t.stato === s.value);
+    const col = document.createElement('div');
+    col.className = 'todo-col';
+    col.innerHTML = `
+      <div class="todo-col-title">
+        <span style="color:${s.color}">${s.label}</span>
+        <span class="todo-col-count">${tasks.length}</span>
+      </div>
+      <div id="todo-col-${s.value.replace(' ','-')}"></div>
+    `;
+    const container = col.querySelector(`#todo-col-${s.value.replace(' ','-')}`);
+    tasks.forEach(task => {
+      const card = document.createElement('div');
+      card.className = `todo-card prio-${task.priorita}`;
+      card.innerHTML = `
+        <h4>${task.titolo}</h4>
+        ${task.assegnato_a ? `<div class="todo-assegnato">→ ${task.assegnato_a}</div>` : ''}
+        <div class="todo-meta">
+          <span>${task.creato_da_nome}</span>
+          ${task.aggiornato_da_nome ? `<span>agg. da ${task.aggiornato_da_nome}</span>` : ''}
+        </div>
+      `;
+      card.onclick = () => apriDettaglioTodo(task);
+      container.appendChild(card);
+    });
+    board.appendChild(col);
+  });
+}
+
+function apriDettaglioTodo(task){
+  const overlay = document.getElementById('bando-overlay');
+  const content = document.getElementById('bando-drawer-content');
+  overlay.style.display = 'flex';
+
+  content.innerHTML = `
+    <div class="drawer-head">
+      <h2>${task ? 'Attività' : 'Nuova attività'}</h2>
+      <button class="close-btn" id="close-todo-drawer">&times;</button>
+    </div>
+    <div class="section">
+      <div class="field">
+        <label>Titolo <span class="req">*</span></label>
+        <input type="text" id="todo-titolo" value="${task ? task.titolo.replace(/"/g,'&quot;') : ''}">
+      </div>
+      <div class="field">
+        <label>Descrizione</label>
+        <textarea id="todo-desc" rows="4">${task && task.descrizione ? task.descrizione : ''}</textarea>
+      </div>
+      <div class="field">
+        <label>Assegnato a</label>
+        <input type="text" id="todo-assegnato" value="${task && task.assegnato_a ? task.assegnato_a : ''}" placeholder="Nome della persona">
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Stato</label>
+          <select id="todo-stato" class="todo-stato-select">
+            ${STATI_TODO.map(s => `<option value="${s.value}" ${task && task.stato === s.value ? 'selected' : ''}>${s.label}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field">
+          <label>Priorità</label>
+          <select id="todo-priorita">
+            ${PRIORITA.map(p => `<option value="${p.value}" ${task && task.priorita === p.value ? 'selected' : (!task && p.value === 2 ? 'selected' : '')}>${p.label}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      ${task ? `
+        <div class="field" style="font-size:12px;color:var(--text-faint);">
+          Creato da <strong>${task.creato_da_nome}</strong> il ${fmtData(task.created_at)}<br>
+          ${task.aggiornato_da_nome ? `Ultimo aggiornamento: <strong>${task.aggiornato_da_nome}</strong> il ${fmtData(task.updated_at)}` : ''}
+        </div>
+      ` : ''}
+      <div class="save-bar">
+        <button class="btn btn-primary" id="salva-todo-btn" style="width:auto;">Salva</button>
+        ${task ? `<button class="btn btn-danger" id="elimina-todo-btn" style="width:auto;">Elimina</button>` : ''}
+        <span class="save-status" id="todo-save-status"></span>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('close-todo-drawer').onclick = chiudiBandoDrawer;
+  document.getElementById('salva-todo-btn').onclick = () => salvaTodo(task ? task.id : null);
+  if(task) document.getElementById('elimina-todo-btn').onclick = () => eliminaTodo(task.id);
+}
+
+function apriFormTodo(task){ apriDettaglioTodo(task); }
+
+async function salvaTodo(id){
+  const status = document.getElementById('todo-save-status');
+  const titolo = document.getElementById('todo-titolo').value.trim();
+  if(!titolo){ status.textContent = 'Il titolo è obbligatorio.'; return; }
+
+  const payload = {
+    titolo,
+    descrizione: document.getElementById('todo-desc').value.trim() || null,
+    assegnato_a: document.getElementById('todo-assegnato').value.trim() || null,
+    stato: document.getElementById('todo-stato').value,
+    priorita: parseInt(document.getElementById('todo-priorita').value),
+    aggiornato_da_nome: state.user.nome,
+    aggiornato_da_id: state.user.id,
+  };
+
+  let error;
+  if(id){
+    ({ error } = await sb.from('todo_tasks').update(payload).eq('id', id));
+  } else {
+    payload.creato_da_nome = state.user.nome;
+    payload.creato_da_id = state.user.id;
+    ({ error } = await sb.from('todo_tasks').insert(payload));
+  }
+
+  if(error){ console.error(error); status.textContent = 'Errore nel salvataggio.'; return; }
+  showToast('Attività salvata.');
+  chiudiBandoDrawer();
+  await caricaTodo();
+}
+
+async function eliminaTodo(id){
+  if(!confirm('Eliminare questa attività definitivamente?')) return;
+  const { error } = await sb.from('todo_tasks').delete().eq('id', id);
+  if(error){ showToast('Errore nell'eliminazione.'); return; }
+  showToast('Attività eliminata.');
+  chiudiBandoDrawer();
+  await caricaTodo();
 }
 
 // Deep link da QR: apre automaticamente la scheda candidato
