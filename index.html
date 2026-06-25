@@ -42,6 +42,33 @@
   .hero .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.2em;color:var(--accent);margin-bottom:14px;}
   .hero h1{font-size:clamp(40px,8vw,76px);margin:0 0 18px;line-height:0.98;}
   .hero p{max-width:540px;color:var(--text-soft);font-size:17px;margin:0 auto 32px;}
+
+/* ---- TEMA CHIARO ---- */
+body.light-theme {
+  --bg: #F5F0E8;
+  --bg-raised: #FFFFFF;
+  --bg-sunken: #EDE8DF;
+  --text: #1C1404;
+  --text-soft: #4A3C22;
+  --text-faint: #8A7A5A;
+  --accent: #9B7A14;
+  --accent-bright: #B89020;
+  --accent-ink: #FFFFFF;
+  --border: #D8CFBE;
+  --danger: #C0392B;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.06);
+}
+body.light-theme input[type=text],
+body.light-theme input[type=email],
+body.light-theme input[type=tel],
+body.light-theme input[type=date],
+body.light-theme input[type=number],
+body.light-theme textarea,
+body.light-theme select {
+  background: var(--bg-raised);
+  color: var(--text);
+  border-color: var(--border);
+}
   .footlights{display:flex;gap:10px;margin-bottom:36px;}
   .footlights span{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0.55;}
   .footlights span:nth-child(3n){opacity:1;box-shadow:0 0 8px var(--accent);}
@@ -141,6 +168,7 @@
   <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
   <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
   <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
+  <button class="lang-btn theme-btn" onclick="toggleTheme()" title="Tema chiaro" style="font-size:14px;">☀</button>
 </div>
 
 <div class="hero">
@@ -471,6 +499,25 @@ const TRANSLATIONS = {
 const LANG_KEY = 'rx_lang';
 let LANG = localStorage.getItem(LANG_KEY) || 'it';
 
+
+(function(){
+  var THEME_KEY = 'rx_theme';
+  function applyTheme(t){
+    document.body.classList.toggle('light-theme', t === 'light');
+    document.querySelectorAll('.theme-btn').forEach(function(b){
+      b.textContent = t === 'light' ? '☾' : '☀';
+      b.title = t === 'light' ? 'Tema scuro' : 'Tema chiaro';
+    });
+  }
+  window.toggleTheme = function(){
+    var cur = localStorage.getItem(THEME_KEY) || 'dark';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, next);
+    applyTheme(next);
+  };
+  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+})();
+
 function t(key){ return (TRANSLATIONS[LANG]||{})[key] || (TRANSLATIONS['it']||{})[key] || key; }
 
 function setLang(lang){
@@ -512,17 +559,24 @@ function giorniAllaScadenza(iso){
 async function caricaBandiAttivi(){
   const grid=document.getElementById("candidature-grid");
   const emptyNote=document.getElementById("bandi-empty-note");
-  const {data,error}=await sb.from("bandi").select("*,categorie(nome)").eq("attivo",true).order("data_evento_inizio",{ascending:true});
+  // rimuovi solo le card bandi (non la spontanea statica)
+  grid.querySelectorAll(".opzione-card:not(.spontanea)").forEach(c=>c.remove());
+  const {data,error}=await sb.from("bandi").select("*,categorie(nome),traduzioni").eq("attivo",true).order("data_evento_inizio",{ascending:true});
   if(error||!data||data.length===0){ emptyNote.style.display="block"; return; }
+  window._bandiCached = data;
   data.forEach(b=>{
     const card=document.createElement("div");
     card.className="opzione-card";
+    // Usa la traduzione nella lingua corrente se disponibile, altrimenti italiano
+    const tr = (b.traduzioni && b.traduzioni[LANG]) || {};
+    const titoloVis = tr.titolo || b.titolo;
+    const descrizioneVis = tr.descrizione || b.descrizione || '';
     const giorni=giorniAllaScadenza(b.scadenza_candidature);
     let scadenzaHtml=""; // usato sotto per card-dates
     let locandinaHtml="";
     if(b.locandina_path){
       const url=sb.storage.from("bandi-locandine").getPublicUrl(b.locandina_path).data.publicUrl;
-      locandinaHtml=`<img src="${url}" alt="${b.titolo}" class="locandina-bando">`;
+      locandinaHtml=`<img src="${url}" alt="${titoloVis}" class="locandina-bando">`;
       card.classList.add("con-locandina");
     }
     // Date in evidenza
@@ -541,9 +595,9 @@ async function caricaBandiAttivi(){
 
     const bodyHtml=`
       <div class="tag-categoria" style="background:${categoriaColorVar(b.categorie?b.categorie.nome:'')}">${b.categorie?b.categorie.nome:''}</div>
-      <h3>${b.titolo}</h3>
+      <h3>${titoloVis}</h3>
       ${datesHtml}
-      <p class="desc">${b.descrizione||''}</p>
+      <p class="desc">${descrizioneVis}</p>
       <a href="form-candidatura.html?bando=${b.id}" class="btn btn-primary">${t('apply.bando.btn')}</a>
     `;
     card.innerHTML=locandinaHtml?(locandinaHtml+`<div class="card-body">${bodyHtml}</div>`):bodyHtml;
@@ -552,10 +606,12 @@ async function caricaBandiAttivi(){
 }
 
 function onLangChange(){
-  // re-render bandi buttons (text in card comes from t())
+  // re-render bandi cards con la nuova lingua (usa traduzioni se disponibili)
   const grid=document.getElementById("candidature-grid");
-  const btns=grid.querySelectorAll(".opzione-card:not(.spontanea) .btn");
-  btns.forEach(b=>b.textContent=t('apply.bando.btn'));
+  if(grid && window._bandiCached && window._bandiCached.length){
+    // rimuovi solo le card dei laboratori (non la card spontanea che è HTML statico)
+    caricaBandiAttivi();
+  }
 }
 
 // Init
