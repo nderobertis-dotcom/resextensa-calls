@@ -1837,7 +1837,7 @@ async function salvaTodo(id){
 async function eliminaTodo(id){
   if(!confirm('Eliminare questa attività definitivamente?')) return;
   const { error } = await sb.from('todo_tasks').delete().eq('id', id);
-  if(error){ showToast('Errore nell'eliminazione.'); return; }
+  if(error){ showToast("Errore nell'eliminazione."); return; }
   showToast('Attività eliminata.');
   chiudiBandoDrawer();
   await caricaTodo();
