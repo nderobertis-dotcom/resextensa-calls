@@ -887,15 +887,6 @@ function renderFileSlot(m){
 }
 
 function renderPanelMaterialiGenerici(){
-  // Mappa categoria → figura privacy
-  const FIGURA_MAP = {
-    "Dancer": "dancer",
-    "Choreographer | Creation": "choreographer",
-    "Technical Figure": "professional",
-    "Office Figure": "professional"
-  };
-  const figuraParam = FIGURA_MAP[nomeCat] || "dancer";
-
   return `<div class="panel">
     <div class="panel-title">${t('pan.materials')}</div>
     <p style="font-size:13px;color:var(--text-soft);margin:0 0 14px;">${t('f.mat.hint')}</p>
@@ -979,6 +970,14 @@ I dati non saranno diffusi a soggetti terzi per finalità commerciali.<br><br>
 
 function renderPanelDichiarazioni(nomeCat){
   const dich = DICHIARAZIONI[nomeCat] || DICHIARAZIONI["Technical Figure"];
+  // Link alla privacy specifica per figura
+  const FIGURA_MAP = {
+    "Dancer": "dancer",
+    "Choreographer | Creation": "choreographer",
+    "Technical Figure": "professional",
+    "Office Figure": "professional"
+  };
+  const figuraParam = FIGURA_MAP[nomeCat] || "dancer";
 
   const checkboxes = dich.consensi.map(c => `
     <div class="consent-row" style="margin-bottom:10px;">
@@ -990,7 +989,7 @@ function renderPanelDichiarazioni(nomeCat){
   return `<div class="panel">
     <div class="panel-title">${t('pan.privacy')}</div>
     <details class="informativa" style="margin-bottom:16px;">
-      <summary style="cursor:pointer;color:var(--text-soft);font-size:13px;">Leggi dichiarazioni e consensi completi · <a href="#" target="_blank" id="privacy-link-detail" href="privacy.html?figura=${figuraParam}" style="color:var(--accent);font-size:12px;">Informativa privacy completa ↗</a></summary>
+      <summary style="cursor:pointer;color:var(--text-soft);font-size:13px;">Leggi dichiarazioni e consensi completi · <a href="privacy.html?figura=${figuraParam}" target="_blank" id="privacy-link-detail" style="color:var(--accent);font-size:12px;">Informativa privacy completa ↗</a></summary>
       <div style="margin-top:10px;font-size:12px;line-height:1.7;color:var(--text-soft);max-height:320px;overflow-y:auto;padding-right:8px;">
         ${dich.testo}
       </div>
