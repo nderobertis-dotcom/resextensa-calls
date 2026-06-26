@@ -895,20 +895,108 @@ function renderPanelMaterialiGenerici(){
   </div>`;
 }
 
-function renderPanelPrivacy(){
+
+// ============================================================
+// DICHIARAZIONI E CONSENSI PER CATEGORIA
+// ============================================================
+const DICHIARAZIONI = {
+  "Dancer": {
+    testo: `<strong>DICHIARAZIONI E CONSENSI — DANCER / FORMAZIONE / LABORATORI / WORKSHOP</strong><br><br>
+Con l'invio della presente candidatura dichiara di:<br><br>
+<ul>
+<li>Partecipare volontariamente al percorso di ricerca, alta formazione, workshop, masterclass o altra attività formativa promossa da ResExtensa Dance Company, Porta d'Oriente – Centro Nazionale di Produzione della Danza e/o AREA Mediterranea;</li>
+<li>Essere nelle condizioni fisiche adeguate a partecipare alle attività previste e assumersi la responsabilità di segnalare eventuali condizioni che possano richiedere particolari attenzioni, limitazioni o adattamenti;</li>
+<li>Rispettare le indicazioni organizzative, didattiche e di sicurezza fornite dai docenti, dai tutor e dall'organizzazione;</li>
+<li>Prendere atto che la partecipazione alle attività comporta l'assunzione della normale alea connessa a pratiche formative che possono includere attività corporee, motorie, performative o laboratoriali;</li>
+<li>Esonerare, nei limiti consentiti dalla legge, ResExtensa Dance Company, Porta d'Oriente, AREA Mediterranea, i docenti, i tutor e gli organizzatori da responsabilità per danni derivanti da comportamenti contrari alle indicazioni ricevute o da informazioni omesse in fase di candidatura, restando impregiudicata la responsabilità per dolo o colpa grave;</li>
+<li>Riconoscere che eventuali momenti di apertura al pubblico (prova aperta, showing, performance) costituiscono parte integrante del percorso formativo e non configurano attività lavorativa o prestazione artistica professionale;</li>
+<li>Autorizzare, a titolo gratuito e senza limiti territoriali, la realizzazione e l'utilizzo di fotografie, riprese audio e video effettuate nell'ambito delle attività, esclusivamente per finalità documentali, culturali, informative, educative, archivistiche e promozionali.</li>
+</ul>
+<hr>
+<strong>INFORMATIVA PRIVACY</strong><br><br>
+Ai sensi del Regolamento (UE) 2016/679 (GDPR), i dati forniti saranno trattati da ResExtensa Associazione Culturale esclusivamente per finalità connesse alla gestione della candidatura, all'organizzazione delle attività formative, alla gestione della banca dati professionale ResExtensa Calls e agli adempimenti amministrativi.<br><br>
+I dati potranno essere conservati per consentire future manifestazioni di interesse, aggiornamenti del profilo e valutazioni relative ad attività promosse da ResExtensa, Porta d'Oriente e AREA Mediterranea.<br><br>
+<strong>Titolare del trattamento:</strong> ResExtensa Associazione Culturale – Via Trevisani 90/92, 70122 Bari – info@resextensa.it`,
+    consensi: [
+      { id: "f-consenso", label: "Dichiaro di aver letto l'informativa privacy e presto il consenso al trattamento dei dati personali per le finalità indicate.", req: true },
+      { id: "f-consenso-immagini", label: "Presto il consenso all'utilizzo di immagini, riprese audio e video secondo quanto sopra specificato.", req: true }
+    ]
+  },
+  "Choreographer | Creation": {
+    testo: `<strong>DICHIARAZIONI E CONSENSI — CHOREOGRAPHER | CREATION</strong><br><br>
+Con l'invio della presente candidatura dichiara di:<br><br>
+<ul>
+<li>Essere titolare dei diritti necessari sui materiali trasmessi oppure di aver ottenuto le autorizzazioni necessarie al loro utilizzo;</li>
+<li>Garantire che i materiali inviati non violano diritti di terzi;</li>
+<li>Prendere atto che la documentazione trasmessa sarà utilizzata ai fini della valutazione artistica della candidatura, dell'archiviazione nella banca dati professionale e dell'eventuale sviluppo di percorsi di sostegno, residenza, coproduzione, programmazione o collaborazione;</li>
+<li>Autorizzare l'utilizzo, la pubblicazione e la diffusione, a titolo gratuito e senza limiti territoriali, dei materiali trasmessi esclusivamente per finalità culturali, informative, documentali e promozionali connesse alle attività di ResExtensa, Porta d'Oriente e AREA Mediterranea;</li>
+<li>Prendere atto che tale autorizzazione non comporta alcuna cessione dei diritti d'autore, dei diritti di proprietà intellettuale o di sfruttamento economico dell'opera, che restano integralmente in capo agli autori;</li>
+<li>Riconoscere che l'invio della candidatura non comporta alcun obbligo di selezione, sostegno, coproduzione o collaborazione da parte di ResExtensa, Porta d'Oriente o AREA Mediterranea.</li>
+</ul>
+<hr>
+<strong>INFORMATIVA PRIVACY</strong><br><br>
+Ai sensi del Regolamento (UE) 2016/679 (GDPR), i dati personali e professionali forniti, compresi curriculum, portfolio, materiali fotografici e audiovisivi, saranno trattati da ResExtensa Associazione Culturale esclusivamente per finalità connesse alla gestione della candidatura, alla valutazione artistica, alla banca dati professionale ResExtensa Calls e alle attività istituzionali di ResExtensa, Porta d'Oriente e AREA Mediterranea.<br><br>
+I materiali e le informazioni potranno essere aggiornati nel tempo attraverso la piattaforma. I dati non saranno diffusi a soggetti terzi per finalità commerciali.<br><br>
+<strong>Titolare del trattamento:</strong> ResExtensa Associazione Culturale – Via Trevisani 90/92, 70122 Bari – info@resextensa.it`,
+    consensi: [
+      { id: "f-consenso-disponibilita", label: "Dichiaro di aver preso visione delle date e delle condizioni previste dalla call e di essere disponibile a partecipare alle attività indicate.", req: false },
+      { id: "f-consenso", label: "Dichiaro di aver letto l'informativa privacy e presto il consenso al trattamento dei dati personali e professionali per le finalità sopra indicate.", req: true },
+      { id: "f-consenso-materiali", label: "Presto il consenso all'utilizzo e alla diffusione, per finalità culturali, informative, documentali e promozionali, dei materiali fotografici, audiovisivi e descrittivi trasmessi, nel rispetto dell'autorialità delle opere e senza cessione dei relativi diritti di proprietà intellettuale.", req: true }
+    ]
+  },
+  "Technical Figure": {
+    testo: `<strong>DICHIARAZIONI E CONSENSI — FIGURA PROFESSIONALE</strong><br><br>
+Con l'invio della presente candidatura dichiara di:<br><br>
+<ul>
+<li>Fornire informazioni veritiere e aggiornate relativamente al proprio percorso formativo, professionale e alle competenze dichiarate;</li>
+<li>Essere titolare dei diritti necessari sui materiali trasmessi oppure di aver ottenuto le autorizzazioni necessarie al loro utilizzo;</li>
+<li>Prendere atto che curriculum, portfolio, fotografie, video e altri materiali allegati saranno utilizzati esclusivamente per finalità di valutazione professionale, archiviazione e scouting nell'ambito delle attività di ResExtensa, Porta d'Oriente e AREA Mediterranea;</li>
+<li>Prendere atto che la candidatura sarà inserita nella banca dati professionale ResExtensa Calls e potrà essere presa in considerazione per future opportunità artistiche, tecniche, organizzative, formative o produttive;</li>
+<li>Autorizzare l'utilizzo e la diffusione, a titolo gratuito e senza limiti territoriali, dei materiali fotografici, audiovisivi e descrittivi trasmessi, esclusivamente per finalità culturali, informative, documentali e promozionali, in contesti che non ne pregiudichino la dignità, il decoro e la reputazione professionale;</li>
+<li>Riconoscere che l'inserimento nella banca dati non comporta alcun obbligo di convocazione, collaborazione, incarico o coinvolgimento professionale da parte di ResExtensa, Porta d'Oriente o AREA Mediterranea.</li>
+</ul>
+<hr>
+<strong>INFORMATIVA PRIVACY</strong><br><br>
+Ai sensi del Regolamento (UE) 2016/679 (GDPR), i dati personali e professionali forniti saranno trattati da ResExtensa Associazione Culturale esclusivamente per finalità connesse alla gestione della banca dati professionale ResExtensa Calls, alle attività di scouting, selezione, valutazione professionale e alle ulteriori attività istituzionali di ResExtensa, Porta d'Oriente e AREA Mediterranea.<br><br>
+I dati non saranno diffusi a soggetti terzi per finalità commerciali.<br><br>
+<strong>Titolare del trattamento:</strong> ResExtensa Associazione Culturale – Via Trevisani 90/92, 70122 Bari – info@resextensa.it`,
+    consensi: [
+      { id: "f-consenso", label: "Dichiaro di aver letto l'informativa privacy e presto il consenso al trattamento dei dati personali e professionali per le finalità sopra indicate.", req: true },
+      { id: "f-consenso-materiali", label: "Presto il consenso all'utilizzo e alla diffusione, per finalità culturali, informative, documentali e promozionali, dei materiali fotografici, audiovisivi e descrittivi trasmessi.", req: true }
+    ]
+  },
+  "Office Figure": null  // usa Technical Figure
+};
+
+function renderPanelDichiarazioni(nomeCat){
+  const dich = DICHIARAZIONI[nomeCat] || DICHIARAZIONI["Technical Figure"];
+
+  const checkboxes = dich.consensi.map(c => `
+    <div class="consent-row" style="margin-bottom:10px;">
+      <input type="checkbox" id="${c.id}" ${c.req ? 'required' : ''}>
+      <label for="${c.id}" style="font-size:13px;${!c.req ? 'color:var(--text-faint);' : ''}">${c.label}${!c.req ? ' <span style="font-size:11px;">(facoltativo)</span>' : ''}</label>
+    </div>
+  `).join('');
+
   return `<div class="panel">
     <div class="panel-title">${t('pan.privacy')}</div>
-    <div class="consent-row">
-      <input type="checkbox" id="f-consenso" required>
-      <label for="f-consenso">${t('f.privacy')}</label>
-    </div>
-    <details class="informativa">
-      <summary>${t('f.privacyread')}</summary>
-      <div>[PLACEHOLDER — replace with the actual legal text before publishing.]</div>
+    <details class="informativa" style="margin-bottom:16px;">
+      <summary style="cursor:pointer;color:var(--text-soft);font-size:13px;">Leggi dichiarazioni e consensi completi</summary>
+      <div style="margin-top:10px;font-size:12px;line-height:1.7;color:var(--text-soft);max-height:320px;overflow-y:auto;padding-right:8px;">
+        ${dich.testo}
+      </div>
     </details>
+    ${checkboxes}
   </div>
   <button type="submit" class="btn btn-primary" id="submit-btn">${t('f.submit')}</button>`;
 }
+
+function renderPanelPrivacy(){
+  // Compatibilità con bandi (usa categoria corrente)
+  const nomeCat = categoriaSelezionata ? categoriaSelezionata.nome : null;
+  return nomeCat ? renderPanelDichiarazioni(nomeCat) : renderPanelDichiarazioni("Technical Figure");
+}
+
 
 // ============================================================
 // BIND EVENTS
@@ -1087,6 +1175,13 @@ async function handleSubmit(e){
 
     // 2. Raccolta dati_extra
     const datiExtra = {};
+    // Consensi aggiuntivi per categoria
+    const consensoImmagini = document.getElementById("f-consenso-immagini");
+    const consensoMateriali = document.getElementById("f-consenso-materiali");
+    const consensoDisponibilita = document.getElementById("f-consenso-disponibilita");
+    if(consensoImmagini) datiExtra.consenso_immagini = consensoImmagini.checked;
+    if(consensoMateriali) datiExtra.consenso_materiali = consensoMateriali.checked;
+    if(consensoDisponibilita) datiExtra.consenso_disponibilita = consensoDisponibilita.checked;
     if(fig && isSpontaneo){
       fig.campiExtra.forEach(c => {
         const v = document.getElementById(`extra-${c.id}`)?.value;
@@ -1118,7 +1213,7 @@ async function handleSubmit(e){
       p_minorenne: minorenne,
       p_nome_tutore: minorenne ? document.getElementById("f-tutore-nome")?.value.trim() : null,
       p_contatto_tutore: minorenne ? document.getElementById("f-tutore-contatto")?.value.trim() : null,
-      p_consenso_privacy: document.getElementById("f-consenso").checked,
+      p_consenso_privacy: document.getElementById("f-consenso")?.checked || false,
       p_consenso_versione: INFORMATIVA_VERSIONE,
       p_categoria_id: cat.id,
       p_bando_id: bandoCorrente ? bandoCorrente.id : null,
