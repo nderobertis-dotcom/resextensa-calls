@@ -603,6 +603,26 @@ function giorniAllaScadenza(iso){
   return Math.round((scad-oggi)/86400000);
 }
 
+
+// Traduzione automatica via Google Translate (fallback quando non c'è traduzione manuale)
+async function traduzionePer(testo, lang){
+  if(!testo || !testo.trim() || lang === 'it') return testo;
+  const cKey = 'rx_t_' + lang + '_' + testo.substring(0,40).replace(/\W/g,'');
+  const cached = sessionStorage.getItem(cKey);
+  if(cached) return cached;
+  try{
+    const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=it&tl='
+      + lang + '&dt=t&q=' + encodeURIComponent(testo);
+    const r = await fetch(url);
+    const d = await r.json();
+    const result = d[0].map(s => s[0]).join('');
+    sessionStorage.setItem(cKey, result);
+    return result;
+  } catch(e){
+    return testo; // fallback italiano
+  }
+}
+
 async function caricaBandiAttivi(){
   const grid=document.getElementById("candidature-grid");
   const emptyNote=document.getElementById("bandi-empty-note");
@@ -616,8 +636,13 @@ async function caricaBandiAttivi(){
     card.className="opzione-card";
     // Usa la traduzione nella lingua corrente se disponibile, altrimenti italiano
     const tr = (b.traduzioni && b.traduzioni[LANG]) || {};
-    const titoloVis = tr.titolo || b.titolo;
-    const descrizioneVis = tr.descrizione || b.descrizione || '';
+    // Se esiste traduzione manuale usala, altrimenti auto-traduci
+    const titoloVis = tr.titolo
+      ? tr.titolo
+      : (LANG !== 'it' ? await traduzionePer(b.titolo, LANG) : b.titolo);
+    const descrizioneVis = tr.descrizione
+      ? tr.descrizione
+      : (LANG !== 'it' && b.descrizione ? await traduzionePer(b.descrizione, LANG) : (b.descrizione || ''));
     const giorni=giorniAllaScadenza(b.scadenza_candidature);
     let scadenzaHtml=""; // usato sotto per card-dates
     let locandinaHtml="";
@@ -653,12 +678,8 @@ async function caricaBandiAttivi(){
 }
 
 function onLangChange(){
-  // re-render bandi cards con la nuova lingua (usa traduzioni se disponibili)
-  const grid=document.getElementById("candidature-grid");
-  if(grid && window._bandiCached && window._bandiCached.length){
-    // rimuovi solo le card dei laboratori (non la card spontanea che è HTML statico)
-    caricaBandiAttivi();
-  }
+  // Ricarica le card dei laboratori con la nuova lingua (auto-traduzione inclusa)
+  caricaBandiAttivi();
 }
 
 // Init
