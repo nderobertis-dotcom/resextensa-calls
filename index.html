@@ -684,8 +684,7 @@ function onLangChange(){
 
 // Init
 document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===LANG));
-applyLang();
-caricaBandiAttivi();
+applyLang(); // chiama onLangChange() → caricaBandiAttivi()
 </script>
 </body>
 </html>
