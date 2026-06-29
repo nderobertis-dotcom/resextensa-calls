@@ -631,7 +631,7 @@ async function caricaBandiAttivi(){
   const {data,error}=await sb.from("bandi").select("*,categorie(nome),traduzioni").eq("attivo",true).order("data_evento_inizio",{ascending:true});
   if(error||!data||data.length===0){ emptyNote.style.display="block"; return; }
   window._bandiCached = data;
-  data.forEach(b=>{
+  for(const b of data){
     const card=document.createElement("div");
     card.className="opzione-card";
     // Usa la traduzione nella lingua corrente se disponibile, altrimenti italiano
@@ -674,7 +674,7 @@ async function caricaBandiAttivi(){
     `;
     card.innerHTML=locandinaHtml?(locandinaHtml+`<div class="card-body">${bodyHtml}</div>`):bodyHtml;
     grid.appendChild(card);
-  });
+  }
 }
 
 function onLangChange(){
