@@ -497,20 +497,18 @@ function getFIGURE(){
     titolo: t("fig.dancer.t"),
     color: "var(--cat-dancer, #B2477A)",
     desc: t("fig.dancer.d"),
-    campiExtra: [
-      { id:"altezza", label:"Height (cm)", type:"number", req:true, placeholder:"e.g. 175" }
-    ],
+    campiExtra: [],
     testi: [
       { id:"motivational", label:"Motivational Thought", max:1500, req:true },
       { id:"special_needs", label:"Special Needs / Requests / Notes", max:1500, req:false }
     ],
     materiali: [
       { id:"cv",        label:"Curriculum Vitae", tipo:"cv",    req:false },
-      { id:"foto1",     label:"Headshot Photo",   tipo:"foto",  req:true },
-      { id:"foto2",     label:"Full Body Photo",  tipo:"foto",  req:true },
+      { id:"foto1",     label:"Headshot Photo",   tipo:"foto",  req:false },
+      { id:"foto2",     label:"Full Body Photo",  tipo:"foto",  req:false },
       { id:"impro1",    label:"Impro Video 1",    tipo:"video", req:true },
       { id:"impro2",    label:"Impro Video 2",    tipo:"video", req:false },
-      { id:"rep1",      label:"Repertoire Video 1", tipo:"video", req:true },
+      { id:"rep1",      label:"Repertoire Video 1", tipo:"video", req:false },
       { id:"rep2",      label:"Repertoire Video 2", tipo:"video", req:false }
     ]
   },
@@ -657,7 +655,7 @@ async function caricaBando(id){
   banner.innerHTML = `
     <div class="eyebrow">APPLYING FOR</div>
     <h3>${b.titolo}</h3>
-    <p>${b.categorie ? b.categorie.nome : ''} ${b.data_evento_inizio ? ' · ' + fmtData(b.data_evento_inizio) : ''} ${b.luogo ? ' · ' + b.luogo : ''}</p>
+    <p>${b.categorie ? b.categorie.nome : ''}${b.data_evento_inizio ? ' · ' + fmtRangeData(b.data_evento_inizio, b.data_evento_fine) : ''}${b.luogo ? ' · ' + b.luogo : ''}</p>
   `;
   document.getElementById("bando-banner-wrap").appendChild(banner);
 
@@ -668,6 +666,16 @@ async function caricaBando(id){
 function fmtData(iso){
   if(!iso) return "";
   return new Date(iso).toLocaleDateString("it-IT",{day:"2-digit",month:"long",year:"numeric"});
+}
+
+function fmtRangeData(inizio, fine){
+  if(!inizio) return "";
+  const fmt = (iso, opts) => new Date(iso).toLocaleDateString("it-IT", opts);
+  if(!fine) return fmt(inizio, {day:"2-digit",month:"long",year:"numeric"});
+  const stessoAnno = new Date(inizio).getFullYear() === new Date(fine).getFullYear();
+  const i = fmt(inizio, {day:"2-digit",month:"long", ...(stessoAnno ? {} : {year:"numeric"})});
+  const f = fmt(fine, {day:"2-digit",month:"long",year:"numeric"});
+  return "dal " + i + " al " + f;
 }
 
 function selezionaCategoria(cat, btn){
