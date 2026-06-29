@@ -659,6 +659,9 @@ async function caricaBando(id){
   `;
   document.getElementById("bando-banner-wrap").appendChild(banner);
 
+  // Carica altri laboratori attivi (per la domanda aggiuntiva)
+  await caricaAltriLaboratori(b.id);
+
   const fakeCategoria = { id: b.categoria_id, nome: b.categorie ? b.categorie.nome : '' };
   renderFormBando(fakeCategoria, b);
 }
@@ -707,6 +710,26 @@ function renderFormBando(cat, bando){
   if(fig){
     categoriaSelezionata = cat;
     renderFormSpontaneo(cat);
+    // Aggiungi domanda altri laboratori PRIMA delle dichiarazioni
+    const form = document.getElementById("candidatura-form");
+    const altriPanel = `
+      <div class="panel" id="panel-altri-lab-wrap">
+        <div class="panel-title" style="margin-bottom:12px;">Partecipazione ad altri Laboratori</div>
+        <p style="font-size:13px;color:var(--text-soft);margin:0 0 14px;">Intendi partecipare ad altri Laboratori attivi di ResExtensa?</p>
+        <div style="display:flex;gap:14px;margin-bottom:0;" id="altri-lab-toggle">
+          <label class="check-item" style="gap:8px;cursor:pointer;">
+            <input type="radio" name="altri-lab-radio" value="no" checked onchange="mostraPannelloAltriLab(false)"> No
+          </label>
+          <label class="check-item" style="gap:8px;cursor:pointer;">
+            <input type="radio" name="altri-lab-radio" value="si" onchange="mostraPannelloAltriLab(true)"> Sì
+          </label>
+        </div>
+        ${renderPanelAltriLaboratori()}
+      </div>`;
+    // Inserisci prima dell'ultimo pannello (dichiarazioni)
+    const panels = form.querySelectorAll('.panel');
+    const lastPanel = panels[panels.length - 1];
+    lastPanel.insertAdjacentHTML('beforebegin', altriPanel);
     document.getElementById("form-section").style.display = "block";
     document.getElementById("form-section").scrollIntoView({behavior:"smooth", block:"start"});
   } else {
@@ -905,8 +928,51 @@ function renderPanelMaterialiGenerici(){
 
 
 // ============================================================
-// DICHIARAZIONI E CONSENSI PER CATEGORIA
+// ALTRI LABORATORI ATTIVI
 // ============================================================
+let _altriLaboratori = [];
+
+async function caricaAltriLaboratori(bandoCorrenteId){
+  const { data, error } = await sb
+    .from("bandi")
+    .select("id, titolo, categoria_id, categorie(nome)")
+    .eq("attivo", true)
+    .neq("id", bandoCorrenteId)
+    .order("data_evento_inizio", { ascending: true });
+  _altriLaboratori = (data || []).map(b => ({
+    id: b.id,
+    titolo: b.titolo,
+    categoria_id: b.categoria_id,
+    categorie_nome: b.categorie?.nome || ""
+  }));
+}
+
+function renderPanelAltriLaboratori(){
+  if(!bandoCorrente || _altriLaboratori.length === 0) return "";
+  const opzioni = _altriLaboratori.map(b => `
+    <label class="check-item" style="margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;">
+      <input type="checkbox" class="altri-lab-chk" value='${JSON.stringify(b).replace(/'/g,"&#39;")}' style="margin-top:3px;flex-shrink:0;">
+      <span>
+        <strong style="font-size:13px;">${b.titolo}</strong>
+        ${b.categorie_nome ? `<span style="font-size:11px;color:var(--text-faint);margin-left:6px;">${b.categorie_nome}</span>` : ""}
+      </span>
+    </label>
+  `).join("");
+  return `
+  <div class="panel" id="panel-altri-lab" style="display:none;">
+    <div class="panel-title" style="margin-bottom:12px;">Altri Laboratori ResExtensa</div>
+    <p style="font-size:13px;color:var(--text-soft);margin:0 0 16px;">Sono attivi altri laboratori. La tua candidatura verrà inviata automaticamente anche a quelli che selezioni.</p>
+    <div class="check-group" style="flex-direction:column;">
+      ${opzioni}
+    </div>
+  </div>`;
+}
+
+function mostraPannelloAltriLab(mostra){
+  const p = document.getElementById("panel-altri-lab");
+  if(p) p.style.display = mostra ? "block" : "none";
+}
+
 const DICHIARAZIONI = {
   "Dancer": {
     testo: `<strong>DICHIARAZIONI E CONSENSI — DANCER / FORMAZIONE / LABORATORI / WORKSHOP</strong><br><br>
@@ -1244,6 +1310,34 @@ async function handleSubmit(e){
     });
 
     if(rpcErr) throw rpcErr;
+
+    // 4. Candidature aggiuntive per altri laboratori selezionati
+    const altriSelezionati = [...document.querySelectorAll('.altri-lab-chk:checked')].map(c => JSON.parse(c.value));
+    for(const altroB of altriSelezionati){
+      // Riusa gli stessi dati anagrafici e materiali già caricati
+      await sb.rpc("invia_candidatura", {
+        p_nome: document.getElementById("f-nome").value.trim(),
+        p_cognome: document.getElementById("f-cognome").value.trim().toUpperCase(),
+        p_email: document.getElementById("f-email").value.trim(),
+        p_telefono: document.getElementById("f-telefono")?.value.trim() || null,
+        p_data_nascita: dataNascita,
+        p_minorenne: minorenne,
+        p_nome_tutore: minorenne ? document.getElementById("f-tutore-nome")?.value.trim() : null,
+        p_contatto_tutore: minorenne ? document.getElementById("f-tutore-contatto")?.value.trim() : null,
+        p_consenso_privacy: document.getElementById("f-consenso")?.checked || false,
+        p_consenso_versione: INFORMATIVA_VERSIONE,
+        p_categoria_id: altroB.categoria_id,
+        p_bando_id: altroB.id,
+        p_ruolo_specifico: altroB.categorie_nome || cat.nome,
+        p_progetto_riferimento: altroB.titolo,
+        p_indirizzo_domicilio: document.getElementById("f-domicilio")?.value.trim() || null,
+        p_indirizzo_residenza: document.getElementById("f-residenza")?.value.trim() || null,
+        p_codice_fiscale: document.getElementById("f-cf")?.value.trim().toUpperCase() || null,
+        p_nazionalita: document.getElementById("f-nazionalita")?.value.trim() || null,
+        p_dati_extra: { ...datiExtra, candidatura_aggiuntiva: true },
+        p_materiali: materialiPayload
+      });
+    }
 
     document.getElementById("cat-section").style.display = "none";
     document.getElementById("bando-banner-wrap").innerHTML = "";
