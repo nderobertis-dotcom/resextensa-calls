@@ -44,6 +44,33 @@
   }
   @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.01ms!important; transition-duration:0.01ms!important; } }
   *{ box-sizing: border-box; }
+
+/* ---- TEMA CHIARO ---- */
+body.light-theme {
+  --bg: #F5F0E8;
+  --bg-raised: #FFFFFF;
+  --bg-sunken: #EDE8DF;
+  --text: #1C1404;
+  --text-soft: #4A3C22;
+  --text-faint: #8A7A5A;
+  --accent: #9B7A14;
+  --accent-bright: #B89020;
+  --accent-ink: #FFFFFF;
+  --border: #D8CFBE;
+  --danger: #C0392B;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.06);
+}
+body.light-theme input[type=text],
+body.light-theme input[type=email],
+body.light-theme input[type=tel],
+body.light-theme input[type=date],
+body.light-theme input[type=number],
+body.light-theme textarea,
+body.light-theme select {
+  background: var(--bg-raised);
+  color: var(--text);
+  border-color: var(--border);
+}
   body{ margin:0; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',-apple-system,sans-serif; font-size:15px; line-height:1.65; }
   h1,h2,h3,.display{ font-family:'Archivo Narrow','Arial Narrow',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
   .mono{ font-family:'IBM Plex Mono',monospace; }
