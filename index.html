@@ -74,12 +74,6 @@ body.light-theme select {
   .footlights span:nth-child(3n){opacity:1;box-shadow:0 0 8px var(--accent);}
   .btn{display:inline-block;border:none;border-radius:6px;padding:16px 32px;font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;text-decoration:none;}
   .btn-primary{background:var(--accent);color:var(--accent-ink);} .btn-primary:hover{background:var(--accent-bright);}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border);}
-  .stats div{padding:36px 20px;text-align:center;border-right:1px solid var(--border);}
-  .stats div:last-child{border-right:none;}
-  .stats .num{font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(26px,4vw,38px);color:var(--accent);display:block;margin-bottom:6px;}
-  .stats .label{font-size:12px;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.04em;}
-  @media(max-width:640px){.stats{grid-template-columns:1fr;}.stats div{border-right:none;border-bottom:1px solid var(--border);}}
   section{padding:80px 0;} section.raised{background:var(--bg-raised);}
   .step-label{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);letter-spacing:0.1em;margin-bottom:14px;}
   section h2.title{font-size:clamp(26px,4vw,36px);margin:0 0 16px;}
@@ -180,11 +174,30 @@ body.light-theme select {
   <div class="footlights"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 </div>
 
-<div class="stats">
-  <div><span class="num">2004</span><span class="label" data-i18n="stats.founded">Anno di fondazione</span></div>
-  <div><span class="num">2022</span><span class="label" data-i18n="stats.centre">Centro Nazionale di Produzione della Danza</span></div>
-  <div><span class="num">3</span><span class="label" data-i18n="stats.venues">Sedi — Bari, Brindisi, Taranto</span></div>
-</div>
+
+
+<section class="raised">
+  <div class="wrap">
+    <div class="step-label" data-i18n="apply.step">PARTECIPA</div>
+    <h2 class="title" data-i18n="apply.title">Partecipa</h2>
+    <p class="sezione-intro" data-i18n="apply.intro">Scopri i laboratori attivi e candidati direttamente. Puoi anche inviare una candidatura aperta.</p>
+
+    <!-- LABORATORI ATTIVI (caricati da JS, posizione principale) -->
+    <div class="candidature-grid" id="candidature-grid"></div>
+    <div class="bandi-empty-note" id="bandi-empty-note" style="display:none;" data-i18n="apply.empty"></div>
+
+    <!-- CANDIDATURA APERTA (secondaria, in fondo) -->
+    <div class="spon-footer">
+      <div class="opzione-card spontanea">
+        <div class="spon-text">
+          <h3 data-i18n="apply.spon.t">Candidatura spontanea</h3>
+          <p class="desc" data-i18n="apply.spon.d">Proponi il tuo profilo alla compagnia.</p>
+        </div>
+        <a href="form-candidatura.html" class="btn btn-primary" data-i18n="apply.spon.btn">Candidati ora</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section>
   <div class="wrap">
@@ -238,28 +251,6 @@ body.light-theme select {
   </div>
 </section>
 
-<section class="raised">
-  <div class="wrap">
-    <div class="step-label" data-i18n="apply.step">PARTECIPA</div>
-    <h2 class="title" data-i18n="apply.title">Partecipa</h2>
-    <p class="sezione-intro" data-i18n="apply.intro">Scopri i laboratori attivi e candidati direttamente. Puoi anche inviare una candidatura aperta.</p>
-
-    <!-- LABORATORI ATTIVI (caricati da JS, posizione principale) -->
-    <div class="candidature-grid" id="candidature-grid"></div>
-    <div class="bandi-empty-note" id="bandi-empty-note" style="display:none;" data-i18n="apply.empty"></div>
-
-    <!-- CANDIDATURA APERTA (secondaria, in fondo) -->
-    <div class="spon-footer">
-      <div class="opzione-card spontanea">
-        <div class="spon-text">
-          <h3 data-i18n="apply.spon.t">Candidatura spontanea</h3>
-          <p class="desc" data-i18n="apply.spon.d">Proponi il tuo profilo alla compagnia.</p>
-        </div>
-        <a href="form-candidatura.html" class="btn btn-primary" data-i18n="apply.spon.btn">Candidati ora</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 
