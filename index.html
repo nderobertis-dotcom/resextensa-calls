@@ -37,7 +37,7 @@
   .lang-btn.active{ background:var(--accent); color:var(--accent-ink); }
   .lang-btn:hover:not(.active){ color:var(--text); }
 
-  .hero{min-height:86vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;background:radial-gradient(ellipse at top,rgba(201,162,39,0.12),transparent 60%),var(--bg-sunken);border-bottom:1px solid var(--border);}
+  .hero{min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 24px;background:radial-gradient(ellipse at top,rgba(201,162,39,0.12),transparent 60%),var(--bg-sunken);border-bottom:1px solid var(--border);}
   .hero img{height:130px;width:auto;margin-bottom:28px;}
   .hero .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.2em;color:var(--accent);margin-bottom:14px;}
   .hero h1{font-size:clamp(40px,8vw,76px);margin:0 0 18px;line-height:0.98;}
@@ -82,7 +82,9 @@ body.light-theme select {
   @media(max-width:640px){.stats{grid-template-columns:1fr;}.stats div{border-right:none;border-bottom:1px solid var(--border);}}
   section{padding:80px 0;} section.raised{background:var(--bg-raised);}
   .step-label{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-faint);letter-spacing:0.1em;margin-bottom:14px;}
-  section h2.title{font-size:clamp(26px,4vw,36px);margin:0 0 24px;}
+  section h2.title{font-size:clamp(26px,4vw,36px);margin:0 0 16px;}
+  section p, section .chi-siamo p, section .sezione-intro{line-height:1.5;}
+  section .valore p{font-size:13.5px;line-height:1.5;}
   .chi-siamo p{color:var(--text-soft);}
   .photo-placeholder{aspect-ratio:4/5;border:1px dashed var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-faint);font-size:13px;padding:20px;background:var(--bg-sunken);}
   .valori{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
