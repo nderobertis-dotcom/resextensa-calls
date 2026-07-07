@@ -1261,11 +1261,11 @@ async function handleSubmit(e){
 
   const fig = getFIGURE()[cat.nome];
 
-  // Validazione slot obbligatori
-  if(fig && isSpontaneo){
+  // Validazione slot obbligatori (sia spontanee che bandi)
+  if(fig){
     for(const m of fig.materiali){
       if(m.req && !fileSlots[m.id]){
-        errBox.textContent = `Please attach: ${m.label}`;
+        errBox.textContent = `${t("err.file")} ${m.label}`;
         errBox.style.display = "block";
         return;
       }
@@ -1282,7 +1282,8 @@ async function handleSubmit(e){
   try{
     // 1. Upload file slot
     const materialiPayload = [];
-    if(fig && isSpontaneo){
+    // Upload materiali figura (sia spontanee che bandi)
+    if(fig){
       for(const m of fig.materiali){
         const file = fileSlots[m.id];
         if(!file) continue;
@@ -1290,15 +1291,6 @@ async function handleSubmit(e){
         const { error: upErr } = await sb.storage.from(BUCKET).upload(path, file);
         if(upErr) throw new Error(`Upload failed: ${m.label}`);
         materialiPayload.push({ tipo: m.tipo, etichetta: m.label, storage_path: path, nome_file_originale: file.name });
-      }
-    } else {
-      // bando: materiali generici
-      for(const entry of (window._materialiGenerici||[])){
-        if(!entry.file) continue;
-        const path = `${cat.id}/${generateUUID()}-${nomeFileSicuro(entry.file.name)}`;
-        const { error: upErr } = await sb.storage.from(BUCKET).upload(path, entry.file);
-        if(upErr) throw new Error(`Upload failed: ${entry.file.name}`);
-        materialiPayload.push({ tipo: "altro", etichetta: null, storage_path: path, nome_file_originale: entry.file.name });
       }
     }
 
@@ -1311,7 +1303,7 @@ async function handleSubmit(e){
     if(consensoImmagini) datiExtra.consenso_immagini = consensoImmagini.checked;
     if(consensoMateriali) datiExtra.consenso_materiali = consensoMateriali.checked;
     if(consensoDisponibilita) datiExtra.consenso_disponibilita = consensoDisponibilita.checked;
-    if(fig && isSpontaneo){
+    if(fig){
       fig.campiExtra.forEach(c => {
         const v = document.getElementById(`extra-${c.id}`)?.value;
         if(v) datiExtra[c.id] = v;

@@ -1,0 +1,2743 @@
+{
+  "versione": "1.0",
+  "data": "2026-07-07T00:08:53.421Z",
+  "pnData": [
+    {
+      "usc": 500,
+      "data": "2026-06-24",
+      "desc": "Pagamento Fitto: VIA BOCCARDI — Dicembre",
+      "meseComp": "Dicembre",
+      "soc": "VIRTUS",
+      "ent": 0,
+      "conto": "SEDI / APPARTAMENTI",
+      "gruppo": "COSTO IMMOBILI",
+      "subconto": "Fitto: VIA BOCCARDI"
+    },
+    {
+      "subconto": "Affitti Sedi / Appartamenti",
+      "ent": 0,
+      "conto": "COSTO IMMOBILI",
+      "gruppo": "",
+      "data": "2026-06-24",
+      "meseComp": "",
+      "desc": "CAPARRA DI 2 MENSILITA' FITTO VIA BOCCARDI",
+      "soc": "VIRTUS",
+      "usc": 1000
+    },
+    {
+      "subconto": "Affitti Sedi / Appartamenti",
+      "gruppo": "",
+      "ent": 0,
+      "conto": "COSTO IMMOBILI",
+      "data": "2026-06-24",
+      "soc": "VIRTUS",
+      "desc": "REGISTRAZIONE CONTRATTO APPARTAMENTO VIA BOCCARDI",
+      "meseComp": "",
+      "usc": 100
+    }
+  ],
+  "fattureData": [],
+  "fattNr": {
+    "DINAMO": 1,
+    "INVICTA": 1,
+    "VIRTUS": 1
+  },
+  "contratti": [],
+  "prevState": {
+    "DINAMO": [
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "STAFF AMMINISTRATIVO",
+        "id": "DINAMO_0",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "sub": "Amministrativo / Segreteria"
+      },
+      {
+        "inizio": "",
+        "conto": "STAFF OPERATIVO",
+        "note": "",
+        "sub": "Custode Palapoli",
+        "id": "DINAMO_3",
+        "gruppo": "COSTO PERSONALE",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "STAFF OPERATIVO",
+        "note": "",
+        "id": "DINAMO_4",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Addetto pulizia",
+        "inizio": ""
+      },
+      {
+        "inizio": "",
+        "conto": "STAFF OPERATIVO",
+        "sub": "Tuttofare",
+        "note": "",
+        "id": "DINAMO_5",
+        "gruppo": "COSTO PERSONALE",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "id": "DINAMO_6",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Sicurezza",
+        "conto": "STAFF OPERATIVO"
+      },
+      {
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Grafico",
+        "id": "DINAMO_7",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "inizio": "",
+        "conto": "STAFF COMUNICAZIONE",
+        "sub": "Fotografo",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "id": "DINAMO_8",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "note": "",
+        "sub": "Addetto stampa",
+        "id": "DINAMO_9",
+        "gruppo": "COSTO PERSONALE",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": ""
+      },
+      {
+        "conto": "STAFF TECNICO",
+        "id": "DINAMO_10",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Allenatore 1",
+        "note": "",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "note": "",
+        "sub": "Allenatore 2",
+        "gruppo": "COSTO PERSONALE",
+        "id": "DINAMO_11",
+        "conto": "STAFF TECNICO",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "STAFF TECNICO",
+        "note": "",
+        "id": "DINAMO_12",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Preparatore fisico"
+      },
+      {
+        "inizio": "",
+        "conto": "STAFF TECNICO",
+        "sub": "Allenatore 1ª Div F",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "DINAMO_13",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "ROSTER",
+        "id": "DINAMO_14",
+        "sub": "Atleta 1",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "inizio": ""
+      },
+      {
+        "conto": "ROSTER",
+        "sub": "Atleta 2",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "DINAMO_15",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "conto": "ROSTER",
+        "id": "DINAMO_16",
+        "note": "",
+        "sub": "Atleta 3",
+        "gruppo": "COSTO PERSONALE",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "sub": "Atleta 6",
+        "gruppo": "COSTO PERSONALE",
+        "id": "DINAMO_17",
+        "note": "",
+        "conto": "ROSTER",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "note": "",
+        "sub": "Atleta 7",
+        "gruppo": "COSTO PERSONALE",
+        "id": "DINAMO_18",
+        "conto": "ROSTER",
+        "inizio": ""
+      },
+      {
+        "conto": "FIP / FIPAV / CSEN",
+        "gruppo": "FEDERAZIONE",
+        "id": "DINAMO_19",
+        "sub": "Affiliazione FIPAV",
+        "note": "",
+        "inizio": "Luglio",
+        "nmesi": 1,
+        "mensile": 500
+      },
+      {
+        "note": "",
+        "id": "DINAMO_20",
+        "gruppo": "FEDERAZIONE",
+        "sub": "Iscrizione campionati",
+        "conto": "FIP / FIPAV / CSEN",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "FIP / FIPAV / CSEN",
+        "sub": "Tesseramento atleti",
+        "gruppo": "FEDERAZIONE",
+        "id": "DINAMO_21",
+        "note": ""
+      },
+      {
+        "inizio": "",
+        "note": "",
+        "sub": "Transfer FIBA",
+        "id": "DINAMO_22",
+        "gruppo": "FEDERAZIONE",
+        "conto": "FIP / FIPAV / CSEN",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "conto": "PALESTRE",
+        "id": "DINAMO_23",
+        "note": "",
+        "gruppo": "COSTO IMMOBILI",
+        "sub": "Palapoli (canone mensile)",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "PALESTRE",
+        "gruppo": "COSTO IMMOBILI",
+        "sub": "Palapanunzio (Invicta)",
+        "id": "DINAMO_24",
+        "note": "",
+        "inizio": ""
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "PALESTRE",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "sub": "Altra palestra Dinamo",
+        "id": "DINAMO_25"
+      },
+      {
+        "inizio": "",
+        "id": "DINAMO_26",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "sub": "Fitto sede via Fiume",
+        "conto": "SEDI / APPARTAMENTI",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "SEDI / APPARTAMENTI",
+        "sub": "Fitto casa academy",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "id": "DINAMO_27",
+        "inizio": ""
+      },
+      {
+        "conto": "UTENZE",
+        "note": "",
+        "id": "DINAMO_28",
+        "sub": "Bollette luce",
+        "gruppo": "COSTO IMMOBILI",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "conto": "UTENZE",
+        "sub": "Bolletta acqua (AQP)",
+        "id": "DINAMO_29",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "SPESE MEDICHE",
+        "note": "",
+        "id": "DINAMO_30",
+        "sub": "Visite mediche atleti",
+        "gruppo": "COSTO ATT. SPORT.",
+        "inizio": ""
+      },
+      {
+        "inizio": "",
+        "note": "",
+        "sub": "Materiale sanitario",
+        "gruppo": "COSTO ATT. SPORT.",
+        "id": "DINAMO_31",
+        "conto": "SPESE MEDICHE",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "sub": "Rimborsi trasferta",
+        "id": "DINAMO_32",
+        "note": "",
+        "gruppo": "COSTO ATT. SPORT.",
+        "conto": "TRASFERTE",
+        "inizio": ""
+      },
+      {
+        "inizio": "",
+        "conto": "ABBIGLIAMENTO",
+        "id": "DINAMO_33",
+        "gruppo": "COSTO ATT. SPORT.",
+        "sub": "Divise gara",
+        "note": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "conto": "ABBIGLIAMENTO",
+        "gruppo": "COSTO ATT. SPORT.",
+        "sub": "Divise gara",
+        "id": "DINAMO_dup_1775830189677",
+        "note": "(copia)",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "inizio": "",
+        "conto": "ABBIGLIAMENTO",
+        "note": "(copia)",
+        "sub": "Divise gara",
+        "id": "DINAMO_dup_1775830188321",
+        "gruppo": "COSTO ATT. SPORT.",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "note": "",
+        "id": "DINAMO_34",
+        "gruppo": "COSTO AMM.VO",
+        "sub": "Noleggio fotocopiatrice",
+        "conto": "NOLEGGI",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "sub": "Cancelleria / stampati",
+        "gruppo": "COSTO AMM.VO",
+        "id": "DINAMO_35",
+        "note": "",
+        "conto": "SPESE VARIE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "conto": "PACE FISCALE VIRTUS",
+        "note": "",
+        "id": "DINAMO_36",
+        "gruppo": "ONERI FISCALI",
+        "sub": "Rate accertamento 2018–2019",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "PACE FISCALE VIRTUS",
+        "gruppo": "ONERI FISCALI",
+        "id": "DINAMO_37",
+        "sub": "Rate avviso bonario 2020–2022",
+        "note": "",
+        "inizio": ""
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "gruppo": "ONERI FISCALI",
+        "sub": "Rate accertamento adesione 2018",
+        "note": "",
+        "id": "DINAMO_38",
+        "conto": "PACE FISCALE DINAMO"
+      },
+      {
+        "inizio": "",
+        "sub": "Contributi collaboratori",
+        "gruppo": "ONERI FISCALI",
+        "note": "",
+        "id": "DINAMO_39",
+        "conto": "CONTRIBUTI INPS",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "sub": "Saldi pregressi collaboratori",
+        "gruppo": "STAGIONI PREG.",
+        "id": "DINAMO_40",
+        "note": "",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "conto": "RESIDUI DINAMO",
+        "id": "DINAMO_41",
+        "sub": "IAIA SALVATORE",
+        "note": "",
+        "gruppo": "STAGIONI PREG.",
+        "inizio": "Luglio",
+        "nmesi": 1,
+        "mensile": 1000
+      },
+      {
+        "inizio": "Luglio",
+        "sub": "DE PALMA ELEONORA",
+        "id": "DINAMO_dup_1779226522551",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia)",
+        "conto": "RESIDUI DINAMO",
+        "mensile": 1400,
+        "nmesi": 1
+      },
+      {
+        "nmesi": 1,
+        "mensile": 700,
+        "inizio": "Luglio",
+        "conto": "RESIDUI DINAMO",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia)",
+        "id": "DINAMO_dup_1779226592780",
+        "sub": "CATALANO CHIARA"
+      },
+      {
+        "mensile": 1049,
+        "nmesi": 1,
+        "sub": "LABIANCA NICOLA",
+        "gruppo": "STAGIONI PREG.",
+        "id": "DINAMO_dup_1779226639832",
+        "note": "(copia) (copia) (copia)",
+        "conto": "RESIDUI DINAMO",
+        "inizio": "Luglio"
+      },
+      {
+        "nmesi": 1,
+        "mensile": 720,
+        "conto": "RESIDUI DINAMO",
+        "sub": "FIORE CRISTIAN",
+        "id": "DINAMO_dup_1779226664389",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia)",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia)",
+        "id": "DINAMO_dup_1779226691055",
+        "sub": "SERVIDDIO MATTEO",
+        "conto": "RESIDUI DINAMO",
+        "mensile": 600,
+        "nmesi": 1
+      },
+      {
+        "mensile": 450,
+        "nmesi": 1,
+        "id": "DINAMO_dup_1779226727844",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "AMORUSO GIULIO",
+        "conto": "RESIDUI DINAMO",
+        "inizio": "Luglio"
+      },
+      {
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "TANGARI PAOLO",
+        "gruppo": "STAGIONI PREG.",
+        "id": "DINAMO_dup_1779226749460",
+        "conto": "RESIDUI DINAMO",
+        "inizio": "Luglio",
+        "mensile": 300,
+        "nmesi": 1
+      },
+      {
+        "id": "DINAMO_dup_1779226812400",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "NINNO PEPPE",
+        "gruppo": "STAGIONI PREG.",
+        "conto": "RESIDUI DINAMO",
+        "inizio": "Luglio",
+        "mensile": 540,
+        "nmesi": 1
+      },
+      {
+        "mensile": 1095,
+        "nmesi": 1,
+        "gruppo": "STAGIONI PREG.",
+        "id": "DINAMO_dup_1779226811412",
+        "sub": "LANZONE",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "conto": "RESIDUI DINAMO",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI DINAMO",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "OVERLAB",
+        "gruppo": "STAGIONI PREG.",
+        "id": "DINAMO_dup_1779226899144",
+        "nmesi": 1,
+        "mensile": 450
+      },
+      {
+        "inizio": "",
+        "sub": "Saldi pregressi collaboratori",
+        "gruppo": "STAGIONI PREG.",
+        "id": "DINAMO_42",
+        "note": "",
+        "conto": "RESIDUI INVICTA",
+        "mensile": 0,
+        "nmesi": 0
+      }
+    ],
+    "INVICTA": [
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "id": "INVICTA_0",
+        "sub": "Amministrativo / Segreteria",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "conto": "STAFF AMMINISTRATIVO"
+      },
+      {
+        "inizio": "",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "id": "INVICTA_1",
+        "sub": "Carte virtuali / rimborsi",
+        "conto": "STAFF AMMINISTRATIVO",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "STAFF AMMINISTRATIVO",
+        "id": "INVICTA_2",
+        "note": "",
+        "sub": "Tesseramento FIP amm.",
+        "gruppo": "COSTO PERSONALE",
+        "inizio": ""
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "STAFF OPERATIVO",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "INVICTA_3",
+        "sub": "Custode Palapoli",
+        "inizio": ""
+      },
+      {
+        "sub": "Addetto pulizia",
+        "id": "INVICTA_4",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "conto": "STAFF OPERATIVO",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "inizio": "",
+        "conto": "STAFF OPERATIVO",
+        "note": "",
+        "id": "INVICTA_5",
+        "sub": "Tuttofare",
+        "gruppo": "COSTO PERSONALE",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "STAFF OPERATIVO",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "INVICTA_6",
+        "sub": "Sicurezza"
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Grafico",
+        "id": "INVICTA_7",
+        "note": "",
+        "conto": "STAFF COMUNICAZIONE"
+      },
+      {
+        "gruppo": "COSTO PERSONALE",
+        "id": "INVICTA_8",
+        "note": "",
+        "sub": "Fotografo",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Addetto stampa",
+        "id": "INVICTA_9",
+        "note": "",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "STAFF TECNICO",
+        "gruppo": "COSTO PERSONALE",
+        "id": "INVICTA_10",
+        "sub": "Allenatore 1",
+        "note": "",
+        "inizio": ""
+      },
+      {
+        "id": "INVICTA_11",
+        "note": "",
+        "sub": "Allenatore 2",
+        "gruppo": "COSTO PERSONALE",
+        "conto": "STAFF TECNICO",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "id": "INVICTA_12",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Preparatore fisico",
+        "conto": "STAFF TECNICO",
+        "inizio": ""
+      },
+      {
+        "note": "",
+        "sub": "Allenatore 1ª Div F",
+        "gruppo": "COSTO PERSONALE",
+        "id": "INVICTA_13",
+        "conto": "STAFF TECNICO",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "id": "INVICTA_14",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Atleta 1",
+        "note": "",
+        "conto": "ROSTER"
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "ROSTER",
+        "note": "",
+        "id": "INVICTA_15",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Atleta 2",
+        "inizio": ""
+      },
+      {
+        "conto": "ROSTER",
+        "id": "INVICTA_16",
+        "note": "",
+        "sub": "Atleta 3",
+        "gruppo": "COSTO PERSONALE",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "note": "",
+        "id": "INVICTA_17",
+        "sub": "Atleta 6 (straniero)",
+        "gruppo": "COSTO PERSONALE",
+        "conto": "ROSTER"
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "ROSTER",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Atleta 7",
+        "id": "INVICTA_18",
+        "note": "",
+        "inizio": ""
+      },
+      {
+        "nmesi": 1,
+        "mensile": 500,
+        "inizio": "Luglio",
+        "conto": "FIP / FIPAV / CSEN",
+        "note": "",
+        "gruppo": "FEDERAZIONE",
+        "id": "INVICTA_19",
+        "sub": "FIP - 1° Rata Regionale"
+      },
+      {
+        "inizio": "",
+        "sub": "Iscrizione campionati",
+        "gruppo": "FEDERAZIONE",
+        "note": "",
+        "id": "INVICTA_20",
+        "conto": "FIP / FIPAV / CSEN",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "gruppo": "FEDERAZIONE",
+        "id": "INVICTA_21",
+        "note": "",
+        "sub": "Tesseramento atleti",
+        "conto": "FIP / FIPAV / CSEN"
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "id": "INVICTA_22",
+        "sub": "Transfer FIBA",
+        "gruppo": "FEDERAZIONE",
+        "note": "",
+        "conto": "FIP / FIPAV / CSEN"
+      },
+      {
+        "sub": "Palapoli (canone mensile)",
+        "id": "INVICTA_23",
+        "note": "",
+        "gruppo": "COSTO IMMOBILI",
+        "conto": "PALESTRE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "inizio": "",
+        "note": "",
+        "sub": "Palapanunzio (Invicta)",
+        "gruppo": "COSTO IMMOBILI",
+        "id": "INVICTA_24",
+        "conto": "PALESTRE",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "PALESTRE",
+        "sub": "Altra palestra Dinamo",
+        "note": "",
+        "gruppo": "COSTO IMMOBILI",
+        "id": "INVICTA_25"
+      },
+      {
+        "inizio": "",
+        "conto": "SEDI / APPARTAMENTI",
+        "id": "INVICTA_26",
+        "note": "",
+        "sub": "Fitto sede via Fiume",
+        "gruppo": "COSTO IMMOBILI",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "id": "INVICTA_27",
+        "note": "",
+        "gruppo": "COSTO IMMOBILI",
+        "sub": "Fitto casa academy",
+        "conto": "SEDI / APPARTAMENTI",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "id": "INVICTA_28",
+        "gruppo": "COSTO IMMOBILI",
+        "sub": "Bollette luce",
+        "note": "",
+        "conto": "UTENZE"
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "sub": "Bolletta acqua (AQP)",
+        "id": "INVICTA_29",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "conto": "UTENZE",
+        "inizio": ""
+      },
+      {
+        "inizio": "",
+        "sub": "Visite mediche atleti",
+        "id": "INVICTA_30",
+        "gruppo": "COSTO ATT. SPORT.",
+        "note": "",
+        "conto": "SPESE MEDICHE",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "note": "",
+        "gruppo": "COSTO ATT. SPORT.",
+        "id": "INVICTA_31",
+        "sub": "Materiale sanitario",
+        "conto": "SPESE MEDICHE"
+      },
+      {
+        "inizio": "",
+        "conto": "TRASFERTE",
+        "sub": "Rimborsi trasferta",
+        "id": "INVICTA_32",
+        "gruppo": "COSTO ATT. SPORT.",
+        "note": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "inizio": "",
+        "id": "INVICTA_33",
+        "gruppo": "COSTO ATT. SPORT.",
+        "sub": "Divise gara",
+        "note": "",
+        "conto": "ABBIGLIAMENTO",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "NOLEGGI",
+        "id": "INVICTA_34",
+        "sub": "Noleggio fotocopiatrice",
+        "gruppo": "COSTO AMM.VO",
+        "note": ""
+      },
+      {
+        "conto": "SPESE VARIE",
+        "gruppo": "COSTO AMM.VO",
+        "id": "INVICTA_35",
+        "sub": "Cancelleria / stampati",
+        "note": "",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "PACE FISCALE VIRTUS",
+        "id": "INVICTA_36",
+        "note": "",
+        "sub": "Rate accertamento 2018–2019",
+        "gruppo": "ONERI FISCALI"
+      },
+      {
+        "conto": "PACE FISCALE VIRTUS",
+        "sub": "Rate avviso bonario 2020–2022",
+        "id": "INVICTA_37",
+        "gruppo": "ONERI FISCALI",
+        "note": "",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "PACE FISCALE DINAMO",
+        "sub": "Rate accertamento adesione 2018",
+        "id": "INVICTA_38",
+        "note": "",
+        "gruppo": "ONERI FISCALI"
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "note": "",
+        "gruppo": "ONERI FISCALI",
+        "id": "INVICTA_39",
+        "sub": "Contributi collaboratori",
+        "conto": "CONTRIBUTI INPS",
+        "inizio": ""
+      },
+      {
+        "gruppo": "STAGIONI PREG.",
+        "note": "",
+        "id": "INVICTA_40",
+        "sub": "Saldi pregressi collaboratori",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "RESIDUI DINAMO",
+        "id": "INVICTA_41",
+        "gruppo": "STAGIONI PREG.",
+        "note": "",
+        "sub": "Saldi pregressi collaboratori"
+      },
+      {
+        "id": "INVICTA_42",
+        "sub": "DE BELLIS LUCA",
+        "note": "",
+        "gruppo": "STAGIONI PREG.",
+        "conto": "RESIDUI INVICTA",
+        "inizio": "Luglio",
+        "mensile": 2000,
+        "nmesi": 1
+      },
+      {
+        "nmesi": 1,
+        "mensile": 800,
+        "inizio": "Luglio",
+        "conto": "RESIDUI INVICTA",
+        "sub": "AZZOLLINI PAOLO",
+        "gruppo": "STAGIONI PREG.",
+        "id": "INVICTA_dup_1782988285778",
+        "note": "(copia)"
+      },
+      {
+        "nmesi": 1,
+        "mensile": 800,
+        "inizio": "Luglio",
+        "conto": "RESIDUI INVICTA",
+        "sub": "AZZOLLINI GIACOMO",
+        "id": "INVICTA_dup_1782988329089",
+        "note": "(copia) (copia)",
+        "gruppo": "STAGIONI PREG."
+      },
+      {
+        "mensile": 600,
+        "nmesi": 1,
+        "inizio": "Luglio",
+        "id": "INVICTA_dup_1782988454966",
+        "note": "(copia) (copia) (copia)",
+        "gruppo": "STAGIONI PREG.",
+        "sub": "GIORGIO",
+        "conto": "RESIDUI INVICTA"
+      },
+      {
+        "nmesi": 1,
+        "mensile": 600,
+        "inizio": "Luglio",
+        "conto": "RESIDUI INVICTA",
+        "sub": "DE SARIO",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia)",
+        "id": "INVICTA_dup_1782988494381"
+      },
+      {
+        "inizio": "Luglio",
+        "sub": "SPADAVECCHIA NICO",
+        "id": "INVICTA_dup_1782988521033",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia)",
+        "conto": "RESIDUI INVICTA",
+        "mensile": 600,
+        "nmesi": 1
+      },
+      {
+        "conto": "RESIDUI INVICTA",
+        "id": "INVICTA_dup_1782988554458",
+        "gruppo": "STAGIONI PREG.",
+        "sub": "SANCILIO GIANPAOLO",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia)",
+        "inizio": "Luglio",
+        "nmesi": 1,
+        "mensile": 1600
+      },
+      {
+        "id": "INVICTA_dup_1782988585188",
+        "sub": "SAVOIA",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "conto": "RESIDUI INVICTA",
+        "inizio": "Luglio",
+        "mensile": 400,
+        "nmesi": 1
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI INVICTA",
+        "sub": "AMORUSO",
+        "gruppo": "STAGIONI PREG.",
+        "id": "INVICTA_dup_1782988621421",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "nmesi": 1,
+        "mensile": 600
+      }
+    ],
+    "VIRTUS": [
+      {
+        "conto": "STAFF AMMINISTRATIVO",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_0",
+        "sub": "Amministrativo / Segreteria",
+        "inizio": "Luglio",
+        "nmesi": 12,
+        "mensile": 400
+      },
+      {
+        "mensile": 100,
+        "nmesi": 12,
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_1",
+        "sub": "Carte virtuali / rimborsi",
+        "conto": "STAFF AMMINISTRATIVO",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Tesseramento FIP amm.",
+        "id": "VIRTUS_2",
+        "note": "",
+        "conto": "STAFF AMMINISTRATIVO",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 9,
+        "mensile": 700,
+        "inizio": "Settembre",
+        "conto": "STAFF OPERATIVO",
+        "sub": "MAGARELLI SERGIO - Custode Palapoli",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "VIRTUS_3"
+      },
+      {
+        "note": "",
+        "sub": "Addetto pulizia",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_4",
+        "conto": "STAFF OPERATIVO",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 300,
+        "nmesi": 9,
+        "inizio": "Settembre",
+        "note": "",
+        "sub": "SPADAVECCHIA ROBERTO - Tuttofare",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_5",
+        "conto": "STAFF OPERATIVO"
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Sicurezza Gare Interne",
+        "id": "VIRTUS_6",
+        "note": "",
+        "conto": "STAFF OPERATIVO"
+      },
+      {
+        "sub": "D'ANTONA ALEX - Grafica",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "VIRTUS_7",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": "Luglio",
+        "mensile": 250,
+        "nmesi": 12
+      },
+      {
+        "mensile": 450,
+        "nmesi": 9,
+        "sub": "VOLPE DONATO - Fotografo",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_8",
+        "note": "",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": "Settembre"
+      },
+      {
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "sub": "DIAMANTE MATTEO - Addetto stampa",
+        "id": "VIRTUS_9",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": "Luglio",
+        "mensile": 290,
+        "nmesi": 12
+      },
+      {
+        "mensile": 150,
+        "nmesi": 9,
+        "note": "(copia)",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "CAMPOREALE CARLO - Tecnico",
+        "id": "VIRTUS_dup_1775829773970",
+        "conto": "STAFF COMUNICAZIONE",
+        "inizio": "Settembre"
+      },
+      {
+        "inizio": "Settembre",
+        "id": "VIRTUS_10",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "sub": "LUISI GIUSEPPE - Allenatore 1",
+        "conto": "STAFF TECNICO",
+        "mensile": 1400,
+        "nmesi": 10
+      },
+      {
+        "mensile": 0,
+        "nmesi": 9,
+        "sub": "AZZOLLINI ILARIO - Allenatore 2",
+        "id": "VIRTUS_11",
+        "note": "",
+        "gruppo": "COSTO PERSONALE",
+        "conto": "STAFF TECNICO",
+        "inizio": "Settembre"
+      },
+      {
+        "nmesi": 9,
+        "mensile": 720,
+        "conto": "STAFF TECNICO",
+        "sub": "DE GENNARO DOMENICO - Prep. fisico",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "VIRTUS_12",
+        "inizio": "Settembre"
+      },
+      {
+        "mensile": 700,
+        "nmesi": 10,
+        "inizio": "Settembre",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "sub": "AMATO MAURO - Fisioterapista",
+        "id": "VIRTUS_13",
+        "conto": "STAFF TECNICO"
+      },
+      {
+        "nmesi": 10,
+        "mensile": 300,
+        "conto": "STAFF TECNICO",
+        "note": "(copia)",
+        "id": "VIRTUS_dup_1775829708902",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "CHIRENTI PAOLO - Medico",
+        "inizio": "Settembre"
+      },
+      {
+        "mensile": 1100,
+        "nmesi": 9,
+        "id": "VIRTUS_14",
+        "sub": "LOPEZ POSTIGO ANTONIO",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "conto": "ROSTER",
+        "inizio": "Ottobre"
+      },
+      {
+        "nmesi": 1,
+        "mensile": 500,
+        "inizio": "Maggio",
+        "conto": "ROSTER",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_dup_1782751994594",
+        "sub": "LOPEZ POSTIGO ANTONIO - Premio Play Off",
+        "note": "(copia)"
+      },
+      {
+        "inizio": "Maggio",
+        "conto": "ROSTER",
+        "note": "(copia) (copia)",
+        "id": "VIRTUS_dup_1782752044048",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "LOPEZ POSTIGO ANTONIO - 3 Turni Play Off",
+        "nmesi": 1,
+        "mensile": 600
+      },
+      {
+        "nmesi": 9,
+        "mensile": 800,
+        "conto": "ROSTER",
+        "sub": "SPERANZONI CARLO",
+        "gruppo": "COSTO PERSONALE",
+        "note": "",
+        "id": "VIRTUS_15",
+        "inizio": "Ottobre"
+      },
+      {
+        "inizio": "Ottobre",
+        "sub": "TANGALA RAOUL JOSEPH",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_16",
+        "note": "",
+        "conto": "ROSTER",
+        "mensile": 700,
+        "nmesi": 9
+      },
+      {
+        "nmesi": 9,
+        "mensile": 900,
+        "inizio": "Ottobre",
+        "conto": "ROSTER",
+        "sub": "DI MARZIO MARCO",
+        "note": "(copia)",
+        "id": "VIRTUS_dup_1775829522626",
+        "gruppo": "COSTO PERSONALE"
+      },
+      {
+        "conto": "ROSTER",
+        "gruppo": "COSTO PERSONALE",
+        "sub": "Atleta 5",
+        "id": "VIRTUS_dup_1775829517954",
+        "note": "(copia)",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_17",
+        "sub": "Atleta 6",
+        "note": "",
+        "conto": "ROSTER"
+      },
+      {
+        "inizio": "",
+        "sub": "Atleta 7",
+        "gruppo": "COSTO PERSONALE",
+        "id": "VIRTUS_18",
+        "note": "",
+        "conto": "ROSTER",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "nmesi": 1,
+        "mensile": 3515,
+        "inizio": "Luglio",
+        "conto": "FIP / FIPAV / CSEN",
+        "gruppo": "FEDERAZIONE",
+        "sub": "FIP - 1° RATA REGIONALE",
+        "note": "",
+        "id": "VIRTUS_19"
+      },
+      {
+        "inizio": "",
+        "conto": "FIP / FIPAV / CSEN",
+        "note": "",
+        "id": "VIRTUS_20",
+        "sub": "Iscrizione campionati",
+        "gruppo": "FEDERAZIONE",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "inizio": "",
+        "sub": "Tesseramento atleti",
+        "note": "",
+        "gruppo": "FEDERAZIONE",
+        "id": "VIRTUS_21",
+        "conto": "FIP / FIPAV / CSEN"
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "FIP / FIPAV / CSEN",
+        "sub": "Transfer FIBA",
+        "note": "",
+        "id": "VIRTUS_22",
+        "gruppo": "FEDERAZIONE",
+        "inizio": ""
+      },
+      {
+        "conto": "PALESTRE",
+        "id": "VIRTUS_23",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "sub": "Palapoli (canone mensile)",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "id": "VIRTUS_24",
+        "sub": "Palapanunzio (Invicta)",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "conto": "PALESTRE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "inizio": "",
+        "conto": "PALESTRE",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "",
+        "id": "VIRTUS_25",
+        "sub": "Altra palestra Dinamo",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "conto": "SEDI / APPARTAMENTI",
+        "note": "",
+        "sub": "Fitto: VIA DALLA CHIESA, 70",
+        "gruppo": "COSTO IMMOBILI",
+        "id": "VIRTUS_26",
+        "inizio": "Luglio",
+        "nmesi": 12,
+        "mensile": 250
+      },
+      {
+        "conto": "SEDI / APPARTAMENTI",
+        "sub": "Fitto: VIA G. SALEPICO, 155",
+        "id": "VIRTUS_dup_1775828505208",
+        "gruppo": "COSTO IMMOBILI",
+        "note": "(copia)",
+        "inizio": "Luglio",
+        "nmesi": 12,
+        "mensile": 480
+      },
+      {
+        "gruppo": "COSTO IMMOBILI",
+        "id": "VIRTUS_dup_1775828609027",
+        "note": "(copia) (copia)",
+        "sub": "Fitto: VIA BOCCARDI",
+        "conto": "SEDI / APPARTAMENTI",
+        "inizio": "Dicembre",
+        "mensile": 500,
+        "nmesi": 12
+      },
+      {
+        "nmesi": 12,
+        "mensile": 400,
+        "conto": "SEDI / APPARTAMENTI",
+        "gruppo": "COSTO IMMOBILI",
+        "id": "VIRTUS_dup_1775828654196",
+        "note": "(copia) (copia) (copia)",
+        "sub": "Fitto: VIA MICHIELLO",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "id": "VIRTUS_27",
+        "note": "",
+        "sub": "Fitto: VIA FIUME",
+        "gruppo": "COSTO IMMOBILI",
+        "conto": "SEDI / APPARTAMENTI",
+        "mensile": 600,
+        "nmesi": 12
+      },
+      {
+        "sub": "Bollette luce",
+        "note": "",
+        "gruppo": "COSTO IMMOBILI",
+        "id": "VIRTUS_28",
+        "conto": "UTENZE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "inizio": "",
+        "conto": "UTENZE",
+        "sub": "Bolletta acqua (AQP)",
+        "id": "VIRTUS_29",
+        "note": "",
+        "gruppo": "COSTO IMMOBILI",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "inizio": "",
+        "conto": "SPESE MEDICHE",
+        "id": "VIRTUS_30",
+        "sub": "Visite mediche atleti",
+        "gruppo": "COSTO ATT. SPORT.",
+        "note": ""
+      },
+      {
+        "id": "VIRTUS_31",
+        "note": "",
+        "gruppo": "COSTO ATT. SPORT.",
+        "sub": "Materiale sanitario",
+        "conto": "SPESE MEDICHE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "note": "",
+        "id": "VIRTUS_32",
+        "sub": "NOLEGGIO C/CONDUCENTE",
+        "gruppo": "COSTO ATT. SPORT.",
+        "conto": "TRASFERTE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "inizio": "",
+        "conto": "TRASFERTE",
+        "id": "VIRTUS_dup_1775829876366",
+        "note": "(copia)",
+        "sub": "NOLEGGIO S/CONDUCENTE",
+        "gruppo": "COSTO ATT. SPORT.",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "conto": "TRASFERTE",
+        "sub": "ALBERGHI",
+        "gruppo": "COSTO ATT. SPORT.",
+        "note": "(copia) (copia)",
+        "id": "VIRTUS_dup_1775829909906",
+        "inizio": "",
+        "nmesi": 0,
+        "mensile": 0
+      },
+      {
+        "gruppo": "COSTO ATT. SPORT.",
+        "id": "VIRTUS_dup_1775829907681",
+        "sub": "RISTORANTE",
+        "note": "(copia) (copia)",
+        "conto": "TRASFERTE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "id": "VIRTUS_33",
+        "sub": "SPORTIKA",
+        "gruppo": "COSTO ATT. SPORT.",
+        "note": "",
+        "conto": "ABBIGLIAMENTO",
+        "inizio": ""
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "ABBIGLIAMENTO",
+        "sub": "OVERLAB",
+        "id": "VIRTUS_dup_1775829605374",
+        "note": "(copia)",
+        "gruppo": "COSTO ATT. SPORT.",
+        "inizio": ""
+      },
+      {
+        "gruppo": "COSTO ATT. SPORT.",
+        "id": "VIRTUS_dup_1775829588674",
+        "sub": "PUBLITEC",
+        "note": "(copia)",
+        "conto": "ABBIGLIAMENTO",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "sub": "Noleggio fotocopiatrice",
+        "gruppo": "COSTO AMM.VO",
+        "id": "VIRTUS_34",
+        "note": "",
+        "conto": "NOLEGGI",
+        "inizio": ""
+      },
+      {
+        "note": "",
+        "sub": "Cancelleria / stampati",
+        "id": "VIRTUS_35",
+        "gruppo": "COSTO AMM.VO",
+        "conto": "SPESE VARIE",
+        "inizio": "",
+        "mensile": 0,
+        "nmesi": 0
+      },
+      {
+        "conto": "PACE FISCALE VIRTUS",
+        "id": "VIRTUS_36",
+        "gruppo": "ONERI FISCALI",
+        "sub": "1.VIRTUS - 01420240040798855",
+        "note": "",
+        "inizio": "Luglio",
+        "nmesi": 15,
+        "mensile": 128.09
+      },
+      {
+        "mensile": 1168.92,
+        "nmesi": 12,
+        "sub": "2.VIRTUS - ADESIONE 2018",
+        "note": "(copia)",
+        "gruppo": "ONERI FISCALI",
+        "id": "VIRTUS_dup_1783356079993",
+        "conto": "PACE FISCALE VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 2648.1,
+        "nmesi": 17,
+        "sub": "3.VIRTUS - ADESIONE 2019",
+        "note": "(copia) (copia)",
+        "gruppo": "ONERI FISCALI",
+        "id": "VIRTUS_dup_1783356572428",
+        "conto": "PACE FISCALE VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "nmesi": 4,
+        "mensile": 256.81,
+        "inizio": "Luglio",
+        "conto": "PACE FISCALE VIRTUS",
+        "note": "(copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1783356753755",
+        "gruppo": "ONERI FISCALI",
+        "sub": "4.VIRTUS - IRES 2021"
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "PACE FISCALE VIRTUS",
+        "id": "VIRTUS_dup_1783357133843",
+        "note": "(copia) (copia) (copia) (copia)",
+        "gruppo": "ONERI FISCALI",
+        "sub": "5.VIRTUS - IRES 2022",
+        "nmesi": 10,
+        "mensile": 244.12
+      },
+      {
+        "mensile": 174.21,
+        "nmesi": 19,
+        "inizio": "Luglio",
+        "id": "VIRTUS_dup_1783357387493",
+        "note": "(copia) (copia) (copia) (copia) (copia)",
+        "gruppo": "ONERI FISCALI",
+        "sub": "6.VIRTUS - IRES 2023",
+        "conto": "PACE FISCALE VIRTUS"
+      },
+      {
+        "mensile": 1015,
+        "nmesi": 8,
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia)",
+        "gruppo": "ONERI FISCALI",
+        "sub": "7.VIRTUS LITI PENDENTI IRES 2016",
+        "id": "VIRTUS_dup_1783357530193",
+        "conto": "PACE FISCALE VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 722.35,
+        "nmesi": 8,
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "8.VIRTUS LITI PENDENTI IVA 2016",
+        "gruppo": "ONERI FISCALI",
+        "id": "VIRTUS_dup_1783357786421",
+        "conto": "PACE FISCALE VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "id": "VIRTUS_dup_1783358269244",
+        "sub": "9.VIRTUS - 01420230026179070",
+        "gruppo": "ONERI FISCALI",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "conto": "PACE FISCALE VIRTUS",
+        "mensile": 83.92,
+        "nmesi": 2
+      },
+      {
+        "mensile": 75.27,
+        "nmesi": 67,
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1783358268172",
+        "gruppo": "ONERI FISCALI",
+        "sub": "10.VIRTUS - 01420250038373457",
+        "conto": "PACE FISCALE VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "nmesi": 83,
+        "mensile": 150.83,
+        "inizio": "Luglio",
+        "conto": "PACE FISCALE VIRTUS",
+        "id": "VIRTUS_37",
+        "sub": "11.VIRTUS - 01420250077939192",
+        "gruppo": "ONERI FISCALI",
+        "note": ""
+      },
+      {
+        "nmesi": 14,
+        "mensile": 1608.36,
+        "inizio": "Luglio",
+        "conto": "PACE FISCALE DINAMO",
+        "gruppo": "ONERI FISCALI",
+        "sub": "1.DINAMO ADESIONE 2018",
+        "id": "VIRTUS_38",
+        "note": ""
+      },
+      {
+        "nmesi": 4,
+        "mensile": 202.3,
+        "conto": "PACE FISCALE DINAMO",
+        "sub": "2.DINAMO IRES 2020",
+        "note": "(copia)",
+        "id": "VIRTUS_dup_1783353029094",
+        "gruppo": "ONERI FISCALI",
+        "inizio": "Luglio"
+      },
+      {
+        "gruppo": "ONERI FISCALI",
+        "note": "(copia) (copia)",
+        "sub": "3.DINAMO IRES 2021",
+        "id": "VIRTUS_dup_1783353181962",
+        "conto": "PACE FISCALE DINAMO",
+        "inizio": "Luglio",
+        "mensile": 265.4,
+        "nmesi": 4
+      },
+      {
+        "note": "(copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1783353390249",
+        "sub": "4.DINAMO IRES 2023",
+        "gruppo": "ONERI FISCALI",
+        "conto": "PACE FISCALE DINAMO",
+        "inizio": "Luglio",
+        "mensile": 169.5,
+        "nmesi": 20
+      },
+      {
+        "mensile": 70.67,
+        "nmesi": 52,
+        "inizio": "Luglio",
+        "gruppo": "ONERI FISCALI",
+        "id": "VIRTUS_dup_1783353607792",
+        "sub": "5.DINAMO - 01420250019434819",
+        "note": "(copia) (copia) (copia) (copia)",
+        "conto": "PACE FISCALE DINAMO"
+      },
+      {
+        "inizio": "Luglio",
+        "sub": "6.DINAMO - 01420250015739782",
+        "gruppo": "ONERI FISCALI",
+        "note": "(copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1783353916945",
+        "conto": "PACE FISCALE DINAMO",
+        "mensile": 103.52,
+        "nmesi": 63
+      },
+      {
+        "mensile": 68.09,
+        "nmesi": 39,
+        "id": "VIRTUS_39",
+        "gruppo": "ONERI FISCALI",
+        "note": "",
+        "sub": "1.INVICTA - 01420250019437748",
+        "conto": "PACE FISCALE INVICTA",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "PACE FISCALE INVICTA",
+        "note": "(copia) (copia)",
+        "id": "VIRTUS_dup_1783355421045",
+        "gruppo": "ONERI FISCALI",
+        "sub": "2.INVICTA - IRES 2023",
+        "nmesi": 19,
+        "mensile": 167.1
+      },
+      {
+        "mensile": 2400,
+        "nmesi": 1,
+        "sub": "AMMINISTRATIVO - Nico de Robertis",
+        "note": "",
+        "id": "VIRTUS_40",
+        "gruppo": "STAGIONI PREG.",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia)",
+        "id": "VIRTUS_dup_1782382028456",
+        "sub": "VOLPE DONATO - Fotografo",
+        "conto": "RESIDUI VIRTUS",
+        "mensile": 2700,
+        "nmesi": 1
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782461434637",
+        "sub": "DIAMANTE MATTEO - Addetto Stampa",
+        "note": "(copia) (copia)",
+        "nmesi": 1,
+        "mensile": 3190
+      },
+      {
+        "inizio": "Luglio",
+        "note": "(copia) (copia)",
+        "id": "VIRTUS_dup_1782461241823",
+        "sub": "D'ANTONA ALEX - Grafico",
+        "gruppo": "STAGIONI PREG.",
+        "conto": "RESIDUI VIRTUS",
+        "mensile": 2500,
+        "nmesi": 1
+      },
+      {
+        "mensile": 5500,
+        "nmesi": 1,
+        "gruppo": "STAGIONI PREG.",
+        "sub": "GALLO GIANLUCA - Allenatore",
+        "id": "VIRTUS_dup_1782462662420",
+        "note": "(copia) (copia) (copia)",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 900,
+        "nmesi": 1,
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia)",
+        "sub": "SPADAVECCHIA ROBERTO - Tuttofare",
+        "id": "VIRTUS_dup_1782512690794",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782462785983",
+        "note": "(copia) (copia) (copia) (copia)",
+        "sub": "AZZOLLINI ILARIO - Allenatore",
+        "nmesi": 1,
+        "mensile": 1800
+      },
+      {
+        "nmesi": 1,
+        "mensile": 1200,
+        "conto": "RESIDUI VIRTUS",
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782462859340",
+        "sub": "CUCCOVILLO DAVIDE - Allenatore",
+        "note": "(copia) (copia) (copia) (copia) (copia)",
+        "inizio": "Luglio"
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "sub": "DAUNYS RIMASTAS - Atleta",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1782725157822",
+        "gruppo": "STAGIONI PREG.",
+        "nmesi": 1,
+        "mensile": 4900
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "sub": "QUARTA SIMONE - Atleta",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1782725236457",
+        "nmesi": 1,
+        "mensile": 3400
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "gruppo": "STAGIONI PREG.",
+        "sub": "FAVALI GIANCARLO - Atleta",
+        "id": "VIRTUS_dup_1782725356881",
+        "nmesi": 1,
+        "mensile": 5400
+      },
+      {
+        "mensile": 2300,
+        "nmesi": 1,
+        "id": "VIRTUS_dup_1782725419057",
+        "sub": "PIERI NICOLO' - Atleta",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "gruppo": "STAGIONI PREG.",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "nmesi": 1,
+        "mensile": 1350,
+        "conto": "RESIDUI VIRTUS",
+        "sub": "BIANCO ANDREA - Atleta",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1782725529170",
+        "gruppo": "STAGIONI PREG.",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 2950,
+        "nmesi": 1,
+        "id": "VIRTUS_dup_1782725625780",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "MEZZINA DAVIDE - Atleta",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "id": "VIRTUS_dup_1782726410499",
+        "sub": "BRUGIA - Atleta",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio",
+        "mensile": 400,
+        "nmesi": 1
+      },
+      {
+        "mensile": 300,
+        "nmesi": 1,
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1782726541463",
+        "sub": "POTITO EOIN THOMAS - Atleta",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 1200,
+        "nmesi": 1,
+        "sub": "ANNESE MARCO - Atleta",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782726595119",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 1600,
+        "nmesi": 1,
+        "id": "VIRTUS_dup_1782726649182",
+        "sub": "SENGHOR MAMADOU - Atleta",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 4000,
+        "nmesi": 1,
+        "inizio": "Luglio",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "BOLIS ALESSIO - Atleta",
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782726764927",
+        "conto": "RESIDUI VIRTUS"
+      },
+      {
+        "mensile": 550,
+        "nmesi": 1,
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782726870719",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "NATALINI ALESSIO - Atleta",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "nmesi": 1,
+        "mensile": 2160,
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia)",
+        "sub": "DE GENNARO DOMENICO - Prepar. Atl.",
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782462935164"
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "sub": "AMATO MAURO - Fisioterapista",
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1782512889165",
+        "nmesi": 1,
+        "mensile": 2800
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "sub": "CHIRENTI PAOLO - Medico",
+        "gruppo": "STAGIONI PREG.",
+        "id": "VIRTUS_dup_1782512973169",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "nmesi": 1,
+        "mensile": 1500
+      },
+      {
+        "inizio": "Luglio",
+        "conto": "RESIDUI VIRTUS",
+        "gruppo": "STAGIONI PREG.",
+        "sub": "Fitto: VIA DALLA CHIESA, 70",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1782752243250",
+        "nmesi": 1,
+        "mensile": 1250
+      },
+      {
+        "mensile": 100,
+        "nmesi": 1,
+        "gruppo": "STAGIONI PREG.",
+        "note": "(copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia) (copia)",
+        "id": "VIRTUS_dup_1782867639666",
+        "sub": "Carte Virtuali / rimboso giugno",
+        "conto": "RESIDUI VIRTUS",
+        "inizio": "Luglio"
+      },
+      {
+        "mensile": 0,
+        "nmesi": 0,
+        "sub": "Saldi pregressi collaboratori",
+        "note": "",
+        "id": "VIRTUS_41",
+        "gruppo": "STAGIONI PREG.",
+        "conto": "RESIDUI DINAMO",
+        "inizio": ""
+      },
+      {
+        "nmesi": 0,
+        "mensile": 0,
+        "conto": "RESIDUI INVICTA",
+        "sub": "Saldi pregressi collaboratori",
+        "gruppo": "STAGIONI PREG.",
+        "note": "",
+        "id": "VIRTUS_42",
+        "inizio": ""
+      },
+      {
+        "note": "Procuratore LUISI GIUSEPPE (Allenatore Capo)",
+        "sub": "SCIPIONI LUCA (Luisi Giuseppe)",
+        "id": "VIRTUS_c_1781821241754",
+        "gruppo": "PROCURE",
+        "conto": "PROCURATORI",
+        "inizio": "Ottobre",
+        "mensile": 1000,
+        "nmesi": 1
+      },
+      {
+        "mensile": 650,
+        "nmesi": 1,
+        "sub": "SCIPIONI LUCA (Tangala Raoul Joseph)",
+        "gruppo": "PROCURE",
+        "note": "Procuratore LUISI GIUSEPPE (Allenatore Capo) (copia)",
+        "id": "VIRTUS_dup_1782753276467",
+        "conto": "PROCURATORI",
+        "inizio": "Novembre"
+      },
+      {
+        "mensile": 990,
+        "nmesi": 1,
+        "id": "VIRTUS_dup_1782752145954",
+        "note": "Procuratore LUISI GIUSEPPE (Allenatore Capo) (copia)",
+        "sub": "XXXXXX (Lopez Postigo Antonio)",
+        "gruppo": "PROCURE",
+        "conto": "PROCURATORI",
+        "inizio": "Ottobre"
+      },
+      {
+        "conto": "PROCURATORI",
+        "sub": "XXXXXX (Speranzoni Carlo)",
+        "gruppo": "PROCURE",
+        "id": "VIRTUS_dup_1782753356120",
+        "note": "Procuratore LUISI GIUSEPPE (Allenatore Capo) (copia) (copia)",
+        "inizio": "Ottobre",
+        "nmesi": 1,
+        "mensile": 720
+      },
+      {
+        "mensile": 810,
+        "nmesi": 1,
+        "inizio": "Ottobre",
+        "id": "VIRTUS_dup_1782867577022",
+        "note": "Procuratore LUISI GIUSEPPE (Allenatore Capo) (copia) (copia) (copia)",
+        "sub": "XXXXXX (Di Marzio Marco)",
+        "gruppo": "PROCURE",
+        "conto": "PROCURATORI"
+      }
+    ]
+  },
+  "pdcData": [
+    {
+      "collapsed": true,
+      "label": "COSTI OPERATIVI",
+      "id": "G1",
+      "conti": [
+        {
+          "collapsed": true,
+          "label": "COSTO PERSONALE",
+          "cod": "A.1",
+          "sub": [
+            {
+              "note": "Segreteria, carte virtuali, rimborsi",
+              "id": "S1",
+              "tipo": "CE",
+              "cod": "A.1.01",
+              "label": "Staff Amministrativo"
+            },
+            {
+              "label": "Staff Operativo",
+              "note": "Custodi, addetti pulizia, sicurezza",
+              "id": "S2",
+              "cod": "A.1.02",
+              "tipo": "CE"
+            },
+            {
+              "label": "Staff Comunicazione",
+              "id": "S3",
+              "note": "Grafico, fotografo, addetto stampa",
+              "cod": "A.1.03",
+              "tipo": "CE"
+            },
+            {
+              "tipo": "CE",
+              "cod": "A.1.04",
+              "note": "Compensi allenatori maschile e femminile",
+              "id": "S4",
+              "label": "Staff Tecnico — Allenatori"
+            },
+            {
+              "label": "Roster Atleti",
+              "tipo": "CE",
+              "cod": "A.1.05",
+              "note": "Compensi atleti tesserati",
+              "id": "S5"
+            },
+            {
+              "note": "Premi a risultato",
+              "id": "S6",
+              "tipo": "CE",
+              "cod": "A.1.06",
+              "label": "Premi Vittoria"
+            }
+          ],
+          "id": "C1"
+        },
+        {
+          "collapsed": true,
+          "label": "COSTO IMMOBILI",
+          "cod": "A.2",
+          "id": "C2",
+          "sub": [
+            {
+              "note": "Palapoli, Palapanunzio, altre palestre",
+              "id": "S7",
+              "tipo": "CE",
+              "cod": "A.2.01",
+              "label": "Canoni Palestre"
+            },
+            {
+              "tipo": "CE",
+              "cod": "A.2.02",
+              "note": "Via Fiume, via Salepico, case academy",
+              "id": "S8",
+              "label": "Affitti Sedi / Appartamenti"
+            },
+            {
+              "note": "Engie, Enel, AQP",
+              "id": "S9",
+              "cod": "A.2.03",
+              "tipo": "CE",
+              "label": "Utenze (Luce / Acqua)"
+            },
+            {
+              "note": "Interventi non ricorrenti",
+              "id": "S10",
+              "tipo": "CE",
+              "cod": "A.2.04",
+              "label": "Manutenzioni Straordinarie"
+            }
+          ]
+        },
+        {
+          "id": "C3",
+          "sub": [
+            {
+              "label": "Affiliazione / Riaffiliazione",
+              "id": "S11",
+              "note": "FIP, FIPAV, CSEN",
+              "cod": "A.3.01",
+              "tipo": "CE"
+            },
+            {
+              "label": "Iscrizione Campionati",
+              "note": "Quote iscrizione per campionato",
+              "id": "S12",
+              "tipo": "CE",
+              "cod": "A.3.02"
+            },
+            {
+              "cod": "A.3.03",
+              "tipo": "CE",
+              "id": "S13",
+              "note": "Tesseramento FIP/FIPAV per atleta",
+              "label": "Tesseramento Atleti"
+            },
+            {
+              "label": "Transfer FIBA",
+              "cod": "A.3.04",
+              "tipo": "CE",
+              "id": "S14",
+              "note": "Trasferimenti internazionali"
+            },
+            {
+              "id": "S15",
+              "note": "Sanzioni disciplinari federali",
+              "cod": "A.3.05",
+              "tipo": "CE",
+              "label": "Multe e Ammende"
+            }
+          ],
+          "cod": "A.3",
+          "collapsed": true,
+          "label": "FEDERAZIONE E TESSERAMENTI"
+        }
+      ],
+      "cod": "A"
+    },
+    {
+      "label": "COSTI ATTIVITÀ SPORTIVA",
+      "collapsed": true,
+      "id": "G2",
+      "conti": [
+        {
+          "label": "TRASFERTE E GARE",
+          "collapsed": true,
+          "cod": "B.1",
+          "id": "C4",
+          "sub": [
+            {
+              "id": "S16",
+              "note": "Km, pedaggi, pernottamenti",
+              "tipo": "CE",
+              "cod": "B.1.01",
+              "label": "Rimborsi Trasferta Atleti"
+            },
+            {
+              "label": "Noleggio Mezzi di Trasporto",
+              "tipo": "CE",
+              "cod": "B.1.02",
+              "note": "Pullman, van",
+              "id": "S17"
+            },
+            {
+              "note": "Gare interne",
+              "id": "S18",
+              "tipo": "CE",
+              "cod": "B.1.03",
+              "label": "Rimborsi Arbitri"
+            },
+            {
+              "cod": "B.1.04",
+              "tipo": "CE",
+              "note": "DJ, speaker, biglietteria",
+              "id": "S19",
+              "label": "Spese Gare Interne"
+            }
+          ]
+        },
+        {
+          "sub": [
+            {
+              "cod": "B.2.01",
+              "tipo": "CE",
+              "note": "Maglia, pantaloncino, calzettoni ufficiali",
+              "id": "S20",
+              "label": "Divise di Gara"
+            },
+            {
+              "label": "Kit Allenamento",
+              "note": "Abbigliamento quotidiano",
+              "id": "S21",
+              "cod": "B.2.02",
+              "tipo": "CE"
+            },
+            {
+              "label": "Attrezzatura Sportiva",
+              "cod": "B.2.03",
+              "tipo": "CE",
+              "note": "Palloni, borse, materiale tecnico",
+              "id": "S22"
+            }
+          ],
+          "id": "C5",
+          "cod": "B.2",
+          "collapsed": true,
+          "label": "ABBIGLIAMENTO E ATTREZZATURA"
+        },
+        {
+          "collapsed": true,
+          "label": "SPESE MEDICHE",
+          "cod": "B.3",
+          "id": "C6",
+          "sub": [
+            {
+              "tipo": "CE",
+              "cod": "B.3.01",
+              "note": "Idoneità sportiva e controlli",
+              "id": "S23",
+              "label": "Visite Mediche Atleti"
+            },
+            {
+              "label": "Materiale Sanitario",
+              "tipo": "CE",
+              "cod": "B.3.02",
+              "id": "S24",
+              "note": "Farmaci, borse mediche, presidi"
+            },
+            {
+              "label": "Assicurazioni Sportive",
+              "cod": "B.3.03",
+              "tipo": "CE",
+              "note": "Polizze infortuni atleti e staff",
+              "id": "S25"
+            }
+          ]
+        }
+      ],
+      "cod": "B"
+    },
+    {
+      "id": "G3",
+      "conti": [
+        {
+          "id": "C7",
+          "sub": [
+            {
+              "label": "Noleggio Fotocopiatrice",
+              "id": "S26",
+              "note": "",
+              "tipo": "CE",
+              "cod": "C.1.01"
+            },
+            {
+              "tipo": "CE",
+              "cod": "C.1.02",
+              "note": "Strumentazione per streaming",
+              "id": "S27",
+              "label": "Noleggio Hardware / Dirette"
+            },
+            {
+              "label": "Software e Abbonamenti",
+              "cod": "C.1.03",
+              "tipo": "CE",
+              "id": "S28",
+              "note": "Gestionali, piattaforme digitali"
+            }
+          ],
+          "cod": "C.1",
+          "collapsed": true,
+          "label": "NOLEGGI E SERVIZI"
+        },
+        {
+          "collapsed": true,
+          "label": "SPESE GENERALI",
+          "cod": "C.2",
+          "id": "C8",
+          "sub": [
+            {
+              "label": "Cancelleria e Stampati",
+              "id": "S29",
+              "note": "Materiale ufficio",
+              "cod": "C.2.01",
+              "tipo": "CE"
+            },
+            {
+              "label": "Postali e Commissioni",
+              "tipo": "CE",
+              "cod": "C.2.02",
+              "note": "Spedizioni, bonifici, commissioni bancarie",
+              "id": "S30"
+            },
+            {
+              "label": "Consulenze Professionali",
+              "note": "Commercialista, legale",
+              "id": "S31",
+              "cod": "C.2.03",
+              "tipo": "CE"
+            }
+          ]
+        }
+      ],
+      "cod": "C",
+      "collapsed": true,
+      "label": "COSTI AMMINISTRATIVI"
+    },
+    {
+      "collapsed": false,
+      "label": "ONERI FISCALI E PREGRESSI",
+      "conti": [
+        {
+          "cod": "D.1",
+          "sub": [
+            {
+              "cod": "D.1.01",
+              "tipo": "CE",
+              "id": "S32",
+              "note": "Agenzia Entrate — rateizzazione",
+              "label": "Rate Accertamento 2018–2019 Virtus"
+            },
+            {
+              "label": "Rate Avviso Bonario 2020–2022 Virtus",
+              "cod": "D.1.02",
+              "tipo": "CE",
+              "note": "",
+              "id": "S33"
+            },
+            {
+              "label": "Rate Accertamento 2018 Dinamo",
+              "cod": "D.1.03",
+              "tipo": "CE",
+              "id": "S34",
+              "note": ""
+            },
+            {
+              "label": "Rate Avviso Bonario 2020–2021 Dinamo",
+              "id": "S35",
+              "note": "",
+              "cod": "D.1.04",
+              "tipo": "CE"
+            }
+          ],
+          "id": "C9",
+          "collapsed": false,
+          "label": "PACE FISCALE / ACCERTAMENTI"
+        },
+        {
+          "sub": [
+            {
+              "id": "S36",
+              "note": "Debiti maturati stagioni precedenti",
+              "cod": "D.2.01",
+              "tipo": "CE",
+              "label": "Saldi Pregressi — Virtus"
+            },
+            {
+              "cod": "D.2.02",
+              "tipo": "CE",
+              "id": "S37",
+              "note": "",
+              "label": "Saldi Pregressi — Dinamo"
+            },
+            {
+              "label": "Saldi Pregressi — Invicta",
+              "note": "",
+              "id": "S38",
+              "cod": "D.2.03",
+              "tipo": "CE"
+            }
+          ],
+          "id": "C10",
+          "cod": "D.2",
+          "label": "STAGIONI PREGRESSE",
+          "collapsed": false
+        },
+        {
+          "label": "CONTRIBUTI INPS / IRPEF",
+          "collapsed": true,
+          "id": "C11",
+          "sub": [
+            {
+              "note": "INPS su compensi collaboratori sportivi",
+              "id": "S39",
+              "cod": "D.3.01",
+              "tipo": "CE",
+              "label": "Contributi Collaboratori"
+            },
+            {
+              "note": "Ritenuta 20% / 23% su compensi",
+              "id": "S40",
+              "tipo": "CE",
+              "cod": "D.3.02",
+              "label": "Ritenute d'acconto"
+            }
+          ],
+          "cod": "D.3"
+        }
+      ],
+      "id": "G4",
+      "cod": "D"
+    },
+    {
+      "cod": "E",
+      "id": "G5",
+      "conti": [
+        {
+          "collapsed": true,
+          "label": "CONTRATTI DI SPONSORIZZAZIONE",
+          "cod": "E.1",
+          "sub": [
+            {
+              "tipo": "SP",
+              "cod": "E.1.01",
+              "id": "S41",
+              "note": "Contributo + 50% IVA",
+              "label": "Sponsor Principali (Main Sponsor)"
+            },
+            {
+              "tipo": "SP",
+              "cod": "E.1.02",
+              "note": "Forniture in cambio di visibilità",
+              "id": "S42",
+              "label": "Sponsor Tecnici"
+            },
+            {
+              "id": "S43",
+              "note": "Accordi su singola partita",
+              "cod": "E.1.03",
+              "tipo": "SP",
+              "label": "Sponsor di Gara (Co-sponsor)"
+            },
+            {
+              "label": "Sponsorizzazioni Divise",
+              "cod": "E.1.04",
+              "tipo": "SP",
+              "note": "Logo su maglia / pantaloncini",
+              "id": "S44"
+            }
+          ],
+          "id": "C12"
+        },
+        {
+          "collapsed": true,
+          "label": "ALTRI PROVENTI",
+          "sub": [
+            {
+              "label": "Botteghino e Abbonamenti",
+              "id": "S45",
+              "note": "Incassi da gare interne",
+              "tipo": "CE",
+              "cod": "E.2.01"
+            },
+            {
+              "label": "Contributi Federali",
+              "note": "Rimborsi e premi federazione",
+              "id": "S46",
+              "tipo": "CE",
+              "cod": "E.2.02"
+            },
+            {
+              "note": "Quote associative soci e atleti",
+              "id": "S47",
+              "tipo": "CE",
+              "cod": "E.2.03",
+              "label": "Quote Sociali"
+            },
+            {
+              "note": "Entrate non classificabili altrove",
+              "id": "S48",
+              "cod": "E.2.04",
+              "tipo": "CE",
+              "label": "Proventi Diversi"
+            }
+          ],
+          "id": "C13",
+          "cod": "E.2"
+        }
+      ],
+      "collapsed": true,
+      "label": "ENTRATE DA SPONSORIZZAZIONI"
+    },
+    {
+      "cod": "F",
+      "id": "G6",
+      "conti": [
+        {
+          "collapsed": true,
+          "label": "CREDITI E DEBITI",
+          "id": "C14",
+          "sub": [
+            {
+              "label": "Crediti verso Sponsor",
+              "tipo": "PA",
+              "cod": "F.1.01",
+              "id": "S49",
+              "note": "Rate non ancora incassate"
+            },
+            {
+              "label": "Debiti verso Collaboratori",
+              "tipo": "PA",
+              "cod": "F.1.02",
+              "id": "S50",
+              "note": "Compensi maturati non pagati"
+            },
+            {
+              "note": "Quote scadute non saldate",
+              "id": "S51",
+              "cod": "F.1.03",
+              "tipo": "PA",
+              "label": "Debiti verso Federazione"
+            }
+          ],
+          "cod": "F.1"
+        },
+        {
+          "collapsed": true,
+          "label": "DISPONIBILITÀ DI CASSA",
+          "id": "C15",
+          "sub": [
+            {
+              "label": "Cassa Contante",
+              "cod": "F.2.01",
+              "tipo": "PA",
+              "note": "Fondo cassa fisico",
+              "id": "S52"
+            },
+            {
+              "label": "Conto Corrente Bancario",
+              "tipo": "PA",
+              "cod": "F.2.02",
+              "note": "",
+              "id": "S53"
+            },
+            {
+              "cod": "F.2.03",
+              "tipo": "PA",
+              "id": "S54",
+              "note": "",
+              "label": "Carte di Credito / Virtuali"
+            }
+          ],
+          "cod": "F.2"
+        }
+      ],
+      "label": "POSTE PATRIMONIALI",
+      "collapsed": true
+    }
+  ],
+  "permessi": {
+    "admin": {
+      "pn-view": 1,
+      "scadenzario": 1,
+      "gestione-utenti": 1,
+      "fatt-view": 1,
+      "fatt-edit": 1,
+      "pdc-edit": 1,
+      "dashboard": 1,
+      "salva": 1,
+      "prev-view": 1,
+      "prev-ril-view": 1,
+      "rendiconto": 1,
+      "contr-edit": 1,
+      "pdc-view": 1,
+      "prev-move": 1,
+      "preg-view": 1,
+      "pn-edit": 1,
+      "stip-view": 1,
+      "prev-edit": 1,
+      "fabbisogno": 1,
+      "contr-view": 1
+    },
+    "visitor": {
+      "pn-view": 0,
+      "scadenzario": 1,
+      "gestione-utenti": 0,
+      "fatt-view": 1,
+      "pdc-edit": 0,
+      "fatt-edit": 0,
+      "salva": 0,
+      "dashboard": 1,
+      "rendiconto": 1,
+      "prev-view": 1,
+      "prev-ril-view": 1,
+      "contr-edit": 0,
+      "prev-move": 0,
+      "preg-view": 1,
+      "pn-edit": 0,
+      "pdc-view": 1,
+      "stip-view": 1,
+      "prev-edit": 0,
+      "contr-view": 1,
+      "fabbisogno": 1
+    },
+    "superior": {
+      "prev-move": 0,
+      "pn-edit": 1,
+      "preg-view": 1,
+      "pdc-view": 1,
+      "stip-view": 1,
+      "prev-edit": 0,
+      "fabbisogno": 1,
+      "contr-view": 1,
+      "salva": 0,
+      "dashboard": 1,
+      "rendiconto": 1,
+      "prev-ril-view": 1,
+      "prev-view": 1,
+      "contr-edit": 0,
+      "pdc-edit": 0,
+      "fatt-edit": 1,
+      "pn-view": 0,
+      "scadenzario": 1,
+      "gestione-utenti": 0,
+      "fatt-view": 1
+    },
+    "editor": {
+      "fatt-view": 1,
+      "gestione-utenti": 0,
+      "scadenzario": 1,
+      "pn-view": 1,
+      "pdc-edit": 1,
+      "fatt-edit": 0,
+      "contr-edit": 1,
+      "rendiconto": 1,
+      "prev-view": 1,
+      "prev-ril-view": 1,
+      "salva": 1,
+      "dashboard": 1,
+      "stip-view": 1,
+      "prev-edit": 1,
+      "contr-view": 1,
+      "fabbisogno": 1,
+      "pn-edit": 0,
+      "preg-view": 1,
+      "prev-move": 1,
+      "pdc-view": 1
+    }
+  },
+  "insoluteData": []
+}
