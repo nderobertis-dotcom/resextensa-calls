@@ -1256,6 +1256,19 @@ function calcolaEta(dataNascita){
   return anni;
 }
 
+const FILE_SIZE_LIMITS = {
+  video: 50 * 1024 * 1024,
+  foto:  10 * 1024 * 1024,
+  cv:     5 * 1024 * 1024,
+  altro: 20 * 1024 * 1024
+};
+const FILE_SIZE_LABELS = { video:'50MB', foto:'10MB', cv:'5MB', altro:'20MB' };
+
+function checkFileSize(file, tipo){
+  const limit = FILE_SIZE_LIMITS[tipo] || FILE_SIZE_LIMITS.altro;
+  return file.size <= limit;
+}
+
 function generateUUID(){
   if(typeof crypto !== 'undefined' && crypto.randomUUID){
     return crypto.randomUUID();
