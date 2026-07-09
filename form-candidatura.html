@@ -931,17 +931,39 @@ function renderPanelFigura(nomeCat, fig){
 }
 
 function renderFileSlot(m){
-  return `<div class="file-slot" id="slot-wrap-${m.id}">
+  const isVideo = m.tipo === 'video';
+  const sizeLabel = FILE_SIZE_LABELS[m.tipo] || '20MB';
+  const linkField = isVideo ? `
+    <div style="padding:4px 14px 8px;">
+      <label style="font-size:11px;color:var(--text-faint);display:block;margin-bottom:4px;">LINK VIDEO (YouTube, Vimeo, Google Drive…)</label>
+      <input type="text" id="slot-link-${m.id}"
+        placeholder="Incolla qui il link del video"
+        style="width:100%;font-size:13px;"
+        oninput="onLinkChange('${m.id}', this)">
+    </div>
+    <div style="padding:0 14px 4px;font-size:11px;color:var(--text-faint);">— oppure carica un file (max ${sizeLabel}) —</div>` : '';
+  return `<div class="file-slot" id="slot-wrap-${m.id}" data-tipo="${m.tipo}">
     <div class="file-slot-head">
       <span class="file-slot-label">${m.label}${m.req ? '<span class="req"> *</span>' : `<span class="opt"> ${t('f.opt')}</span>`}</span>
       <span class="file-slot-status" id="slot-status-${m.id}">${t('f.nofile')}</span>
     </div>
+    ${linkField}
     <div style="padding:0 14px 12px; display:flex; gap:8px; align-items:center;">
       <button type="button" class="file-slot-btn" onclick="document.getElementById('slot-input-${m.id}').click()">${t('f.choose')}</button>
+      <span style="font-size:11px;color:var(--text-faint);">max ${sizeLabel}</span>
       <button type="button" class="file-slot-btn" id="slot-remove-${m.id}" style="display:none;color:var(--danger);border-color:var(--danger);" onclick="rimuoviSlot('${m.id}')">${t('f.remove')}</button>
     </div>
     <input type="file" id="slot-input-${m.id}" accept="${accettaPerTipo(m.tipo)}" onchange="onSlotChange('${m.id}', this)">
   </div>`;
+}
+
+function onLinkChange(id, input){
+  const s = document.getElementById("slot-status-" + id);
+  if(input.value.trim()){
+    if(s){ s.textContent = "✓ Link inserito"; s.className = "file-slot-status ok"; }
+  } else {
+    if(s){ s.textContent = "No file"; s.className = "file-slot-status"; }
+  }
 }
 
 function renderPanelMaterialiGenerici(){
@@ -1204,15 +1226,6 @@ function accettaPerTipo(tipo){
   if(tipo === "foto")  return "image/*";
   if(tipo === "cv")    return ".pdf,.doc,.docx";
   return "*";
-}
-
-function onLinkChange(id, input){
-  const status = document.getElementById("slot-status-" + id);
-  if(input.value.trim()){
-    if(status){ status.textContent = "✓ Link inserito"; status.className = "file-slot-status ok"; }
-  } else {
-    if(status){ status.textContent = "No file"; status.className = "file-slot-status"; }
-  }
 }
 
 function onSlotChange(id, input){
