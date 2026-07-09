@@ -940,6 +940,12 @@ function renderFileSlot(m){
         placeholder="Incolla qui il link del video"
         style="width:100%;font-size:13px;"
         oninput="onLinkChange('${m.id}', this)">
+      <div id="slot-pwd-wrap-${m.id}" style="display:none;margin-top:6px;">
+        <label style="font-size:11px;color:var(--text-faint);display:block;margin-bottom:4px;">PASSWORD DI ACCESSO <span style="font-size:10px;">(se richiesta)</span></label>
+        <input type="text" id="slot-pwd-${m.id}"
+          placeholder="Password per accedere al video"
+          style="width:100%;font-size:13px;">
+      </div>
     </div>
     <div style="padding:0 14px 4px;font-size:11px;color:var(--text-faint);">— oppure carica un file (max ${sizeLabel}) —</div>` : '';
   return `<div class="file-slot" id="slot-wrap-${m.id}" data-tipo="${m.tipo}">
@@ -959,10 +965,13 @@ function renderFileSlot(m){
 
 function onLinkChange(id, input){
   const s = document.getElementById("slot-status-" + id);
+  const pwdWrap = document.getElementById("slot-pwd-wrap-" + id);
   if(input.value.trim()){
     if(s){ s.textContent = "✓ Link inserito"; s.className = "file-slot-status ok"; }
+    if(pwdWrap) pwdWrap.style.display = "block";
   } else {
     if(s){ s.textContent = "No file"; s.className = "file-slot-status"; }
+    if(pwdWrap) pwdWrap.style.display = "none";
   }
 }
 
@@ -1335,10 +1344,14 @@ async function handleSubmit(e){
     // Upload materiali figura (sia spontanee che bandi)
     if(fig){
       for(const m of fig.materiali){
-        // Salva link video in dati_extra se presente
+        // Salva link video e password in dati_extra se presenti
         if(m.tipo === "video"){
           const linkEl = document.getElementById("slot-link-" + m.id);
-          if(linkEl && linkEl.value.trim()) datiExtra["link_" + m.id] = linkEl.value.trim();
+          const pwdEl = document.getElementById("slot-pwd-" + m.id);
+          if(linkEl && linkEl.value.trim()){
+            datiExtra["link_" + m.id] = linkEl.value.trim();
+            if(pwdEl && pwdEl.value.trim()) datiExtra["pwd_" + m.id] = pwdEl.value.trim();
+          }
         }
         const file = fileSlots[m.id];
         if(!file) continue;
