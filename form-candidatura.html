@@ -1206,13 +1206,32 @@ function accettaPerTipo(tipo){
   return "*";
 }
 
+function onLinkChange(id, input){
+  const status = document.getElementById("slot-status-" + id);
+  if(input.value.trim()){
+    if(status){ status.textContent = "✓ Link inserito"; status.className = "file-slot-status ok"; }
+  } else {
+    if(status){ status.textContent = "No file"; status.className = "file-slot-status"; }
+  }
+}
+
 function onSlotChange(id, input){
   const file = input.files[0];
   if(!file) return;
+  // Controllo dimensione
+  const wrap = document.getElementById("slot-wrap-" + id);
+  const tipo = (wrap && wrap.dataset.tipo) || "altro";
+  const limit = FILE_SIZE_LIMITS[tipo] || FILE_SIZE_LIMITS.altro;
+  if(file.size > limit){
+    const lbl = FILE_SIZE_LABELS[tipo] || "20MB";
+    alert("File troppo grande. Dimensione massima: " + lbl + (tipo === "video" ? "\nPer video più grandi usa un link YouTube, Vimeo o Google Drive." : ""));
+    input.value = "";
+    return;
+  }
   fileSlots[id] = file;
-  const s = document.getElementById(`slot-status-${id}`);
+  const s = document.getElementById("slot-status-" + id);
   if(s){ s.textContent = file.name; s.className = "file-slot-status ok"; }
-  const rb = document.getElementById(`slot-remove-${id}`);
+  const rb = document.getElementById("slot-remove-" + id);
   if(rb) rb.style.display = "inline-block";
 }
 
@@ -1264,10 +1283,15 @@ async function handleSubmit(e){
   // Validazione slot obbligatori (sia spontanee che bandi)
   if(fig){
     for(const m of fig.materiali){
-      if(m.req && !fileSlots[m.id]){
-        errBox.textContent = `${t("err.file")} ${m.label}`;
-        errBox.style.display = "block";
-        return;
+      if(m.req){
+        const hasFile = !!fileSlots[m.id];
+        const linkEl = document.getElementById("slot-link-" + m.id);
+        const hasLink = m.tipo === "video" && !!(linkEl && linkEl.value.trim());
+        if(!hasFile && !hasLink){
+          errBox.textContent = t("err.file") + " " + m.label;
+          errBox.style.display = "block";
+          return;
+        }
       }
     }
   }
@@ -1285,11 +1309,16 @@ async function handleSubmit(e){
     // Upload materiali figura (sia spontanee che bandi)
     if(fig){
       for(const m of fig.materiali){
+        // Salva link video in dati_extra se presente
+        if(m.tipo === "video"){
+          const linkEl = document.getElementById("slot-link-" + m.id);
+          if(linkEl && linkEl.value.trim()) datiExtra["link_" + m.id] = linkEl.value.trim();
+        }
         const file = fileSlots[m.id];
         if(!file) continue;
         const path = `${cat.id}/${generateUUID()}-${nomeFileSicuro(file.name)}`;
         const { error: upErr } = await sb.storage.from(BUCKET).upload(path, file);
-        if(upErr) throw new Error(`Upload failed: ${m.label}`);
+        if(upErr) throw new Error("Upload failed: " + m.label);
         materialiPayload.push({ tipo: m.tipo, etichetta: m.label, storage_path: path, nome_file_originale: file.name });
       }
     }
