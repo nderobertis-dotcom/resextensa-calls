@@ -1344,15 +1344,6 @@ async function handleSubmit(e){
     // Upload materiali figura (sia spontanee che bandi)
     if(fig){
       for(const m of fig.materiali){
-        // Salva link video e password in dati_extra se presenti
-        if(m.tipo === "video"){
-          const linkEl = document.getElementById("slot-link-" + m.id);
-          const pwdEl = document.getElementById("slot-pwd-" + m.id);
-          if(linkEl && linkEl.value.trim()){
-            datiExtra["link_" + m.id] = linkEl.value.trim();
-            if(pwdEl && pwdEl.value.trim()) datiExtra["pwd_" + m.id] = pwdEl.value.trim();
-          }
-        }
         const file = fileSlots[m.id];
         if(!file) continue;
         const path = `${cat.id}/${generateUUID()}-${nomeFileSicuro(file.name)}`;
@@ -1364,6 +1355,19 @@ async function handleSubmit(e){
 
     // 2. Raccolta dati_extra
     const datiExtra = {};
+    // Link e password video
+    if(fig){
+      for(const m of fig.materiali){
+        if(m.tipo === "video"){
+          const linkEl = document.getElementById("slot-link-" + m.id);
+          const pwdEl = document.getElementById("slot-pwd-" + m.id);
+          if(linkEl && linkEl.value.trim()){
+            datiExtra["link_" + m.id] = linkEl.value.trim();
+            if(pwdEl && pwdEl.value.trim()) datiExtra["pwd_" + m.id] = pwdEl.value.trim();
+          }
+        }
+      }
+    }
     // Consensi aggiuntivi per categoria
     const consensoImmagini = document.getElementById("f-consenso-immagini");
     const consensoMateriali = document.getElementById("f-consenso-materiali");
