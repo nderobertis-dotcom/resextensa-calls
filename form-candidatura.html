@@ -940,6 +940,10 @@ function renderFileSlot(m){
         placeholder="Incolla qui il link del video"
         style="width:100%;font-size:13px;"
         oninput="onLinkChange('${m.id}', this)">
+      <div style="margin-top:6px;padding:8px 10px;background:rgba(201,162,39,0.08);border-left:2px solid var(--accent);font-size:11px;color:var(--text-soft);line-height:1.6;">
+        ⚠ <strong>YouTube:</strong> imposta la visibilità su <strong>"Non in elenco"</strong> (non "Privato") — altrimenti il video non sarà accessibile.<br>
+        ⚠ <strong>Vimeo / Google Drive:</strong> se il video è protetto da password, inseriscila nel campo qui sotto.
+      </div>
       <div id="slot-pwd-wrap-${m.id}" style="display:none;margin-top:6px;">
         <label style="font-size:11px;color:var(--text-faint);display:block;margin-bottom:4px;">PASSWORD DI ACCESSO <span style="font-size:10px;">(se richiesta)</span></label>
         <input type="text" id="slot-pwd-${m.id}"
