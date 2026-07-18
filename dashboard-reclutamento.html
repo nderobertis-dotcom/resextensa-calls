@@ -1089,29 +1089,72 @@ async function caricaMateriali(candidaturaId){
     box.textContent = "Errore nel caricamento dei materiali.";
     return;
   }
-  if(!data || data.length === 0){
+
+  // Recupera dati_extra dalla candidatura corrente per i link video
+  const cand = state.candidature.find(c => c.id === candidaturaId);
+  const extra = (cand && cand.dati_extra) || {};
+  const linkKeys = Object.keys(extra).filter(k => k.startsWith("link_"));
+
+  const hasFile = data && data.length > 0;
+  const hasLink = linkKeys.length > 0;
+
+  if(!hasFile && !hasLink){
     box.innerHTML = '<div class="sub">Nessun materiale allegato.</div>';
     return;
   }
 
   box.innerHTML = "";
-  data.forEach(m => {
-    const row = document.createElement("div");
-    row.className = "materiale-row";
-    row.innerHTML = `
-      <span>${m.nome_file_originale || m.tipo} <span class="sub">(${m.tipo})</span></span>
-      <button class="btn btn-ghost" data-path="${m.storage_path}" style="padding:4px 10px;font-size:12px;">Scarica</button>
-    `;
-    row.querySelector("button").onclick = async (e) => {
-      const path = e.target.getAttribute("data-path");
-      const { data: signed, error: sErr } = await sb.storage
-        .from("candidature-materiali")
-        .createSignedUrl(path, 60);
-      if(sErr){ showToast("Impossibile generare il link al file."); return; }
-      window.open(signed.signedUrl, "_blank");
-    };
-    box.appendChild(row);
-  });
+
+  // --- Link video ---
+  if(hasLink){
+    const secLink = document.createElement("div");
+    secLink.style.cssText = "margin-bottom:10px;";
+    secLink.innerHTML = '<div style="font-size:10px;color:var(--text-faint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Link Video</div>';
+    linkKeys.forEach(k => {
+      const url = extra[k];
+      const slotName = k.replace("link_", "").replace(/_/g," ");
+      const pwdKey = "pwd_" + k.replace("link_","");
+      const pwd = extra[pwdKey];
+      const row = document.createElement("div");
+      row.className = "materiale-row";
+      row.innerHTML = `
+        <span style="font-size:12px;">
+          <span class="sub" style="text-transform:capitalize;">${slotName}</span>
+          ${pwd ? `<span class="sub" style="margin-left:8px;">🔒 pwd: <code style="font-size:11px;">${pwd}</code></span>` : ""}
+        </span>
+        <a href="${url}" target="_blank" class="btn btn-ghost" style="padding:4px 10px;font-size:12px;">Apri ↗</a>
+      `;
+      secLink.appendChild(row);
+    });
+    box.appendChild(secLink);
+  }
+
+  // --- File allegati ---
+  if(hasFile){
+    if(hasLink){
+      const sep = document.createElement("div");
+      sep.style.cssText = "font-size:10px;color:var(--text-faint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;margin-top:10px;";
+      sep.textContent = "File Allegati";
+      box.appendChild(sep);
+    }
+    data.forEach(m => {
+      const row = document.createElement("div");
+      row.className = "materiale-row";
+      row.innerHTML = `
+        <span>${m.nome_file_originale || m.tipo} <span class="sub">(${m.tipo})</span></span>
+        <button class="btn btn-ghost" data-path="${m.storage_path}" style="padding:4px 10px;font-size:12px;">Scarica</button>
+      `;
+      row.querySelector("button").onclick = async (e) => {
+        const path = e.target.getAttribute("data-path");
+        const { data: signed, error: sErr } = await sb.storage
+          .from("candidature-materiali")
+          .createSignedUrl(path, 60);
+        if(sErr){ showToast("Impossibile generare il link al file."); return; }
+        window.open(signed.signedUrl, "_blank");
+      };
+      box.appendChild(row);
+    });
+  }
 }
 
 async function salvaCandidatura(id){
