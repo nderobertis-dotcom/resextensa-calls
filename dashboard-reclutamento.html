@@ -983,7 +983,7 @@ function renderTabella(){
     tr.onclick = () => apriDettaglio(c);
     tr.innerHTML = `
       <td>
-        <div class="name-cell">${c.candidati.nome} ${c.candidati.cognome}</div>
+        <div class="name-cell">${c.candidati.cognome} ${c.candidati.nome}</div>
         <div class="sub">${c.candidati.email}</div>
       </td>
       <td><span class="tag" style="background:${categoriaColorVar(c.categorie.nome)}">${c.categorie.nome}</span></td>
