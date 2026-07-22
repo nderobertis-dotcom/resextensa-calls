@@ -664,7 +664,7 @@ function renderCategorie(){
 async function caricaBando(id){
   const { data: b, error } = await sb
     .from("bandi")
-    .select("*, categorie(nome)")
+    .select("*, categorie(nome), note_candidatura")
     .eq("id", id)
     .eq("attivo", true)
     .single();
@@ -686,11 +686,38 @@ async function caricaBando(id){
   `;
   document.getElementById("bando-banner-wrap").appendChild(banner);
 
+  // Note di iscrizione con checkbox di conferma
+  if(b.note_candidatura){
+    const noteWrap = document.createElement("div");
+    noteWrap.id = "note-candidatura-wrap";
+    noteWrap.style.cssText = "background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;";
+    noteWrap.innerHTML = `
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--accent);margin-bottom:10px;">INFORMAZIONI DI PARTECIPAZIONE</div>
+      <div style="font-size:13px;color:var(--text-soft);line-height:1.7;white-space:pre-wrap;margin-bottom:16px;">${b.note_candidatura}</div>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text);">
+        <input type="checkbox" id="chk-note-candidatura" style="margin-top:3px;flex-shrink:0;" onchange="toggleFormVisibility()">
+        <span>Ho letto e preso atto delle informazioni di partecipazione sopra riportate.</span>
+      </label>
+    `;
+    document.getElementById("bando-banner-wrap").appendChild(noteWrap);
+
+    // Nasconde il form finché non spunta la checkbox
+    document.getElementById("form-section").style.display = "none";
+  }
+
   // Carica altri laboratori attivi (per la domanda aggiuntiva)
   await caricaAltriLaboratori(b.id);
 
   const fakeCategoria = { id: b.categoria_id, nome: b.categorie ? b.categorie.nome : '' };
   renderFormBando(fakeCategoria, b);
+}
+
+function toggleFormVisibility(){
+  const chk = document.getElementById("chk-note-candidatura");
+  const form = document.getElementById("form-section");
+  if(!chk || !form) return;
+  form.style.display = chk.checked ? "block" : "none";
+  if(chk.checked) form.scrollIntoView({behavior:"smooth", block:"start"});
 }
 
 function fmtData(iso){

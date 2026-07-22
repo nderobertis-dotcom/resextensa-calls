@@ -1295,6 +1295,10 @@ function apriFormBando(bando){
         <label for="b-descrizione">Descrizione <span style="color:var(--accent);font-size:11px;">IT</span> <span style="color:var(--text-faint);font-size:11px;">(visibile sulla landing)</span></label>
         <textarea id="b-descrizione" rows="3">${bando && bando.descrizione ? bando.descrizione : ''}</textarea>
       </div>
+      <div class="field">
+        <label for="b-note-candidatura">Note di iscrizione <span style="color:var(--text-faint);font-size:11px;">(quote, condizioni — visibili solo nel form di candidatura)</span></label>
+        <textarea id="b-note-candidatura" rows="6" placeholder="Es. Quote di partecipazione, condizioni, agevolazioni...">${bando && bando.note_candidatura ? bando.note_candidatura : ''}</textarea>
+      </div>
 
       <div class="field">
         <label for="b-categoria">Categoria</label>
@@ -1402,6 +1406,7 @@ async function salvaBando(id, categoriaFissa){
     data_evento_fine: document.getElementById("b-data-fine").value || null,
     scadenza_candidature: document.getElementById("b-scadenza").value || null,
     descrizione: document.getElementById("b-descrizione").value.trim() || null,
+    note_candidatura: document.getElementById("b-note-candidatura").value.trim() || null,
     attivo: document.getElementById("b-attivo").checked
   };
 
