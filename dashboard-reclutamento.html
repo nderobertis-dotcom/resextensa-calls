@@ -605,7 +605,9 @@ body.light-theme header.topbar .role-tag { border-color: var(--border); color: v
           <table>
             <thead>
               <tr>
-                <th>Candidato</th>
+                <th style="cursor:pointer;user-select:none;" onclick="toggleSort()" id="th-candidato">
+                  Candidato <span id="sort-icon" style="font-size:10px;color:var(--accent);">↕</span>
+                </th>
                 <th>Categoria</th>
                 <th>Ruolo / Progetto</th>
                 <th>Stato</th>
@@ -933,6 +935,15 @@ async function caricaCandidature(){
   renderTabella();
 }
 
+let sortOrder = null; // null | 'asc' | 'desc'
+
+function toggleSort(){
+  sortOrder = sortOrder === 'asc' ? 'desc' : sortOrder === 'desc' ? null : 'asc';
+  const icon = document.getElementById('sort-icon');
+  if(icon) icon.textContent = sortOrder === 'asc' ? '↑' : sortOrder === 'desc' ? '↓' : '↕';
+  renderTabella();
+}
+
 function renderTabella(){
   const tbody = document.getElementById("candidature-tbody");
   const empty = document.getElementById("empty-state");
@@ -955,6 +966,15 @@ function renderTabella(){
     return;
   }
   empty.style.display = "none";
+
+  // Ordinamento per cognome
+  if(sortOrder){
+    righe = [...righe].sort((a, b) => {
+      const cA = (a.candidati.cognome || '').toLowerCase();
+      const cB = (b.candidati.cognome || '').toLowerCase();
+      return sortOrder === 'asc' ? cA.localeCompare(cB) : cB.localeCompare(cA);
+    });
+  }
 
   righe.forEach(c => {
     const isBando = !!c.bando_id;
