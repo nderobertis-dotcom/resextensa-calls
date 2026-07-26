@@ -1541,7 +1541,7 @@ async function handleSubmit(e){
 </script>
 
 <!-- MODAL INFORMAZIONI PARTECIPAZIONE -->
-<div class="info-modal-overlay" id="info-modal">
+<div class="info-modal-overlay" id="info-modal" onclick="if(event.target===this)chiudiInfoModal()">
   <div class="info-modal-box">
     <div class="info-modal-head">
       <h3>Informazioni di partecipazione</h3>

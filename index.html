@@ -69,6 +69,35 @@ body.light-theme select {
   color: var(--text);
   border-color: var(--border);
 }
+
+  .info-modal-overlay{
+    display:none;position:fixed;inset:0;
+    background:rgba(0,0,0,0.8);z-index:300;
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .info-modal-overlay.open{display:flex;}
+  .info-modal-box{
+    background:var(--bg-raised);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    width:100%;max-width:560px;max-height:85vh;
+    display:flex;flex-direction:column;
+  }
+  .info-modal-head{
+    padding:16px 20px;border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .info-modal-head h3{margin:0;font-size:15px;}
+  .info-modal-body{
+    padding:20px;overflow-y:auto;flex:1;
+    font-size:13px;color:var(--text-soft);line-height:1.75;white-space:pre-wrap;
+  }
+  .info-modal-foot{padding:12px 20px;border-top:1px solid var(--border);text-align:right;}
+  .btn-info{
+    background:none;border:1px solid var(--border);color:var(--text-soft);
+    border-radius:5px;padding:7px 12px;font-size:12px;cursor:pointer;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .btn-info:hover{border-color:var(--accent);color:var(--accent);}
   .footlights{display:flex;gap:10px;margin-bottom:36px;}
   .footlights span{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:0.55;}
   .footlights span:nth-child(3n){opacity:1;box-shadow:0 0 8px var(--accent);}
@@ -628,7 +657,7 @@ async function caricaBandiAttivi(){
   const emptyNote=document.getElementById("bandi-empty-note");
   // rimuovi solo le card bandi (non la spontanea statica)
   grid.querySelectorAll(".opzione-card:not(.spontanea)").forEach(c=>c.remove());
-  const {data,error}=await sb.from("bandi").select("*,categorie(nome),traduzioni").eq("attivo",true).order("data_evento_inizio",{ascending:true});
+  const {data,error}=await sb.from("bandi").select("*,categorie(nome),traduzioni,note_candidatura").eq("attivo",true).order("data_evento_inizio",{ascending:true});
   if(error||!data||data.length===0){ emptyNote.style.display="block"; return; }
   window._bandiCached = data;
   for(const b of data){
@@ -665,18 +694,34 @@ async function caricaBandiAttivi(){
     }
     datesHtml += '</div>';
 
+    const infoBtn = b.note_candidatura
+      ? `<button class="btn-info" onclick="apriLandModal('${(b.titolo||'').replace(/'/g,'\\'')}', '${(b.note_candidatura||'').replace(/
+/g,'\\n').replace(/'/g,'\\'')}')">ℹ Informazioni di partecipazione</button>`
+      : '';
     const bodyHtml=`
       <div class="tag-categoria" style="background:${categoriaColorVar(b.categorie?b.categorie.nome:'')}">${b.categorie?b.categorie.nome:''}</div>
       <h3>${titoloVis}</h3>
       ${datesHtml}
       <p class="desc">${descrizioneVis}</p>
-      <a href="form-candidatura.html?bando=${b.id}" class="btn btn-primary">${t('apply.bando.btn')}</a>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <a href="form-candidatura.html?bando=${b.id}" class="btn btn-primary">${t('apply.bando.btn')}</a>
+        ${infoBtn}
+      </div>
     `;
     card.innerHTML=locandinaHtml?(locandinaHtml+`<div class="card-body">${bodyHtml}</div>`):bodyHtml;
     grid.appendChild(card);
   }
 }
 
+
+function apriLandModal(titolo, testo){
+  document.getElementById("land-modal-titolo").textContent = titolo || "Informazioni di partecipazione";
+  document.getElementById("land-modal-body").textContent = testo || "";
+  document.getElementById("land-info-modal").classList.add("open");
+}
+function chiudiLandModal(){
+  document.getElementById("land-info-modal").classList.remove("open");
+}
 function onLangChange(){
   // Ricarica le card dei laboratori con la nuova lingua (auto-traduzione inclusa)
   caricaBandiAttivi();
@@ -686,5 +731,18 @@ function onLangChange(){
 document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===LANG));
 applyLang(); // chiama onLangChange() → caricaBandiAttivi()
 </script>
+
+<div class="info-modal-overlay" id="land-info-modal" onclick="if(event.target===this)chiudiLandModal()">
+  <div class="info-modal-box">
+    <div class="info-modal-head">
+      <h3 id="land-modal-titolo">Informazioni di partecipazione</h3>
+      <button onclick="chiudiLandModal()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--text-faint);">&times;</button>
+    </div>
+    <div class="info-modal-body" id="land-modal-body"></div>
+    <div class="info-modal-foot">
+      <button class="btn btn-primary" onclick="chiudiLandModal()" style="width:auto;padding:10px 24px;">Ho letto — Chiudi</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
