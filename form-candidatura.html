@@ -718,16 +718,9 @@ async function caricaBando(id){
   `;
   document.getElementById("bando-banner-wrap").appendChild(banner);
 
-  // Bottone per aprire il modal con le informazioni di partecipazione
+  // Salva le note per il modal "leggi" nel pannello presa visione
   if(b.note_candidatura){
     window._noteCandidatura = b.note_candidatura;
-    const btnWrap = document.createElement("div");
-    btnWrap.innerHTML = `
-      <button class="btn-info-tab" onclick="apriInfoModal()">
-        ℹ Informazioni di partecipazione
-      </button>
-    `;
-    document.getElementById("bando-banner-wrap").appendChild(btnWrap);
   }
 
   // Carica altri laboratori attivi (per la domanda aggiuntiva)
@@ -1168,6 +1161,17 @@ L'interessato può esercitare in qualsiasi momento i diritti previsti dagli arti
   },
   "Office Figure": null  // usa Technical Figure
 };
+
+function apriInfoModal(){
+  const body = document.getElementById("info-modal-body");
+  if(body) body.textContent = window._noteCandidatura || "";
+  const modal = document.getElementById("info-modal");
+  if(modal) modal.classList.add("open");
+}
+function chiudiInfoModal(){
+  const modal = document.getElementById("info-modal");
+  if(modal) modal.classList.remove("open");
+}
 
 function renderPanelPresaVisione(){
   if(!bandoCorrente || !window._noteCandidatura) return '';
