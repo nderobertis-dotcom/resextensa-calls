@@ -166,6 +166,38 @@ body.light-theme select {
   #success-view p{ color:var(--text-soft); max-width:460px; margin:0 auto; }
 
   /* BANDO BANNER */
+
+  /* MODAL INFORMAZIONI PARTECIPAZIONE */
+  .info-modal-overlay{
+    display:none;position:fixed;inset:0;
+    background:rgba(0,0,0,0.75);z-index:300;
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .info-modal-overlay.open{ display:flex; }
+  .info-modal-box{
+    background:var(--bg-raised);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);
+    width:100%;max-width:560px;max-height:85vh;
+    display:flex;flex-direction:column;
+  }
+  .info-modal-head{
+    padding:18px 20px;border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .info-modal-head h3{ margin:0;font-size:16px; }
+  .info-modal-body{
+    padding:20px;overflow-y:auto;flex:1;
+    font-size:13px;color:var(--text-soft);line-height:1.75;white-space:pre-wrap;
+  }
+  .info-modal-foot{ padding:14px 20px;border-top:1px solid var(--border);text-align:right; }
+  .btn-info-tab{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--bg-raised);border:1px solid var(--accent);
+    color:var(--accent);border-radius:6px;padding:10px 16px;
+    font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px;
+    font-family:'IBM Plex Mono',monospace;letter-spacing:0.03em;
+  }
+  .btn-info-tab:hover{ background:rgba(201,162,39,0.1); }
   .bando-banner{ background:var(--bg-raised); border:1px solid var(--accent); border-radius:var(--radius); padding:16px 20px; margin-bottom:24px; }
   .bando-banner .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:var(--accent); margin-bottom:4px; }
   .bando-banner h3{ font-size:17px; margin:0 0 4px; }
@@ -686,23 +718,16 @@ async function caricaBando(id){
   `;
   document.getElementById("bando-banner-wrap").appendChild(banner);
 
-  // Note di iscrizione con checkbox di conferma
+  // Bottone per aprire il modal con le informazioni di partecipazione
   if(b.note_candidatura){
-    const noteWrap = document.createElement("div");
-    noteWrap.id = "note-candidatura-wrap";
-    noteWrap.style.cssText = "background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;";
-    noteWrap.innerHTML = `
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--accent);margin-bottom:10px;">INFORMAZIONI DI PARTECIPAZIONE</div>
-      <div style="font-size:13px;color:var(--text-soft);line-height:1.7;white-space:pre-wrap;margin-bottom:16px;">${b.note_candidatura}</div>
-      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text);">
-        <input type="checkbox" id="chk-note-candidatura" style="margin-top:3px;flex-shrink:0;" onchange="toggleFormVisibility()">
-        <span>Ho letto e preso atto delle informazioni di partecipazione sopra riportate.</span>
-      </label>
+    window._noteCandidatura = b.note_candidatura;
+    const btnWrap = document.createElement("div");
+    btnWrap.innerHTML = `
+      <button class="btn-info-tab" onclick="apriInfoModal()">
+        ℹ Informazioni di partecipazione
+      </button>
     `;
-    document.getElementById("bando-banner-wrap").appendChild(noteWrap);
-
-    // Nasconde il form finché non spunta la checkbox
-    document.getElementById("form-section").style.display = "none";
+    document.getElementById("bando-banner-wrap").appendChild(btnWrap);
   }
 
   // Carica altri laboratori attivi (per la domanda aggiuntiva)
@@ -712,13 +737,6 @@ async function caricaBando(id){
   renderFormBando(fakeCategoria, b);
 }
 
-function toggleFormVisibility(){
-  const chk = document.getElementById("chk-note-candidatura");
-  const form = document.getElementById("form-section");
-  if(!chk || !form) return;
-  form.style.display = chk.checked ? "block" : "none";
-  if(chk.checked) form.scrollIntoView({behavior:"smooth", block:"start"});
-}
 
 function fmtData(iso){
   if(!iso) return "";
@@ -752,7 +770,7 @@ function renderFormSpontaneo(cat){
   if(!fig){ renderFormGenerico(cat); return; }
   fileSlots = {};
   const form = document.getElementById("candidatura-form");
-  form.innerHTML = renderPanelAnagraficaCompleta() + renderPanelFigura(cat.nome, fig) + renderPanelPrivacy();
+  form.innerHTML = renderPanelAnagraficaCompleta() + renderPanelFigura(cat.nome, fig) + renderPanelPresaVisione() + renderPanelPrivacy();
   bindForm();
 }
 
@@ -1151,6 +1169,29 @@ L'interessato può esercitare in qualsiasi momento i diritti previsti dagli arti
   "Office Figure": null  // usa Technical Figure
 };
 
+function renderPanelPresaVisione(){
+  if(!bandoCorrente || !window._noteCandidatura) return '';
+  return `<div class="panel">
+    <div class="panel-title" style="margin-bottom:10px;">Presa visione</div>
+    <div class="consent-row">
+      <input type="checkbox" id="chk-presa-visione" required onchange="registraPresaVisione()">
+      <label for="chk-presa-visione" style="font-size:13px;">
+        Dichiaro di aver preso visione delle informazioni di partecipazione
+        (<button type="button" onclick="apriInfoModal()" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:13px;padding:0;text-decoration:underline;">leggi</button>).
+      </label>
+    </div>
+  </div>`;
+}
+
+function registraPresaVisione(){
+  const chk = document.getElementById("chk-presa-visione");
+  if(chk && chk.checked){
+    window._presaVisioneTimestamp = new Date().toISOString();
+  } else {
+    window._presaVisioneTimestamp = null;
+  }
+}
+
 function renderPanelDichiarazioni(nomeCat){
   const dich = DICHIARAZIONI[nomeCat] || DICHIARAZIONI["Technical Figure"];
   // Link alla privacy specifica per figura
@@ -1400,6 +1441,8 @@ async function handleSubmit(e){
       }
     }
     // Consensi aggiuntivi per categoria
+    // Timestamp presa visione informazioni di partecipazione
+    if(window._presaVisioneTimestamp) datiExtra.presa_visione_timestamp = window._presaVisioneTimestamp;
     const consensoImmagini = document.getElementById("f-consenso-immagini");
     const consensoMateriali = document.getElementById("f-consenso-materiali");
     const consensoDisponibilita = document.getElementById("f-consenso-disponibilita");
@@ -1496,5 +1539,19 @@ async function handleSubmit(e){
   }
 }
 </script>
+
+<!-- MODAL INFORMAZIONI PARTECIPAZIONE -->
+<div class="info-modal-overlay" id="info-modal">
+  <div class="info-modal-box">
+    <div class="info-modal-head">
+      <h3>Informazioni di partecipazione</h3>
+      <button onclick="chiudiInfoModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-faint);">&times;</button>
+    </div>
+    <div class="info-modal-body" id="info-modal-body"></div>
+    <div class="info-modal-foot">
+      <button class="btn btn-primary" onclick="chiudiInfoModal()" style="width:auto;padding:10px 24px;">Ho letto — Chiudi</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
