@@ -660,6 +660,7 @@ async function caricaBandiAttivi(){
   const {data,error}=await sb.from("bandi").select("*,categorie(nome),traduzioni,note_candidatura").eq("attivo",true).order("data_evento_inizio",{ascending:true});
   if(error||!data||data.length===0){ emptyNote.style.display="block"; return; }
   window._bandiCached = data;
+  window._bandiLanding = [];
   for(const b of data){
     const card=document.createElement("div");
     card.className="opzione-card";
@@ -694,9 +695,11 @@ async function caricaBandiAttivi(){
     }
     datesHtml += '</div>';
 
+    if(!window._bandiLanding) window._bandiLanding = [];
+    const _idx = window._bandiLanding.length;
+    window._bandiLanding.push({ titolo: b.titolo, note: b.note_candidatura });
     const infoBtn = b.note_candidatura
-      ? `<button class="btn-info" onclick="apriLandModal('${(b.titolo||'').replace(/'/g,'\\'')}', '${(b.note_candidatura||'').replace(/
-/g,'\\n').replace(/'/g,'\\'')}')">ℹ Informazioni di partecipazione</button>`
+      ? `<button class="btn-info" onclick="apriLandModal(${_idx})">ℹ Informazioni di partecipazione</button>`
       : '';
     const bodyHtml=`
       <div class="tag-categoria" style="background:${categoriaColorVar(b.categorie?b.categorie.nome:'')}">${b.categorie?b.categorie.nome:''}</div>
@@ -714,9 +717,10 @@ async function caricaBandiAttivi(){
 }
 
 
-function apriLandModal(titolo, testo){
-  document.getElementById("land-modal-titolo").textContent = titolo || "Informazioni di partecipazione";
-  document.getElementById("land-modal-body").textContent = testo || "";
+function apriLandModal(idx){
+  const entry = (window._bandiLanding || [])[idx] || {};
+  document.getElementById("land-modal-titolo").textContent = entry.titolo || "Informazioni di partecipazione";
+  document.getElementById("land-modal-body").textContent = entry.note || "";
   document.getElementById("land-info-modal").classList.add("open");
 }
 function chiudiLandModal(){
