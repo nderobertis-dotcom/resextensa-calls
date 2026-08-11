@@ -564,10 +564,30 @@ body.light-theme header.topbar .role-tag { border-color: var(--border); color: v
       <input type="password" id="login-password" autocomplete="current-password">
     </div>
     <button class="btn btn-primary" id="login-btn">Accedi</button>
+    <div style="text-align:center;margin-top:14px;">
+      <a href="#" id="forgot-pwd-link" style="font-size:12px;color:var(--text-faint);text-decoration:underline;">Hai dimenticato la password?</a>
+    </div>
   </div>
 </div>
 
-<!-- ============== APP ============== -->
+<!-- MODALE RECUPERO PASSWORD -->
+<div id="reset-pwd-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:400;align-items:center;justify-content:center;">
+  <div style="background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius);padding:28px 28px 22px;width:100%;max-width:380px;margin:20px;">
+    <h3 style="margin:0 0 8px;font-size:16px;">Recupera password</h3>
+    <p style="font-size:13px;color:var(--text-soft);margin:0 0 16px;">Inserisci la tua email. Riceverai un link per reimpostare la password.</p>
+    <div class="field">
+      <label for="reset-email">Email</label>
+      <input type="email" id="reset-email" placeholder="tuaemail@esempio.it">
+    </div>
+    <div id="reset-msg" style="display:none;font-size:13px;padding:8px 10px;border-radius:5px;margin-bottom:12px;"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button class="btn btn-ghost" id="reset-cancel-btn" style="width:auto;padding:9px 18px;">Annulla</button>
+      <button class="btn btn-primary" id="reset-send-btn" style="width:auto;padding:9px 18px;">Invia link</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
 <div id="app-view">
   <header class="topbar">
     <div class="brand" style="display:flex;align-items:center;gap:12px;">
@@ -775,6 +795,40 @@ function eta(dataNascita){
 document.getElementById("login-btn").addEventListener("click", doLogin);
 document.getElementById("login-password").addEventListener("keydown", e => {
   if(e.key === "Enter") doLogin();
+});
+
+// ---- Recupero password ----
+const resetModal = document.getElementById("reset-pwd-modal");
+document.getElementById("forgot-pwd-link").addEventListener("click", function(e){
+  e.preventDefault();
+  document.getElementById("reset-email").value = document.getElementById("login-email").value || "";
+  document.getElementById("reset-msg").style.display = "none";
+  resetModal.style.display = "flex";
+});
+document.getElementById("reset-cancel-btn").addEventListener("click", function(){
+  resetModal.style.display = "none";
+});
+document.getElementById("reset-send-btn").addEventListener("click", async function(){
+  const email = document.getElementById("reset-email").value.trim();
+  const msgEl = document.getElementById("reset-msg");
+  if(!email){ msgEl.textContent = "Inserisci un indirizzo email."; msgEl.style.background="rgba(200,50,50,0.12)"; msgEl.style.color="var(--danger)"; msgEl.style.display="block"; return; }
+  this.disabled = true;
+  this.textContent = "Invio...";
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://resextensacalls.it/dashboard-reclutamento.html"
+  });
+  this.disabled = false;
+  this.textContent = "Invia link";
+  if(error){
+    msgEl.textContent = "Errore: " + error.message;
+    msgEl.style.background = "rgba(200,50,50,0.12)";
+    msgEl.style.color = "var(--danger)";
+  } else {
+    msgEl.textContent = "✓ Email inviata! Controlla la casella " + email;
+    msgEl.style.background = "rgba(40,160,80,0.12)";
+    msgEl.style.color = "var(--success, #28a050)";
+  }
+  msgEl.style.display = "block";
 });
 
 async function doLogin(){
